@@ -1,2 +1,2 @@
 # americans
-new demo project for USA population data stats
+Bot demo project for USA population data stats
