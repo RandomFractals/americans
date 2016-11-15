@@ -8,17 +8,10 @@ const crypto = require('crypto');
 const express = require('express');
 const fetch = require('node-fetch');
 const request = require('request');
+const {Wit, log} = require('node-wit');
 
-let Wit = null;
-let log = null;
-try {
-  // if running from repo
-  Wit = require('../').Wit;
-  log = require('../').log;
-} catch (e) {
-  Wit = require('node-wit').Wit;
-  log = require('node-wit').log;
-}
+// initialize env vars
+require('dotenv').config();
 
 // Webserver parameter
 const PORT = process.env.PORT || 8445;
