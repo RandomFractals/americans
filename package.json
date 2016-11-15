@@ -6,9 +6,9 @@
     "Americans",
     "bot"
   ],
-  "main": "src/server/messenger.js",
+  "main": "src/server/index.js",
   "scripts": {
-    "start": "node src/server/messenger.js",
+    "start": "node src/server/index.js",
     "bot": "node bot.js",
     "test": "jest"
   },

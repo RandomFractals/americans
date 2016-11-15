@@ -1,1 +1,1 @@
-web: node src/server/messenger.js
+web: node src/server/index.js

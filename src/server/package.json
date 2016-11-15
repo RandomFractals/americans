@@ -6,9 +6,9 @@
     "Americans",
     "bot"
   ],
-  "main": "messenger.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node messenger.js",
+    "start": "node index.js",
     "bot": "node bot.js",
     "test": "jest"
   },
