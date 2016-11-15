@@ -2,6 +2,10 @@
   "name": "Americans-bot",
   "version": "1.0.0",
   "description": "Bots demo project of US pop, biz, trade, incomes, and housing data stats",
+  "keywords": [
+    "Americans",
+    "bot"
+  ],
   "main": "messenger.js",
   "scripts": {
     "start": "node messenger.js",
@@ -15,9 +19,11 @@
     "unmockedModulePathPatterns": ["core-js/.*", "sshpk/.*"]
   },
   "dependencies": {
+    "isomorphic-fetch": "^2.2.1",
     "body-parser": "^1.15.0",
+    "dotenv": "^2.0.0",        
     "express": "^4.13.4",
-    "node-wit": "^3.2.2",
+    "node-wit": "^4.1.0",
     "node-uuid": "^1.4.7",
     "request": "^2.72.0",
     "babel-core": "^6.0.0",
@@ -33,5 +39,8 @@
   "bugs": {
     "url": "https://github.com/RandomFractals/americans/issues"
   },
-  "homepage": "https://github.com/RandomFractals/americans#readme"
+  "homepage": "https://github.com/RandomFractals/americans#readme",
+  "engines": {
+    "node": ">=4.0.0"
+  }
 }
