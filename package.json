@@ -41,6 +41,6 @@
   },
   "homepage": "https://github.com/RandomFractals/americans#readme",
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=6.9.1"
   }
 }
