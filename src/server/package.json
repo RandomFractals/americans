@@ -2,9 +2,9 @@
   "name": "Americans-bot",
   "version": "1.0.0",
   "description": "Bots demo project of US pop, biz, trade, incomes, and housing data stats",
-  "main": "index.js",
+  "main": "messenger.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node messenger.js",
     "bot": "node bot.js",
     "test": "jest"
   },
