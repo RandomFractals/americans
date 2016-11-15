@@ -1,6 +1,7 @@
 'use strict';
 
-// NOTE: set up your .env first
+// NOTE: set up your .env first. 
+// see .env.template
 
 const bodyParser = require('body-parser');
 const crypto = require('crypto');
