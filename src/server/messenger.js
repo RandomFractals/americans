@@ -1,5 +1,7 @@
 'use strict';
 
+// NOTE: set up your .env first
+
 const bodyParser = require('body-parser');
 const crypto = require('crypto');
 const express = require('express');
