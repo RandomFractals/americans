@@ -111,8 +111,10 @@ app.post('/webhook', (req, res) => {
       entry.messaging.forEach( event => {
         if (event.message && !event.message.is_echo) {
           processMessage(event);
+        } else if (event.message.is_echo) {
+          console.log('/webhook::POST:echo message sent:', JSON.stringify(event));
         } else {
-          console.log('/webhook::POST:Unknown message event request: ', JSON.stringify(event));
+          console.log('/webhook::POST:Unknown message event request:', JSON.stringify(event));
         }
       });
     });
