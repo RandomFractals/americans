@@ -91,6 +91,7 @@ app.use( bodyParser.json( {verify: verifyFacebookRequestSignature}));
 app.get('/webhook', (req, res) => {
   if (req.query['hub.mode'] === 'subscribe' &&
       req.query['hub.verify_token'] === FB_VERIFY_TOKEN) {
+    console.log('/webhook::GET:validating webhook...');        
     // send hub.challenge back to confirm fb verify token validation
     res.status(200).send(req.query['hub.challenge']);
   } else {
@@ -243,7 +244,7 @@ function sendMessage(recipientId, messageText) {
   return fetch('https://graph.facebook.com/me/messages?' + queryParams, {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
-    messageData,
+    body: messageData,
   })
   .then(messageResponse => messageResponse.json())
   .then(messageJsonResponse => {
