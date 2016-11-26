@@ -222,15 +222,15 @@ function getSessionId(fbid){
  * Sends FB message.
  * 
  * @param recipientId FB recipient user id.
- * @param text Message text.
+ * @param messageText Message text.
  * 
  * see https://developers.facebook.com/docs/messenger-platform/send-api-reference
  */
-function sendMessage(recipientId, text) {
+function sendMessage(recipientId, messageText) {
   // create message body json
-  let message = JSON.stringify({
-    recipient: {recipientId},
-    message: {text},
+  let messageData = JSON.stringify({
+    recipient: {id: recipientId},
+    message: {text: messageText}
   });
 
   // create messenger page token query params 
@@ -240,7 +240,7 @@ function sendMessage(recipientId, text) {
   return fetch('https://graph.facebook.com/me/messages?' + queryParams, {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
-    message,
+    messageData,
   })
   .then(messageResponse => messageResponse.json())
   .then(messageJsonResponse => {
