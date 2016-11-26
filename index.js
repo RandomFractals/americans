@@ -55,8 +55,8 @@ const actions = {
       return sendMessage(recipientId, text)
         .then(() => null)
         .catch((err) => {
-          console.error('send::Error forwarding message response to: ',
-            recipientId, ':', err.stack || err);
+          console.error('send::Error forwarding message response to:',
+            recipientId, err.stack || err);
         });
     } else {
       console.error(`send::Failed to get user id for session: ${sessionId}`);
