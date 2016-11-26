@@ -51,7 +51,7 @@ const actions = {
     const recipientId = sessions[sessionId].userId;
     if (recipientId) {
       // send bot message response
-      console.log(`send::sending message to: ${recipentId} text: "${text}"`);
+      console.log(`send::sending message to: ${recipientId} text: "${text}"`);
       return sendMessage(recipientId, text)
         .then(() => null)
         .catch((err) => {
