@@ -25,10 +25,10 @@ const FB_PAGE_TOKEN = process.env.FB_PAGE_TOKEN;
 const FB_APP_SECRET = process.env.FB_APP_SECRET;
 
 if (!FB_PAGE_TOKEN) { 
-  throw new Error('missing FB_PAGE_TOKEN'); 
+  throw new Error('Missing FB_PAGE_TOKEN'); 
 }
 if (!FB_APP_SECRET) { 
-  throw new Error('missing FB_APP_SECRET');
+  throw new Error('Missing FB_APP_SECRET');
 }
 
 // create FB /webhook subscription verification token
@@ -37,28 +37,29 @@ let FB_VERIFY_TOKEN = null;
 crypto.randomBytes(8, (err, buff) => {
   if (err) throw err;
   FB_VERIFY_TOKEN = buff.toString('hex');
-  console.log(`FB /webhook Verify Token: ${FB_VERIFY_TOKEN}`);
+  console.log(`crypto.randomBytes::FB /webhook Verify Token: ${FB_VERIFY_TOKEN}`);
 });
 
-// create user sessions hash map for saving chat history:
-// sessionId -> {fbid: facebookUserId, context: sessionState}
+// create user sessions hash map for tracking chat history:
+// sessionId -> {userId: facebookUserId, context: sessionState}
 const sessions = {};
 
 // create wit.ai bot actions
 const actions = {
   send({sessionId}, {text}) {
     // get fb user id from user session
-    const recipientId = sessions[sessionId].fbid;
+    const recipientId = sessions[sessionId].userId;
     if (recipientId) {
       // send bot message response
+      console.log(`send::sending message to: ${recipentId} text: "${text}"`);
       return sendMessage(recipientId, text)
         .then(() => null)
         .catch((err) => {
-          console.error('Oops! An error occurred while forwarding msg response to',
+          console.error('send::Error forwarding message response to: ',
             recipientId, ':', err.stack || err);
         });
     } else {
-      console.error(`Oops! Couldn\'t find user for session: ${sessionId}`);
+      console.error(`send::Failed to get user id for session: ${sessionId}`);
       // return promise to return control back to bot api
       return Promise.resolve()
     }
@@ -86,14 +87,14 @@ app.use(({method, url}, response, next) => {
 // verify FB request signature for all requests
 app.use( bodyParser.json( {verify: verifyFacebookRequestSignature}));
 
-// create webhook endpoint for FB page subscription verification
+// create /webhook get endpoint for FB page subscription verification
 app.get('/webhook', (req, res) => {
   if (req.query['hub.mode'] === 'subscribe' &&
       req.query['hub.verify_token'] === FB_VERIFY_TOKEN) {
     // send hub.challenge back to confirm fb verify token validation
     res.status(200).send(req.query['hub.challenge']);
   } else {
-    console.error('Failed webhook validation. Make sure your validation tokens match.');
+    console.error('/webhook::GET:Failed /webhook validation. Make sure your validation tokens match!');
     res.sendStatus(400); // or 403 - forbidden
   }
 });
@@ -110,7 +111,7 @@ app.post('/webhook', (req, res) => {
         if (event.message && !event.message.is_echo) {
           processMessage(event);
         } else {
-          console.log('Received unknown event', JSON.stringify(event));
+          console.log('/webhook::POST:Unknown message event request: ', JSON.stringify(event));
         }
       });
     });
@@ -142,7 +143,8 @@ function processMessage(event) {
     sendMessage(sender, 'Sorry I can only process text messages for now.')
       .catch(console.error);
   } else if (text) {
-    // forward message to wit.ai bot engine to run through all bot ai actions
+    // forward message to wit.ai bot engine to run it through all bot ai actions
+    console.log(`processMessage::processing message: "${text}" for: ${senderId}`);
     witAiClient.runActions(sessionId, text, // msg text
           sessions[sessionId].context) // chat history state
       .then((context) => {
@@ -156,7 +158,7 @@ function processMessage(event) {
         sessions[sessionId].context = context;
       })
       .catch((err) => {
-        console.error('Oops! Got an error from Wit.ai: ', err.stack || err);
+        console.error('processMessage:: Wit.ai error: ', err.stack || err);
       });
   }
 
@@ -182,12 +184,12 @@ function verifyFacebookRequestSignature(req, res, buf) {
     // create expected hash code
     var expectedHash = crypto.createHmac('sha1', FB_APP_SECRET).update(buf).digest('hex');
     if (signatureHash != expectedHash) {
-      throw new Error("Couldn't validate x-hub request signature.");
+      throw new Error('verifyFacebookRequestSignature::Invalid x-hub-signature.');
     }
 
   } else {    
     // log FB request validation error
-    console.error("Couldn't validate Facebook x-hub-signature. See https://developers.facebook.com/docs/graph-api/webhooks#setup");
+    console.error('verifyFacebookRequestSignature::Missing x-hub-signature header.');
     // throw an error instead ???
     res.sendStatus(400); 
   }
@@ -198,13 +200,13 @@ function verifyFacebookRequestSignature(req, res, buf) {
 /**
  * Gets user session id for the specified FB user id.
  * 
- * @param FB user id.
+ * @param userId FB user id.
  */
-function getSessionId(fbid){
+function getSessionId(userId){
   // get user session id
-  let sessionId;  
-  Object.keys(sessions).forEach(key => {
-    if (sessions[key].fbid === fbid) {
+  let sessionId = null;  
+  Object.keys(sessions).forEach( key => {
+    if (sessions[key].userId === userId) {
       sessionId = key;
     }
   });
@@ -212,7 +214,7 @@ function getSessionId(fbid){
   if (!sessionId) {
     // create new user session
     sessionId = new Date().toISOString();
-    sessions[sessionId] = {fbid: fbid, context: {}};
+    sessions[sessionId] = {userId: userId, context: {}};
   }
   return sessionId;
 }
@@ -222,12 +224,12 @@ function getSessionId(fbid){
  * Sends FB message.
  * 
  * @param recipientId FB recipient user id.
- * @param messageText Message text.
+ * @param messageText Message text to send.
  * 
  * see https://developers.facebook.com/docs/messenger-platform/send-api-reference
  */
 function sendMessage(recipientId, messageText) {
-  // create message body json
+  // create post message json data
   let messageData = JSON.stringify({
     recipient: {id: recipientId},
     message: {text: messageText}
@@ -236,7 +238,8 @@ function sendMessage(recipientId, messageText) {
   // create messenger page token query params 
   let queryParams = 'access_token=' + encodeURIComponent(FB_PAGE_TOKEN);
 
-  // send message via FB graph messages api
+  // send message via FB messages graph api
+  console.log(`sendMessage::sending message: ${messageData}`);
   return fetch('https://graph.facebook.com/me/messages?' + queryParams, {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
@@ -254,4 +257,4 @@ function sendMessage(recipientId, messageText) {
 
 // listen for requests
 app.listen(PORT);
-console.log(`Listening on port: ${PORT}...`);
+console.log(`index.js::Listening on port: ${PORT}...`);
