@@ -113,6 +113,8 @@ app.post('/webhook', (req, res) => {
           processMessage(event);
         } else if (event.message && event.message.is_echo) {
           console.log('/webhook::POST:echo message sent:', JSON.stringify(event));
+        } else if (event.read) {
+          console.log('/webhook::POST:message read:', JSON.stringify(event));
         } else {
           console.log('/webhook::POST:Unknown message event request:', JSON.stringify(event));
         }
