@@ -1,37 +1,40 @@
 {
   "name": "Americans-bot",
+  "author": "Random Fractals, Inc.",
+  "license": "MIT",  
   "version": "1.0.0",
   "description": "Bots demo project of US pop, biz, trade, incomes, and housing data stats",
   "keywords": [
     "Americans",
     "bot"
-  ],
+  ],  
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "bot": "node bot.js",
     "test": "jest"
   },
-  "author": "Random Fractals, Inc.",
-  "license": "MIT",
   "jest": {
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
-    "unmockedModulePathPatterns": ["core-js/.*", "sshpk/.*"]
+    "unmockedModulePathPatterns": ["core-js/.*", "sshpk/.*"],
+    "testEnvironment": "node"    
   },
   "dependencies": {
-    "isomorphic-fetch": "^2.2.1",
-    "body-parser": "^1.15.0",
     "dotenv": "^2.0.0",        
-    "express": "^4.13.4",
-    "node-wit": "^4.1.0",
-    "node-uuid": "^1.4.7",
-    "request": "^2.72.0",
-    "babel-core": "^6.0.0",
-    "babel-jest": "^6.0.1",
-    "babel-polyfill": "^6.1.4",
-    "bl": "^1.0.0",
-    "jest-cli": "^0.7.1"
+    "express": "^4.14.0",
+    "request": "^2.79.0",
+    "body-parser": "^1.15.2",            
+    "isomorphic-fetch": "^2.2.1",
+    "babel-core": "^6.18.2",
+    "babel-polyfill": "^6.16.0",
+    "bl": "^1.1.2",
+    "uuid": "^3.0.0",
+    "node-wit": "^4.1.0"        
   },
+  "devDendencies": {
+    "babel-jest": "^6.0.1",
+    "jest-cli": "^17.0.3"   
+  },  
   "repository": {
     "type": "git",
     "url": "https://github.com/RandomFractals/americans.git"
