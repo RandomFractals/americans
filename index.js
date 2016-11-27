@@ -32,6 +32,12 @@ app.use( bodyParser.json( {verify: verifyFacebookRequestSignature}));
 app.listen(PORT);
 console.log(`index.js::Listening on port: ${PORT}...`);
 
+app.get('/', (req, res) => {
+  // TODO: create simple html that describes Americans bot functionality,
+  // provides links for FB Messenger and later Slack webhooks config, 
+  // and sample bot usage examples to query census data
+  res.send('"Only those who will risk going too far can possibly find out how far one can go." - T.S. Eliot');
+});
 
 /*----------------- Wit.AI Session and FB Webhook Methods ---------------------*/
 
