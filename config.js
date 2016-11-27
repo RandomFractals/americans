@@ -4,7 +4,7 @@
 const crypto = require('crypto');
 
 // initialize .env vars
-const config = require('dotenv').config();
+const config = require('dotenv').config({silent:true});
 
 // NOTE: set up your .env first
 // see .env.template for more info
