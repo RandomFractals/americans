@@ -1,44 +1,39 @@
 'use strict';
 
-// imports
+// express app imports
 const bodyParser = require('body-parser');
 const crypto = require('crypto');
 const express = require('express');
 const fetch = require('node-fetch');
 const request = require('request');
+
+// wit.ai imports
 const {Wit, log} = require('node-wit');
 
-// initialize .env vars
-require('dotenv').config();
-
-// NOTE: set up your .env first
-// see .env.template for more info
+// app config
+const config = require('./config.js');
 
 // set web server port
 const PORT = process.env.PORT || 8445;
 
-// get Wit.ai token from config
-const WIT_TOKEN = process.env.WIT_TOKEN;
-
-// get FB page token and app secret
-const FB_PAGE_TOKEN = process.env.FB_PAGE_TOKEN;
-const FB_APP_SECRET = process.env.FB_APP_SECRET;
-
-if (!FB_PAGE_TOKEN) { 
-  throw new Error('Missing FB_PAGE_TOKEN'); 
-}
-if (!FB_APP_SECRET) { 
-  throw new Error('Missing FB_APP_SECRET');
-}
-
-// create FB /webhook subscription verification token
-// see https://developers.facebook.com/docs/graph-api/webhooks#setup
-let FB_VERIFY_TOKEN = null;
-crypto.randomBytes(8, (err, buff) => {
-  if (err) throw err;
-  FB_VERIFY_TOKEN = buff.toString('hex');
-  console.log(`crypto.randomBytes::FB /webhook Verify Token: ${FB_VERIFY_TOKEN}`);
+// create and start express web app
+const app = express();
+app.use(({method, url}, response, next) => {
+  response.on('finish', () => {
+    console.log(`${response.statusCode} ${method} ${url}`);
+  });
+  next();
 });
+
+// verify FB request signature for all requests
+app.use( bodyParser.json( {verify: verifyFacebookRequestSignature}));
+
+// listen for requests
+app.listen(PORT);
+console.log(`index.js::Listening on port: ${PORT}...`);
+
+
+/*----------------- Wit.AI Session and FB Webhook Methods ---------------------*/
 
 // create user sessions hash map for tracking chat history:
 // sessionId -> {userId: facebookUserId, context: sessionState}
@@ -70,27 +65,16 @@ const actions = {
 
 // create wit.ai bot client
 const witAiClient = new Wit({
-  accessToken: WIT_TOKEN,
+  accessToken: config.WIT_TOKEN,
   actions,
   logger: new log.Logger(log.INFO)
 });
 
-// create and start express web app
-const app = express();
-app.use(({method, url}, response, next) => {
-  response.on('finish', () => {
-    console.log(`${response.statusCode} ${method} ${url}`);
-  });
-  next();
-});
-
-// verify FB request signature for all requests
-app.use( bodyParser.json( {verify: verifyFacebookRequestSignature}));
 
 // create /webhook get endpoint for FB page subscription verification
 app.get('/webhook', (req, res) => {
   if (req.query['hub.mode'] === 'subscribe' &&
-      req.query['hub.verify_token'] === FB_VERIFY_TOKEN) {
+      req.query['hub.verify_token'] === config.FB_VERIFY_TOKEN) {
     console.log('/webhook::GET:validating webhook...');        
     // send hub.challenge back to confirm fb verify token validation
     res.status(200).send(req.query['hub.challenge']);
@@ -152,7 +136,7 @@ function processMessage(event) {
     console.log(`processMessage::processing message: "${text}" for: ${senderId}`);
     witAiClient.runActions(sessionId, text, // msg text
           sessions[sessionId].context) // chat history state
-      .then((context) => {
+      .then( (context) => {
         // TODO: reset user session based on current session state
         // and last message request as needed
         /*if (context['done']) {
@@ -162,7 +146,7 @@ function processMessage(event) {
         // update user session state
         sessions[sessionId].context = context;
       })
-      .catch((err) => {
+      .catch( (err) => {
         console.error('processMessage:: Wit.ai error: ', err.stack || err);
       });
   }
@@ -187,7 +171,7 @@ function verifyFacebookRequestSignature(req, res, buf) {
     var signatureHash = elements[1];
 
     // create expected hash code
-    var expectedHash = crypto.createHmac('sha1', FB_APP_SECRET).update(buf).digest('hex');
+    var expectedHash = crypto.createHmac('sha1', config.FB_APP_SECRET).update(buf).digest('hex');
     if (signatureHash != expectedHash) {
       throw new Error('verifyFacebookRequestSignature::Invalid x-hub-signature.');
     }
@@ -241,7 +225,7 @@ function sendMessage(recipientId, messageText) {
   });
 
   // create messenger page token query params 
-  let queryParams = 'access_token=' + encodeURIComponent(FB_PAGE_TOKEN);
+  let queryParams = 'access_token=' + encodeURIComponent(config.FB_PAGE_TOKEN);
 
   // send message via FB messages graph api
   console.log(`sendMessage::sending message: ${messageData}`);
@@ -258,8 +242,3 @@ function sendMessage(recipientId, messageText) {
     return messageJsonResponse;
   });
 } // end of sendMessage()
-
-
-// listen for requests
-app.listen(PORT);
-console.log(`index.js::Listening on port: ${PORT}...`);
