@@ -2,13 +2,15 @@
 
 Bots demo project of US pop, biz, trade, incomes, and housing data stats
 
-## Initial Installation
+## Build
 
 ```bash
+git clone https://github.com/RandomFractals/americans.
+cd americans
 npm install
 ```
 
-## Testing
+## Test
 
 ### Jest
 ```bash
