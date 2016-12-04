@@ -38,9 +38,16 @@ if (!FB_VERIFY_TOKEN) {
   });
 }
 
+// get Census data service api key
+const CENSUS_DATA_API_KEY = process.env.CENSUS_DATA_API_KEY;
+if (!CENSUS_DATA_API_KEY) {
+  throw new Error('Missing CENSUS_DATA_API_KEY');
+}
+
 module.exports = {
   WIT_TOKEN: WIT_TOKEN,
   FB_PAGE_TOKEN: FB_PAGE_TOKEN,
   FB_VERIFY_TOKEN: FB_VERIFY_TOKEN,
   FB_APP_SECRET: FB_APP_SECRET,
+  CENSUS_DATA_API_KEY: CENSUS_DATA_API_KEY
 };

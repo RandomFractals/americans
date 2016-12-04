@@ -1,6 +1,6 @@
 jest.dontMock('../config.js');
 
-describe('Const setting test', () => {
+describe('App Config test', () => {
   /*
   it('No WIT_TOKEN test',  () => {
     require('../config.js');
@@ -9,29 +9,34 @@ describe('Const setting test', () => {
 
   it('WIT_TOKEN test', () => {
     process.env.WIT_TOKEN = 'wit_token';
-    var config = require('../cofig.js');
+    const config = require('../config.js');
     expect(config.WIT_TOKEN).toEqual('wit_token');
   });
 
-  it('No FB_PAGE_TOKEN test', () => {
-    var config = require('../config.js');
-    expect(config.FB_PAGE_TOKEN).toEqual(null);
+  it('WIT_TOKEN set test', () => {
+    const config = require('../config.js');
+    expect(config.WIT_TOKEN).not.toBe(null);
   });
 
-  it('No FB_PAGE_TOKEN test', () => {
-    process.env.FB_PAGE_TOKEN = 'fb_token';
-    var config = require('../config.js');
-    expect(config.FB_PAGE_TOKEN).toEqual('fb_token');
+  it('FB_PAGE_TOKEN set test', () => {
+    const config = require('../config.js');
+    expect(config.FB_PAGE_TOKEN).not.toBe(null);
   });
 
-  it('No FB_VERIFY_TOKEN test', () => {
-    var config = require('../config.js');
+
+  it('FB_APP_SECRET set test', () => {
+    const config = require('../config.js');
+    expect(config.FB_APP_SECRET).not.toBe(null);
+  });
+
+  it('FB_VERIFY_TOKEN set test', () => {
+    const config = require('../config.js');
     expect(config.FB_VERIFY_TOKEN).not.toBe(null);
   });
 
-  it('No FB_VERIFY_TOKEN test', () => {
-    process.env.FB_VERIFY_TOKEN = 'fb_token_test';
-    var config = require('../config.js');
-    expect(config.FB_VERIFY_TOKEN).toEqual('fb_token_test');
+  it('CENSUS_DATA_API_KEY set test', () => {
+    const config = require('../config.js');
+    expect(config.CENSUS_DATA_API_KEY).not.toBe(null);
   });
+  
 });
