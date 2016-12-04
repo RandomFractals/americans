@@ -15,8 +15,8 @@ npm install
 npm test 
 ```
 
-## Credit
-I reused soruce code and configuration from:
+## Credits
+Some borrowed and refactored code from:
 * https://github.com/wit-ai/node-wit
 * https://github.com/jw84/messenger-bot-tutorial
 * https://developers.facebook.com/docs/messenger-platform/quickstart
