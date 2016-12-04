@@ -26,7 +26,7 @@ app.use(({method, url}, response, next) => {
 const messenger = require('./messenger.js');
 
 // verify FB request signature for all requests
-app.use( bodyParser.json( {verify: messenger.verifyFacebookRequestSignature}));
+app.use( bodyParser.json( {verify: messenger.verifyRequestSignature}));
 
 // listen for requests
 app.listen(PORT);

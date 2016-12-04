@@ -157,7 +157,7 @@ function processMessage(event) {
  *
  * see https://developers.facebook.com/docs/graph-api/webhooks#setup
  */
-function verifyFacebookRequestSignature(req, res, buf) {
+function verifyRequestSignature(req, res, buf) {
   // get FB hub signature header
   var signature = req.headers['x-hub-signature'];
   if ( signature != null ) {
@@ -174,16 +174,16 @@ function verifyFacebookRequestSignature(req, res, buf) {
 
   } else {    
     // log FB request validation error
-    console.error('Messenger.verifyFacebookRequestSignature(): Missing x-hub-signature header.');
+    console.error('Messenger.verifyRequestSignature(): Missing x-hub-signature header.');
     // throw an error instead ???
     res.sendStatus(400); 
   }
   
-} // end of verifyFacebookRequestSignature()
+} // end of verifyRequestSignature()
 
 
 // export public module functions
 module.exports = {
-  verifyFacebookRequestSignature: verifyFacebookRequestSignature,
+  verifyRequestSignature: verifyRequestSignature,
   processMessage: processMessage
 };
