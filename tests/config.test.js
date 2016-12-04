@@ -1,11 +1,11 @@
 jest.dontMock('../config.js');
 
 describe('App Config test', () => {
-  /*
-  it('No WIT_TOKEN test',  () => {
-    require('../config.js');
-   expect(config.WIT_TOKEN).toThrow(new Error('missing WIT_TOKEN'));
-  	});*/
+  
+  xit('No WIT_TOKEN test',  () => {
+    const config = require('../config.js');
+    expect(config.WIT_TOKEN).toThrow(new Error('missing WIT_TOKEN'));
+  });
 
   it('WIT_TOKEN test', () => {
     process.env.WIT_TOKEN = 'wit_token';
