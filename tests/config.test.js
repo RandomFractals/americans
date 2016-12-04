@@ -1,6 +1,6 @@
 jest.dontMock('../config.js');
 
-describe('App Config tests', () => {
+describe('App Config Tests', () => {
   
   xit('No WIT_TOKEN test',  () => {
     const config = require('../config.js');
