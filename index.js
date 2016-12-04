@@ -43,7 +43,7 @@ app.get('/', (req, res) => {
 
 /*----------------------------- FB Messenger Webhook Routes -----------------------------------------*/
 
-// create /webhook GET endpoint for FB page subscription verification
+// GET endpoint for FB page subscription verification
 app.get('/webhook', (req, res) => {
   if (req.query['hub.mode'] === 'subscribe' &&
       req.query['hub.verify_token'] === config.FB_VERIFY_TOKEN) {
@@ -57,7 +57,7 @@ app.get('/webhook', (req, res) => {
 });
 
 // FB message POST request handler
-app.post('/webhook', (req, res) => {
+app.post('/webhook', (req, res) => {  
   // get Messenger request payload
   const data = req.body;
   if (data.object === 'page') {
@@ -66,14 +66,18 @@ app.post('/webhook', (req, res) => {
       // process messaging requests 
       entry.messaging.forEach( event => {
         if (event.message && !event.message.is_echo) {
+          // let messenger handle message response
           messenger.processMessage(event);
+          // just log other messenger event types for now: 
         } else if (event.message && event.message.is_echo) {
           console.log('/webhook::POST:echo message sent:', JSON.stringify(event));
         } else if (event.read) {
           console.log('/webhook::POST:message read:', JSON.stringify(event));
+        } else if (event.delivery) {
+          console.log('/webhook::POST:message delivered:', JSON.stringify(event));
         } else {
           console.log('/webhook::POST:Unknown message event request:', JSON.stringify(event));
-        }
+        }        
       });
     });
   }
