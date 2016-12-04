@@ -1,5 +1,8 @@
 'use strict';
 
+// crypto lib import for FB requests verification
+const crypto = require('crypto');
+
 // wit.ai imports
 const {Wit, log} = require('node-wit');
 
