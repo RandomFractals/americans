@@ -30,7 +30,7 @@ app.use( bodyParser.json( {verify: messenger.verifyFacebookRequestSignature}));
 
 // listen for requests
 app.listen(PORT);
-console.log(`index.js::Listening on port: ${PORT}...`);
+console.log(`index.js: Listening on port: ${PORT}...`);
 
 // create user-friendly web app info page handler
 app.get('/', (req, res) => {
@@ -47,11 +47,11 @@ app.get('/', (req, res) => {
 app.get('/webhook', (req, res) => {
   if (req.query['hub.mode'] === 'subscribe' &&
       req.query['hub.verify_token'] === config.FB_VERIFY_TOKEN) {
-    console.log('/webhook::GET:validating webhook...');        
+    console.log('/webhook: validating webhook...');        
     // send hub.challenge back to confirm fb verify token validation
     res.status(200).send(req.query['hub.challenge']);
   } else {
-    console.error('/webhook::GET:Failed /webhook validation. Make sure your validation tokens match!');
+    console.error('/webhook: Failed /webhook validation. Make sure your validation tokens match!');
     res.sendStatus(400); // or 403 - forbidden
   }
 });
@@ -70,13 +70,13 @@ app.post('/webhook', (req, res) => {
           messenger.processMessage(event);
           // just log other messenger event types for now: 
         } else if (event.message && event.message.is_echo) {
-          console.log('/webhook::POST:echo message sent:', JSON.stringify(event));
+          console.log('/webhook: echo message sent:', JSON.stringify(event));
         } else if (event.read) {
-          console.log('/webhook::POST:message read:', JSON.stringify(event));
+          console.log('/webhook: message read:', JSON.stringify(event));
         } else if (event.delivery) {
-          console.log('/webhook::POST:message delivered:', JSON.stringify(event));
+          console.log('/webhook: message delivered:', JSON.stringify(event));
         } else {
-          console.log('/webhook::POST:Unknown message event request:', JSON.stringify(event));
+          console.log('/webhook: Unknown message event request:', JSON.stringify(event));
         }        
       });
     });
