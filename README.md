@@ -17,6 +17,11 @@ npm install
 npm test 
 ```
 
+## Run
+```bash
+npm start 
+```
+
 ## Credits
 Some borrowed and refactored code from:
 * https://github.com/wit-ai/node-wit
