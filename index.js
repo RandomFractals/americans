@@ -30,7 +30,7 @@ app.use( bodyParser.json( {verify: messenger.verifyFacebookRequestSignature}));
 
 // listen for requests
 app.listen(PORT);
-console.log(`index.js: Listening on port: ${PORT}...`);
+console.log(`index.js: Listening on Port: ${PORT}...`);
 
 // create user-friendly web app info page handler
 app.get('/', (req, res) => {
@@ -47,7 +47,7 @@ app.get('/', (req, res) => {
 app.get('/webhook', (req, res) => {
   if (req.query['hub.mode'] === 'subscribe' &&
       req.query['hub.verify_token'] === config.FB_VERIFY_TOKEN) {
-    console.log('/webhook: validating webhook...');        
+    console.log('/webhook: Validating webhook...');        
     // send hub.challenge back to confirm fb verify token validation
     res.status(200).send(req.query['hub.challenge']);
   } else {
@@ -70,13 +70,13 @@ app.post('/webhook', (req, res) => {
           messenger.processMessage(event);
           // just log other messenger event types for now: 
         } else if (event.message && event.message.is_echo) {
-          console.log('/webhook: echo message sent:', JSON.stringify(event));
+          console.log('/webhook: Echo Message Sent:', JSON.stringify(event));
         } else if (event.read) {
-          console.log('/webhook: message read:', JSON.stringify(event));
+          console.log('/webhook: Message Read:', JSON.stringify(event));
         } else if (event.delivery) {
-          console.log('/webhook: message delivered:', JSON.stringify(event));
+          console.log('/webhook: Message Delivered:', JSON.stringify(event));
         } else {
-          console.log('/webhook: Unknown message event request:', JSON.stringify(event));
+          console.log('/webhook: Unknown Message Event Request:', JSON.stringify(event));
         }        
       });
     });

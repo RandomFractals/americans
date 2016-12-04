@@ -9,7 +9,7 @@ const {Wit, log} = require('node-wit');
 // app config
 const config = require('./config.js');
 
-/*----------------- Wit.AI Session and FB Webhook Methods ---------------------*/
+/*----------------- Wit.AI Session and FB Messenger Methods ---------------------*/
 
 // create user sessions hash map for tracking chat history:
 // sessionId -> {userId: facebookUserId, context: sessionState}
