@@ -10,8 +10,13 @@ cd americans
 npm install
 ```
 
-## Test
+## Config
+```bash
+cp .env.template .env
+```
+Follow instructions in .env config file to procure required tokens and access api keys.
 
+## Test
 ### Jest
 ```bash
 npm test 
@@ -22,8 +27,17 @@ npm test
 npm start 
 ```
 
+## Dev Guides
+FB Messenger Platform Quick Start:
+
+* https://developers.facebook.com/docs/messenger-platform/quickstart
+
+Wit.AI Node.js SDK:
+
+* https://github.com/wit-ai/node-wit
+
 ## Credits
 Some borrowed and refactored code from:
-* https://github.com/wit-ai/node-wit
+
 * https://github.com/jw84/messenger-bot-tutorial
-* https://developers.facebook.com/docs/messenger-platform/quickstart
+* https://github.com/hunkim/Wit-Facebook
