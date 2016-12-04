@@ -22,15 +22,15 @@ const actions = {
     const recipientId = sessions[sessionId].userId;
     if (recipientId) {
       // send bot message response
-      console.log(`send::sending message to: ${recipientId} text: "${text}"`);
+      console.log(`Messenger.send(): to: ${recipientId} text: "${text}"`);
       return sendMessage(recipientId, text)
         .then(() => null)
         .catch((err) => {
-          console.error('send::Error forwarding message response to:',
+          console.error('Messenger.send(): Error forwarding message response to:',
             recipientId, err.stack || err);
         });
     } else {
-      console.error(`send::Failed to get user id for session: ${sessionId}`);
+      console.error(`Messenger.send(): Failed to get user id for session: ${sessionId}`);
       // return promise to return control back to bot api
       return Promise.resolve()
     }
@@ -71,7 +71,7 @@ function processMessage(event) {
       .catch(console.error);
   } else if (text) {
     // forward message to wit.ai bot engine to run it through all bot ai actions
-    console.log(`processMessage::processing message: "${text}" for: ${senderId}`);
+    console.log(`Messenger.processMessage(): "${text}" for: ${senderId}`);
     witAiClient.runActions(sessionId, text, // msg text
           sessions[sessionId].context) // chat history state
       .then( (context) => {
@@ -85,7 +85,7 @@ function processMessage(event) {
         sessions[sessionId].context = context;
       })
       .catch( (err) => {
-        console.error('processMessage:: Wit.ai error: ', err.stack || err);
+        console.error('Messenger.processMessage(): Wit.ai error: ', err.stack || err);
       });
   }
 
@@ -111,12 +111,12 @@ function verifyFacebookRequestSignature(req, res, buf) {
     // create expected hash code
     var expectedHash = crypto.createHmac('sha1', config.FB_APP_SECRET).update(buf).digest('hex');
     if (signatureHash != expectedHash) {
-      throw new Error('verifyFacebookRequestSignature::Invalid x-hub-signature.');
+      throw new Error('Invalid x-hub-signature.');
     }
 
   } else {    
     // log FB request validation error
-    console.error('verifyFacebookRequestSignature::Missing x-hub-signature header.');
+    console.error('Messenger.verifyFacebookRequestSignature(): Missing x-hub-signature header.');
     // throw an error instead ???
     res.sendStatus(400); 
   }
@@ -166,7 +166,7 @@ function sendMessage(recipientId, messageText) {
   let queryParams = 'access_token=' + encodeURIComponent(config.FB_PAGE_TOKEN);
 
   // send message via FB messages graph api
-  console.log(`sendMessage::sending message: ${messageData}`);
+  console.log(`Messenger.sendMessage(): ${messageData}`);
   return fetch('https://graph.facebook.com/me/messages?' + queryParams, {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
