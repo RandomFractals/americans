@@ -14,7 +14,7 @@ npm install
 ```bash
 cp .env.template .env
 ```
-Follow instructions in .env config file to procure required tokens and access api keys.
+Follow instructions in .env config file to procure required tokens 
 
 ## Test
 ### Jest
