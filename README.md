@@ -15,6 +15,7 @@ npm install
 cp .env.template .env
 ```
 Follow instructions in .env config file to procure required tokens 
+and service api access keys for FB Messenger and census data calls.
 
 ## Test
 ### Jest

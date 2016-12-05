@@ -65,7 +65,7 @@ function processMessage(message) {
   } else if (text) {
     // forward message to wit.ai bot engine to run it through all bot ai actions
     console.log(`Messenger.processMessage(): "${text}" for:${senderId}`);
-    botAi.processMessage(event);
+    botAi.processMessage(message);
   }
 } // end of processMessage()
 
