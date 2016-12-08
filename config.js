@@ -34,7 +34,7 @@ if (!FB_VERIFY_TOKEN) {
     if (err) throw err;
     FB_VERIFY_TOKEN = buff.toString('hex');
     // output new FB verification token for messenger app config
-    console.log(`Config.crypto.randomBytes(): FB_VERIFY_TOKEN=${FB_VERIFY_TOKEN}`);
+    //console.log(`Config.crypto.randomBytes(): FB_VERIFY_TOKEN=${FB_VERIFY_TOKEN}`);
   });
 }
 
