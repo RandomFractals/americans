@@ -66,6 +66,9 @@ function processMessage(message) {
     // forward message to wit.ai bot engine to run it through all bot ai actions
     console.log(`Messenger.processMessage(): "${text}" for:${senderId}`);
     botAi.processMessage(message);
+  } else {
+    console.error('Messenger.processmessage(): missing message request content.');    
+    throw new Error('Missing message request content.');
   }
 } // end of processMessage()
 
