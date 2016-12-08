@@ -3,13 +3,13 @@
 // app config
 const config = require('./config.js');
 
-// wit.ai imports
-const {Wit, log} = require('node-wit');
-
 // TODO: decouple this eventually generic Bot AI setup 
 // from default FB messenger.js interface;
 // P.S.: convert them all to es6 classes too!
 const messenger = require('./messenger.js');
+
+// wit.ai imports
+const {Wit, log} = require('node-wit');
 
 /*----------------- Bot AI Session, Actions, and Messaging Methods ---------------------*/
 
@@ -21,6 +21,7 @@ const sessions = {};
 const actions = {
   send({sessionId}, {text}) {
     // get chat user id from user session
+    console.log(`BotAi.send(): request:${text}`);
     const recipientId = sessions[sessionId].userId;
     if (recipientId) {
       // send bot message response
@@ -70,6 +71,8 @@ function getSessionId(userId){
     sessionId = new Date().toISOString();
     sessions[sessionId] = {userId: userId, context: {}};
   }
+  console.log(`BotAI.getSessionId(): sessionId=${sessionId}`);
+
   return sessionId;
 }
 
@@ -110,13 +113,16 @@ function processMessage(message, chatClient) {
         /*if (context['done']) {
           delete sessions[sessionId];
         }*/
-
+        console.log( JSON.stringify(context) );
         // update user session state
         sessions[sessionId].context = context;
       })
       .catch( (err) => {
         console.error('BotAI.processMessage(): Wit.ai error: ', err.stack || err);
       });
+  } else {
+    console.error('BotAI.processMessage(): missing message text!');    
+    throw new Error('Missing message text.');
   }
 
 } // end of processMessage()
