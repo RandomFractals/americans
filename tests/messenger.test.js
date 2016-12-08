@@ -42,9 +42,15 @@ describe('Messenger processMessage() Tests', () => {
     });
   });
 
-  xit('processMessage() test', () => {
-    let response = messenger.processMessage('test', 'hello', {});
-    expect(response).toBe(undefined); // no return, so undefined
+  xit('What is the population of USA?', () => {
+    // TODO
+    expect( () => {
+      messenger.processMessage({
+        sender: {id: '1165704360144557'}, 
+        recipient: {id: 'PAGE_ID'}, 
+        message: {text: 'What is the population of USA?'}
+      })
+    }).toBeDefined(); 
   });    
 
 });
