@@ -19,15 +19,15 @@ describe('Messenger Interface Tests', () => {
 
 describe('Messenger processMessage() Tests', () => {
 
-  it('fails on processing empty message', () => {
+  it('fails on missing message text', () => {
     expect( () => {
       messenger.processMessage({
         sender: {}, recipient: {}, message: {}
       });
-    }).toThrowError('Missing message request content.');
+    }).toThrowError('Missing message text.');
   });
 
-  it('can process tests/message.json', () => {
+  xit('can process tests/message.json', () => {
     // load test message
     let messageData = null;    
     require('fs').readFile('tests/message.json', 'utf8', function(err, data) {      
@@ -42,15 +42,22 @@ describe('Messenger processMessage() Tests', () => {
     });
   });
 
+  it('can send a "test message"', () => {
+    return messenger.sendMessage('1165704360144557', 'test message')
+      .then( (response) => {
+        expect(response).not.toBeNull(); 
+      });
+  });    
+
   xit('What is the population of USA?', () => {
-    // TODO
-    expect( () => {
-      messenger.processMessage({
-        sender: {id: '1165704360144557'}, 
-        recipient: {id: 'PAGE_ID'}, 
-        message: {text: 'What is the population of USA?'}
-      })
-    }).toBeDefined(); 
+    return messenger.processMessage({
+      sender: {id: '1165704360144557'}, 
+      recipient: {id: 'PAGE_ID'}, 
+      message: {text: 'What is the population of USA?'}
+    })
+    .then( (response) => {
+      expect(response).toBe(undefined); // no return, so undefined 
+    });
   });    
 
 });
