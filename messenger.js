@@ -67,8 +67,8 @@ function processMessage(message) {
     console.log(`Messenger.processMessage(): "${text}" for:${senderId}`);
     botAi.processMessage(message);
   } else {
-    console.error('Messenger.processmessage(): missing message request content.');    
-    throw new Error('Missing message request content.');
+    console.error('Messenger.processMessage(): missing message text!');    
+    throw new Error('Missing message text.');
   }
 } // end of processMessage()
 
@@ -92,7 +92,7 @@ function sendMessage(recipientId, messageText) {
   let queryParams = 'access_token=' + encodeURIComponent(config.FB_PAGE_TOKEN);
 
   // send message via FB messages graph api
-  console.log(`Messenger.sendMessage(): ${messageData}`);
+  console.log(`Messenger.sendMessage(): request:${messageData}`);
   return fetch('https://graph.facebook.com/me/messages?' + queryParams, {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
@@ -100,6 +100,7 @@ function sendMessage(recipientId, messageText) {
   })
   .then(messageResponse => messageResponse.json())
   .then(messageJsonResponse => {
+    console.log(`Messenger.sendMessage(): response:${JSON.stringify(messageJsonResponse)}`);
     if ( messageJsonResponse.error && messageJsonResponse.error.message ) {
       throw new Error(messageJsonResponse.error.message);
     }
