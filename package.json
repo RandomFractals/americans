@@ -20,7 +20,7 @@
       "tests"
     ],
     "testRunner": "jasmine2",
-    "verbose": true
+    "verbose": true    
   },
   "dependencies": {
     "dotenv": "^2.0.0",
