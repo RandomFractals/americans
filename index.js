@@ -22,8 +22,9 @@ app.use(({method, url}, response, next) => {
   next();
 });
 
-// create FB Messenger with wrapped Wit.AI interface instance 
-const messenger = require('./messenger.js');
+// create Messenger interface instance
+const Messenger = require('./messenger.js');
+const messenger = new Messenger(config);
 
 // verify FB request signature for all requests
 app.use( bodyParser.json( {verify: messenger.verifyRequestSignature}));
