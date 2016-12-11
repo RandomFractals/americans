@@ -1,11 +1,19 @@
-jest.dontMock('../src/bot-ai/bot-ai.js');
+jest.dontMock('../src/bot-ai/wit-ai.js');
 
-const botAI = require('../src/bot-ai/bot-ai.js');
+// load config
+const config = require('../src/utils/config.js');
+
+// create Messenger chat client for tests
+const Messenger = require('../src/clients/messenger.js');
+const messenger = new Messenger(config);
+
+const WitAI = require('../src/bot-ai/wit-ai.js');
+const witAI = new WitAI(config, messenger);
 
 describe('Bot AI Interface Tests', () => {
 
   it('processMessage() is defined', () => {
-    expect(botAI.processMessage).toBeDefined();
+    expect(witAI.processMessage).toBeDefined();
   });
 });
 
@@ -13,7 +21,7 @@ describe('Bot AI processMessage() Tests', () => {
 
   it('fails on missing message text', () => {
     expect( () => {
-      botAI.processMessage({
+      witAI.processMessage({
         sender: {}, recipient: {}, message: {}
       });
     }).toThrowError('Missing message text.');
@@ -21,7 +29,7 @@ describe('Bot AI processMessage() Tests', () => {
 
   it('What is the population of USA?', () => {
     return expect( () => {
-      botAI.processMessage({
+      witAI.processMessage({
         sender: {id: "1165704360144557"}, 
         recipient: {id: "PAGE_ID"}, 
         message: {text: "What is the population of USA?"}
