@@ -26,7 +26,7 @@ class BotAIFactory {
         // TODO
       case 'wit.ai':
       default: // wit.ai
-        console.log('BotAIFactory:creating WitAI bot engine instance...');
+        //console.log('BotAIFactory:creating WitAI bot engine instance...');
         this._botAI = new WitAI(config, chatClient);
         break;        
     }
