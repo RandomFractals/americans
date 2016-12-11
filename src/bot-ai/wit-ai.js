@@ -23,7 +23,8 @@ class WitAI {
 
     // create user sessions hash map for tracking user chat history:
     // sessionId -> {userId: userId, context: sessionState}
-    this._sessions = {};
+    const sessions = {};
+    this._sessions = sessions;
 
     // create wit.ai bot actions
     const actions = {
@@ -60,7 +61,7 @@ class WitAI {
     });
 
     // send test message
-    chatClient.sendMessage('1165704360144557', 'Hi from wit.ai bot');
+    //chatClient.sendMessage('1165704360144557', 'Hi from wit.ai bot');
 
     console.log('WitAI bot engine instance created!');
 
@@ -123,7 +124,7 @@ class WitAI {
       // forward message to wit.ai bot engine to run it through all bot ai actions
       console.log(`BotAI.processMessage(): "${text}" for:${senderId}`);
       this._witAiClient.runActions(sessionId, text, // msg text
-            sessions[sessionId].context) // chat history state
+            this._sessions[sessionId].context) // chat history state
         .then( (context) => {
           // TODO: reset user session based on current session state
           // and last message request as needed
@@ -132,7 +133,7 @@ class WitAI {
           }*/
           console.log( JSON.stringify(context) );
           // update user session state
-          sessions[sessionId].context = context;
+          this._sessions[sessionId].context = context;
         })
         .catch( (err) => {
           console.error('BotAI.processMessage(): Wit.ai error: ', err.stack || err);
