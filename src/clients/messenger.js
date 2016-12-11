@@ -4,7 +4,7 @@
 const crypto = require('crypto');
 
 // import bot brains
-const botAi = require('../bot-ai/bot-ai.js');
+const BotAIFactory = require('../bot-ai/bot-ai-factory.js');
 
 /**
  * Defines Messenger class for FB page chats.
@@ -13,17 +13,25 @@ class Messenger {
 
   /**
   * Creates new Messenger instance for FB page chat.
+  *
+  * @param config Messenger bot config.
   */
   constructor(config) {
+    // save bot config
     this._config = config;
+
+    // get bot AI engine instance
+    this.botAI = new BotAIFactory(config, this).botAI;
   }
 
+
   /**
-   * Gets messenger config.
+   * Gets messenger bot config.
    */
   get config() {
     return this._config;
   }
+
 
   /*
   * Verifies Facebook callback request using encrypted
@@ -80,7 +88,7 @@ class Messenger {
     } else if (text) {
       // forward message to wit.ai bot engine to run it through all bot ai actions
       console.log(`Messenger.processMessage(): "${text}" for:${senderId}`);
-      botAi.processMessage(message, this);
+      botAI.processMessage(message, this);
     } else {
       console.error('Messenger.processMessage(): missing message text!');    
       throw new Error('Missing message text.');
