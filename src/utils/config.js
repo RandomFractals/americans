@@ -9,6 +9,9 @@ const config = require('dotenv').config({silent:true});
 // NOTE: set up your .env first
 // see .env.template for more info
 
+// get bot AI config
+const BOT_AI = process.env.BOT_AI;
+
 // get Wit.ai token from config
 const WIT_TOKEN = process.env.WIT_TOKEN;
 if (!WIT_TOKEN) {
@@ -45,6 +48,7 @@ if (!CENSUS_DATA_API_KEY) {
 }
 
 module.exports = {
+  BOT_AI: BOT_AI,
   WIT_TOKEN: WIT_TOKEN,
   FB_PAGE_TOKEN: FB_PAGE_TOKEN,
   FB_VERIFY_TOKEN: FB_VERIFY_TOKEN,
