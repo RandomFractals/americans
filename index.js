@@ -27,7 +27,7 @@ const Messenger = require('./src/clients/messenger.js');
 const messenger = new Messenger(config);
 
 // verify FB request signature for all requests
-//app.use( bodyParser.json( {verify: messenger.verifyRequestSignature}));
+app.use( bodyParser.json() ); //{verify: messenger.verifyRequestSignature}));
 
 // listen for requests
 app.listen(PORT);
