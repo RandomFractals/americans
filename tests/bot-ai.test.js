@@ -1,6 +1,6 @@
-jest.dontMock('../bot-ai.js');
+jest.dontMock('../src/bot-ai/bot-ai.js');
 
-const botAI = require('../bot-ai.js');
+const botAI = require('../src/bot-ai/bot-ai.js');
 
 describe('Bot AI Interface Tests', () => {
 

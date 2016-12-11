@@ -1,10 +1,10 @@
-jest.dontMock('../messenger.js');
+jest.dontMock('../src/clients/messenger.js');
 
 // load config
-const config = require('dotenv').config({silent:true});
+const config = require('../src/utils/config.js');
 
 // create Messenger interface instance
-const Messenger = require('../messenger.js');
+const Messenger = require('../src/clients/messenger.js');
 
 describe('Messenger Interface Tests', () => {
 
@@ -25,6 +25,8 @@ describe('Messenger Interface Tests', () => {
 describe('Messenger processMessage() Tests', () => {
 
   it('fails on missing message text', () => {
+    const config = require('../src/utils/config.js');
+    const messenger = new Messenger(config);    
     expect( () => {
       messenger.processMessage({
         sender: {}, recipient: {}, message: {}
@@ -48,7 +50,8 @@ describe('Messenger processMessage() Tests', () => {
     });
   });
 
-  xit('can send a "test message"', () => {
+  it('can send a "test message"', () => {
+    const config = require('../src/utils/config.js');
     const messenger = new Messenger(config);    
     return messenger.sendMessage('1165704360144557', 'test message')
       .then( (response) => {
@@ -57,6 +60,7 @@ describe('Messenger processMessage() Tests', () => {
   });    
 
   it('What is the population of USA?', () => {
+    const config = require('../src/utils/config.js');
     const messenger = new Messenger(config);
     return messenger.processMessage({
       sender: {id: '1165704360144557'}, 

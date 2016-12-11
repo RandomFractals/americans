@@ -1,12 +1,12 @@
 'use strict';
 
 // app config
-const config = require('./config.js');
+const config = require('../utils/config.js');
 
 // TODO: decouple this eventually generic Bot AI setup 
 // from default FB messenger.js interface;
 // P.S.: convert them all to es6 classes too!
-const messenger = require('./messenger.js');
+const messenger = require('../clients/messenger.js');
 
 // wit.ai imports
 const {Wit, log} = require('node-wit');

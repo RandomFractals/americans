@@ -8,7 +8,7 @@ const fetch = require('node-fetch');
 const request = require('request');
 
 // app config
-const config = require('./config.js');
+const config = require('./src/utils/config.js');
 
 // set web server port
 const PORT = process.env.PORT || 8445;
@@ -23,7 +23,7 @@ app.use(({method, url}, response, next) => {
 });
 
 // create Messenger interface instance
-const Messenger = require('./messenger.js');
+const Messenger = require('./src/clients/messenger.js');
 const messenger = new Messenger(config);
 
 // verify FB request signature for all requests

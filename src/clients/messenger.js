@@ -1,13 +1,10 @@
 'use strict';
 
-// app config
-const config = require('./config.js');
-
 // crypto lib import for FB requests verification
 const crypto = require('crypto');
 
 // import bot brains
-const botAi = require('./bot-ai.js');
+const botAi = require('../bot-ai/bot-ai.js');
 
 /**
  * Defines Messenger class for FB page chats.
@@ -18,7 +15,14 @@ class Messenger {
   * Creates new Messenger instance for FB page chat.
   */
   constructor(config) {
-    this.config = config;
+    this._config = config;
+  }
+
+  /**
+   * Gets messenger config.
+   */
+  get config() {
+    return this._config;
   }
 
   /*
@@ -38,7 +42,8 @@ class Messenger {
       var signatureHash = elements[1];
 
       // create expected hash code
-      var expectedHash = crypto.createHmac('sha1', config.FB_APP_SECRET).update(buf).digest('hex');
+      var expectedHash = crypto.createHmac('sha1', 
+        this.config.FB_APP_SECRET).update(buf).digest('hex');
       if (signatureHash != expectedHash) {
         throw new Error('Invalid x-hub-signature.');
       }
@@ -99,7 +104,7 @@ class Messenger {
     });
 
     // create messenger page token query params 
-    let queryParams = 'access_token=' + encodeURIComponent(config.FB_PAGE_TOKEN);
+    let queryParams = 'access_token=' + encodeURIComponent(this.config.FB_PAGE_TOKEN);
 
     // send message via FB messages graph api
     console.log(`Messenger.sendMessage(): request:${messageData}`);
