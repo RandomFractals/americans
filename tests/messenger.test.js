@@ -1,14 +1,14 @@
 jest.dontMock('../messenger.js');
 
-// initialize .env vars
+// load config
 const config = require('dotenv').config({silent:true});
 
 // create Messenger interface instance
 const Messenger = require('../messenger.js');
-const messenger = new Messenger(config);
 
 describe('Messenger Interface Tests', () => {
 
+  const messenger = new Messenger(config);
   it('verifyRequestSignature() exists', () => {
     expect(messenger.verifyRequestSignature).not.toBeNull();
   });
@@ -40,6 +40,7 @@ describe('Messenger processMessage() Tests', () => {
       messageData = JSON.parse(data);
 
       // process test message
+      const messenger = new Messenger(config);
       return messenger.processMessage(messageData.entry[0].messaging[0])
         .then( (response) => {
           expect(response).toBe(undefined); // no return, so undefined 
@@ -48,13 +49,15 @@ describe('Messenger processMessage() Tests', () => {
   });
 
   xit('can send a "test message"', () => {
+    const messenger = new Messenger(config);    
     return messenger.sendMessage('1165704360144557', 'test message')
       .then( (response) => {
         expect(response).not.toBeNull(); 
       });
   });    
 
-  xit('What is the population of USA?', () => {
+  it('What is the population of USA?', () => {
+    const messenger = new Messenger(config);
     return messenger.processMessage({
       sender: {id: '1165704360144557'}, 
       recipient: {id: 'PAGE_ID'}, 

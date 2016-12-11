@@ -4,11 +4,10 @@
 const config = require('./config.js');
 
 // crypto lib import for FB requests verification
-//const crypto = require('crypto');
+const crypto = require('crypto');
 
 // import bot brains
 const botAi = require('./bot-ai.js');
-
 
 /**
  * Defines Messenger class for FB page chats.
