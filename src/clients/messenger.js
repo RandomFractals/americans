@@ -88,7 +88,7 @@ class Messenger {
     } else if (text) {
       // forward message to wit.ai bot engine to run it through all bot ai actions
       console.log(`Messenger.processMessage(): "${text}" for:${senderId}`);
-      botAI.processMessage(message, this);
+      this.botAI.processMessage(message, this);
     } else {
       console.error('Messenger.processMessage(): missing message text!');    
       throw new Error('Missing message text.');
