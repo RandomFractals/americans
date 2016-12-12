@@ -17,8 +17,9 @@ class BotAIFactory {
   * @param chatClient Chat client instance, i.e. Messenger, Slack, etc.
   */
   constructor(config, chatClient) {
-    // save bot ai config
+    // save bot ai config and chat client instance
     this._config = config;
+    this._chatClient = chatClient;
 
     // create bot AI engine instance
     switch (config.BOT_AI) {      
@@ -46,6 +47,14 @@ class BotAIFactory {
    */
   get botAI() {
     return this._botAI;
+  }
+
+
+  /**
+   * Gets chat client instance.
+   */
+  get chatClient() {
+    return this._chatClient;
   }
 }
 
