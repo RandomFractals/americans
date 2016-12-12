@@ -15,7 +15,7 @@ API.AI bot engine hookup and Slack chat integration coming to chat clients near 
 ## Build
 
 ```bash
-git clone https://github.com/RandomFractals/americans.
+git clone https://github.com/RandomFractals/americans
 cd americans
 npm install
 ```
@@ -25,13 +25,18 @@ npm install
 cp .env.template .env
 ```
 Follow instructions in .env config file to procure required tokens 
-and service api access keys for FB Messenger and census data calls.
+and service api access keys for Wit.ai, FB Messenger, and Census data calls.
 
 ## Test
 ### Jest
 ```bash
 npm test 
 ```
+
+### Console
+```bash
+node bot.js
+``` 
 
 ## Run
 ```bash
