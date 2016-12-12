@@ -2,6 +2,16 @@
 
 Bots demo project of US pop, biz, trade, incomes, and housing data stats
 
+## Project Info
+
+Future home of Americans bot on FB: https://www.facebook.com/Americans-1836666999901817/
+
+Alpha v. webhooks hosted on heroku: https://americans.herokuapp.com/
+
+Current Wit.AI bot brains: https://wit.ai/RandomFractals/americans/stories
+
+API.AI bot engine hookup and Slack chat integration coming to chat clients near you by Christmas time! :)
+
 ## Build
 
 ```bash
