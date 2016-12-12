@@ -7,6 +7,7 @@ const config = require('../src/utils/config.js');
 const Messenger = require('../src/clients/messenger.js');
 const messenger = new Messenger(config);
 
+// create wit.ai bot instance
 const WitAI = require('../src/bot-ai/wit-ai.js');
 const witAI = new WitAI(config, messenger);
 
@@ -28,13 +29,22 @@ describe('Bot AI processMessage() Tests', () => {
   });
 
   it('What is the population of USA?', () => {
-    return expect( () => {
+    return witAI.processMessage({
+        sender: {id: "1165704360144557"}, 
+        recipient: {id: "PAGE_ID"}, 
+        message: {text: "What is the population of USA?"}      
+    }).then( (context) => { 
+      expect(context).toEqual('Hi');
+    });
+
+    /*return expect( () => {
       witAI.processMessage({
         sender: {id: "1165704360144557"}, 
         recipient: {id: "PAGE_ID"}, 
         message: {text: "What is the population of USA?"}
       });
-    }).toBeDefined(); // TODO: should return current USA pop text response
+    }).toBe('Hi'); //.toBeDefined(); // TODO: should return current USA pop text response
+    */
   });    
 
 });
