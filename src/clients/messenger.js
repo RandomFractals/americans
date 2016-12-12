@@ -127,6 +127,8 @@ class Messenger {
       if ( messageJsonResponse.error && messageJsonResponse.error.message ) {
         throw new Error(messageJsonResponse.error.message);
       }
+      // append sent message text
+      messageJsonResponse.message = messageText; 
       return messageJsonResponse;
     });
   } // end of sendMessage()
