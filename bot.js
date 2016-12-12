@@ -1,5 +1,8 @@
 'use strict';
 
+// see: https://wit.ai/RandomFractals/americans/stories
+// for wit.ai bot stories supported by this interactive bot test
+
 // load app config
 const config = require('./src/utils/config.js');
 
@@ -12,19 +15,35 @@ const witAiClient = new Wit({
   actions: {
     send(request, response) {
       return new Promise( function(resolve, reject) {
-        console.log( JSON.stringify(response) );
+        console.log(`> bot.send() response: ${JSON.stringify(response)}`);
         return resolve();
       });
     },
-    myAction({sessionId, context, text, entities}) {
+    greeting({sessionId, context, text, entities}) {
+      console.log('> bot.greeting():');
       console.log(`Session ${sessionId} received message: ${text}`);
-      console.log(`Current context: ${JSON.stringify(context)}`);
-      console.log(`Wit extracted entities: ${JSON.stringify(entities)}`);
+      logBotInfo(context, entities);
       return Promise.resolve(context);
+    },
+    getPopulation({sessionId, context, text, entities}) {
+      console.log('> bot.getPopulation() request:');
+      logBotInfo(context, entities);      
+    },
+    disconnect({sessionId, context, text, entities}) {
+      console.log('> bot.disconnect():');
+      logBotInfo(context, entities);
     }
   },
-  logger: new log.Logger(log.DEBUG) // optional  
+  logger: new log.Logger(log.DEBUG)  
 });
+
+/**
+ * Logs wit.ai context and entities for interactive bot testing.
+ */
+function logBotInfo(context, entities) {
+  console.log(`\t context: ${JSON.stringify(context)}`);
+  console.log(`\t entities: ${JSON.stringify(entities)}`);
+}
 
 // start interactive wit.ai client
 interactive(witAiClient);
