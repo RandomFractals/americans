@@ -28,15 +28,18 @@ class WitAI {
 
     // create wit.ai bot actions
     const actions = {
-      send({sessionId}, {text}) {
+      send({sessionId, context}, {text}) {
         // get chat user id from user session
-        console.log(`BotAi.send(): request:${text}`);
+        console.log(`BotAi.send(): response:"${text}"`);
         const recipientId = sessions[sessionId].userId;
         if (recipientId) {
           // send bot message response
-          console.log(`BotAI.send(): to:${recipientId} text:"${text}"`);
+          console.log(`BotAI.send(): to:${recipientId} response:"${text}"`);
           return chatClient.sendMessage(recipientId, text)
-            .then(() => null)
+            //.then(() => null)
+            .then( () => {
+              console.log(`BotAI.send(): ${text} message sent!`);
+            })
             .catch((err) => {
               console.error('BotAI.send(): Error forwarding message response to:',
                 recipientId, err.stack || err);
@@ -44,7 +47,7 @@ class WitAI {
         } else {
           console.error(`BotAI.send(): Failed to get user id for session: ${sessionId}`);
           // return promise to return control back to bot ai api
-          return Promise.resolve()
+          return Promise.resolve();
         }
       },
       // TODO: implement our custom bot actions here
@@ -118,12 +121,12 @@ class WitAI {
     const sessionId = this.getSessionId(senderId);
 
     if (attachments) {
-      this.chatClient.sendMessage(senderId, 'Sorry I can only process text messages for now.')
+      return this.chatClient.sendMessage(senderId, 'Sorry I can only process text messages for now.')
         .catch(console.error);
     } else if (text) {
       // forward message to wit.ai bot engine to run it through all bot ai actions
       console.log(`BotAI.processMessage(): "${text}" for:${senderId}`);
-      this._witAiClient.runActions(sessionId, text, // msg text
+      return this._witAiClient.runActions(sessionId, text, // msg text
             this._sessions[sessionId].context) // chat history state
         .then( (context) => {
           // TODO: reset user session based on current session state
@@ -134,12 +137,13 @@ class WitAI {
           console.log( JSON.stringify(context) );
           // update user session state
           this._sessions[sessionId].context = context;
+          return context;
         })
         .catch( (err) => {
           console.error('BotAI.processMessage(): Wit.ai error: ', err.stack || err);
         });
     } else {
-      console.error('BotAI.processMessage(): missing message text!');    
+      //console.error('BotAI.processMessage(): missing message text!');    
       throw new Error('Missing message text.');
     }
 
