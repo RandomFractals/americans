@@ -83,14 +83,14 @@ class Messenger {
     const messageTime = message.timestamp;
 
     if (attachments) {
-      sendMessage(senderId, 'Sorry I can only process text messages for now :(')
+      return sendMessage(senderId, 'Sorry I can only process text messages for now :(')
         .catch(console.error);
     } else if (text) {
       // forward message to wit.ai bot engine to run it through all bot ai actions
       console.log(`Messenger.processMessage(): "${text}" for:${senderId}`);
-      this.botAI.processMessage(message, this);
+      return this.botAI.processMessage(message, this);
     } else {
-      console.error('Messenger.processMessage(): missing message text!');    
+      //console.error('Messenger.processMessage(): missing message text!');    
       throw new Error('Missing message text.');
     }
   } // end of processMessage()
