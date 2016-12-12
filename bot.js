@@ -29,6 +29,10 @@ const witAiClient = new Wit({
       console.log('> bot.getPopulation() request:');
       logBotInfo(context, entities);      
     },
+    thanks({sessionId, context, text, entities}) {
+      console.log('> bot.thanks():');
+      logBotInfo(context, entities);
+    },    
     disconnect({sessionId, context, text, entities}) {
       console.log('> bot.disconnect():');
       logBotInfo(context, entities);
