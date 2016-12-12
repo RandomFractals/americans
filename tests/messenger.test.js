@@ -5,10 +5,10 @@ const config = require('../src/utils/config.js');
 
 // create Messenger interface instance
 const Messenger = require('../src/clients/messenger.js');
+const messenger = new Messenger(config);
 
 describe('Messenger Interface Tests', () => {
 
-  const messenger = new Messenger(config);
   it('verifyRequestSignature() exists', () => {
     expect(messenger.verifyRequestSignature).not.toBeNull();
   });
@@ -25,8 +25,6 @@ describe('Messenger Interface Tests', () => {
 describe('Messenger processMessage() Tests', () => {
 
   it('fails on missing message text', () => {
-    const config = require('../src/utils/config.js');
-    const messenger = new Messenger(config);    
     expect( () => {
       messenger.processMessage({
         sender: {}, recipient: {}, message: {}
@@ -51,23 +49,22 @@ describe('Messenger processMessage() Tests', () => {
   });
 
   it('can send a "test message"', () => {
-    const config = require('../src/utils/config.js');
-    const messenger = new Messenger(config);    
-    return messenger.sendMessage('1165704360144557', 'test message')
+    const testMessage = 'test message';
+    return messenger.sendMessage('1165704360144557', testMessage)
       .then( (response) => {
-        expect(response).not.toBeNull(); 
+        console.log(`send test message response: ${JSON.stringify(response)}`);
+        expect(response.message).toEqual(testMessage); 
       });
   });    
 
   it('What is the population of USA?', () => {
-    const config = require('../src/utils/config.js');
-    const messenger = new Messenger(config);
     return messenger.processMessage({
       sender: {id: '1165704360144557'}, 
       recipient: {id: 'PAGE_ID'}, 
       message: {text: 'What is the population of USA?'}
     })
     .then( (response) => {
+      console.log(`population test response:  ${JSON.stringify(response)}`);
       expect(response).not.toBeNull(); 
     });
   });    
