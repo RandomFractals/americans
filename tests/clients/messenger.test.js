@@ -1,10 +1,10 @@
-jest.dontMock('../src/clients/messenger.js');
+jest.dontMock('../../src/clients/messenger.js');
 
 // load config
-const config = require('../src/utils/config.js');
+const config = require('../../src/utils/config.js');
 
 // create Messenger interface instance
-const Messenger = require('../src/clients/messenger.js');
+const Messenger = require('../../src/clients/messenger.js');
 const messenger = new Messenger(config);
 
 describe('Messenger Interface Tests', () => {
@@ -35,7 +35,7 @@ describe('Messenger processMessage() Tests', () => {
   xit('can process tests/message.json', () => {
     // load test message
     let messageData = null;    
-    require('fs').readFile('tests/message.json', 'utf8', function(err, data) {      
+    require('fs').readFile('./message.json', 'utf8', function(err, data) {      
       if (err) throw err; // ignore this error handling for now
       messageData = JSON.parse(data);
 

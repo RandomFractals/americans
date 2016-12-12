@@ -1,14 +1,14 @@
-jest.dontMock('../src/bot-ai/wit-ai.js');
+jest.dontMock('../../src/bot-ai/wit-ai.js');
 
 // load config
-const config = require('../src/utils/config.js');
+const config = require('../../src/utils/config.js');
 
 // create Messenger chat client for tests
-const Messenger = require('../src/clients/messenger.js');
+const Messenger = require('../../src/clients/messenger.js');
 const messenger = new Messenger(config);
 
 // create wit.ai bot instance
-const WitAI = require('../src/bot-ai/wit-ai.js');
+const WitAI = require('../../src/bot-ai/wit-ai.js');
 const witAI = new WitAI(config, messenger);
 
 describe('Bot AI Interface Tests', () => {
