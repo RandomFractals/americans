@@ -21,30 +21,33 @@ const witAiClient = new Wit({
     },
     greeting({sessionId, context, text, entities}) {
       console.log('> bot.greeting():');
-      console.log(`Session ${sessionId} received message: ${text}`);
-      logBotInfo(context, entities);
+      console.log(`\t sessionId: ${sessionId}`);
+      logBotInfo(context, entities, text);
       return Promise.resolve(context);
     },
     getPopulation({sessionId, context, text, entities}) {
       console.log('> bot.getPopulation() request:');
-      logBotInfo(context, entities);      
+      logBotInfo(context, entities, text);
     },
     thanks({sessionId, context, text, entities}) {
       console.log('> bot.thanks():');
-      logBotInfo(context, entities);
+      logBotInfo(context, entities, text);
     },    
     disconnect({sessionId, context, text, entities}) {
       console.log('> bot.disconnect():');
-      logBotInfo(context, entities);
+      logBotInfo(context, entities, text);
     }
   },
-  logger: new log.Logger(log.DEBUG)  
+  logger: new log.Logger(log.DEBUG) //INFO)  
 });
 
+
 /**
- * Logs wit.ai context and entities for interactive bot testing.
+ * Logs wit.ai message text request, context, and entities 
+ * for interactive bot ai story testing.
  */
-function logBotInfo(context, entities) {
+function logBotInfo(context, entities, text) {
+  console.log(`\t message: ${text}`);  
   console.log(`\t context: ${JSON.stringify(context)}`);
   console.log(`\t entities: ${JSON.stringify(entities)}`);
 }
