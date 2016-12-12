@@ -25,6 +25,7 @@ class WitAI {
     // sessionId -> {userId: userId, context: sessionState}
     const sessions = {};
     this._sessions = sessions;
+    const logBotInfo = this.logBotInfo;
 
     // create wit.ai bot actions
     const actions = {
@@ -50,7 +51,26 @@ class WitAI {
           return Promise.resolve();
         }
       },
-      // TODO: implement our custom bot actions here
+      greeting({sessionId, context, text, entities}) {
+        console.log('\n> bot.greeting():');
+        console.log(`\t sessionId: ${sessionId}`);
+        logBotInfo(context, entities, text);
+        return Promise.resolve(context);
+      },
+      getPopulation({sessionId, context, text, entities}) {
+        console.log('\n> bot.getPopulation() request:');
+        logBotInfo(context, entities, text);
+      },
+      thanks({sessionId, context, text, entities}) {
+        console.log('\n> bot.thanks():');
+        logBotInfo(context, entities, text);
+      },    
+      disconnect({sessionId, context, text, entities}) {
+        console.log('\n> bot.disconnect():');
+        logBotInfo(context, entities, text);
+      }
+      
+      // TODO: implement other custom bot actions here
       // see https://wit.ai/docs/quickstart
     };
 
@@ -97,6 +117,16 @@ class WitAI {
     return sessionId;
   }
 
+
+  /**
+   * Logs wit.ai message text request, context, and entities 
+   * for interactive bot ai story testing.
+   */
+  logBotInfo(context, entities, text) {
+    console.log(`\t message: ${text}`);  
+    console.log(`\t context: ${JSON.stringify(context)}`);
+    console.log(`\t entities: ${JSON.stringify(entities)}\n`);
+  }
 
   /*---------------------- Public Bot AI Interface Methods ------------------------------*/
 
