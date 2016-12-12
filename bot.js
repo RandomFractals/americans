@@ -15,26 +15,27 @@ const witAiClient = new Wit({
   actions: {
     send(request, response) {
       return new Promise( function(resolve, reject) {
+        console.log(`> bot.send() request: ${JSON.stringify(request)}`);        
         console.log(`> bot.send() response: ${JSON.stringify(response)}`);
         return resolve();
       });
     },
     greeting({sessionId, context, text, entities}) {
-      console.log('> bot.greeting():');
+      console.log('\n> bot.greeting():');
       console.log(`\t sessionId: ${sessionId}`);
       logBotInfo(context, entities, text);
       return Promise.resolve(context);
     },
     getPopulation({sessionId, context, text, entities}) {
-      console.log('> bot.getPopulation() request:');
+      console.log('\n> bot.getPopulation() request:');
       logBotInfo(context, entities, text);
     },
     thanks({sessionId, context, text, entities}) {
-      console.log('> bot.thanks():');
+      console.log('\n> bot.thanks():');
       logBotInfo(context, entities, text);
     },    
     disconnect({sessionId, context, text, entities}) {
-      console.log('> bot.disconnect():');
+      console.log('\n> bot.disconnect():');
       logBotInfo(context, entities, text);
     }
   },
@@ -49,7 +50,7 @@ const witAiClient = new Wit({
 function logBotInfo(context, entities, text) {
   console.log(`\t message: ${text}`);  
   console.log(`\t context: ${JSON.stringify(context)}`);
-  console.log(`\t entities: ${JSON.stringify(entities)}`);
+  console.log(`\t entities: ${JSON.stringify(entities)}\n`);
 }
 
 // start interactive wit.ai client
