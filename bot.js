@@ -1,7 +1,7 @@
 'use strict';
 
-// app config
-const config = require('./config.js');
+// load app config
+const config = require('./src/utils/config.js');
 
 // wit.ai imports
 const {Wit, interactive, log} = require('node-wit');
@@ -11,15 +11,15 @@ const witAiClient = new Wit({
   accessToken: config.WIT_TOKEN,
   actions: {
     send(request, response) {
-      return new Promise(function(resolve, reject) {
-        console.log(JSON.stringify(response));
+      return new Promise( function(resolve, reject) {
+        console.log( JSON.stringify(response) );
         return resolve();
       });
     },
     myAction({sessionId, context, text, entities}) {
-      console.log(`Session ${sessionId} received ${text}`);
-      console.log(`The current context is ${JSON.stringify(context)}`);
-      console.log(`Wit extracted ${JSON.stringify(entities)}`);
+      console.log(`Session ${sessionId} received message: ${text}`);
+      console.log(`Current context: ${JSON.stringify(context)}`);
+      console.log(`Wit extracted entities: ${JSON.stringify(entities)}`);
       return Promise.resolve(context);
     }
   },
