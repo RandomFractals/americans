@@ -8,7 +8,7 @@ const fetch = require('node-fetch');
 const request = require('request');
 
 // app config
-const config = require('./src/utils/config.js');
+const config = require('./src/utils/app-config.js');
 
 // set web server port
 const PORT = process.env.PORT || 8445;

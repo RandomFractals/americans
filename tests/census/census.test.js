@@ -1,7 +1,7 @@
 jest.dontMock('../../src/census/census.js');
 
 // load config
-const config = require('../../src/utils/config.js');
+const config = require('../../src/utils/app-config.js');
 
 // create Census data service interface instance
 const Census = require('../../src/census/census.js');

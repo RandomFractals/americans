@@ -1,8 +1,8 @@
-jest.dontMock('../../src/utils/config.js');
+jest.dontMock('../../src/utils/app-config.js');
 
 describe('App Config Tests', () => {
 
-  const config = require('../../src/utils/config.js');
+  const config = require('../../src/utils/app-config.js');
   
   xit('No WIT_TOKEN test',  () => {
     expect(config.WIT_TOKEN).toThrow(new Error('missing WIT_TOKEN'));

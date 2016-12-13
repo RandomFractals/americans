@@ -1,7 +1,7 @@
 jest.dontMock('../../src/clients/messenger.js');
 
 // load config
-const config = require('../../src/utils/config.js');
+const config = require('../../src/utils/app-config.js');
 
 // create Messenger interface instance
 const Messenger = require('../../src/clients/messenger.js');

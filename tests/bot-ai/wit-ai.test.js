@@ -1,7 +1,7 @@
 jest.dontMock('../../src/bot-ai/wit-ai.js');
 
 // load config
-const config = require('../../src/utils/config.js');
+const config = require('../../src/utils/app-config.js');
 
 // create Messenger chat client for tests
 const Messenger = require('../../src/clients/messenger.js');
