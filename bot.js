@@ -4,7 +4,7 @@
 // for wit.ai bot stories supported by this interactive bot test
 
 // load app config
-const config = require('./src/utils/config.js');
+const config = require('./src/utils/app-config.js');
 
 // wit.ai imports
 const {Wit, interactive, log} = require('node-wit');
