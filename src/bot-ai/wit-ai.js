@@ -52,25 +52,28 @@ class WitAI {
         }
       },
       greeting({sessionId, context, text, entities}) {
-        console.log('\n> bot.greeting():');
+        console.log(`\n> bot.greeting("${text}"):`);
         console.log(`\t sessionId: ${sessionId}`);
         logBotInfo(context, entities, text);
         return Promise.resolve(context);
       },
       getPopulation({sessionId, context, text, entities}) {
-        console.log('\n> bot.getPopulation() request:');
+        let location = 'USA'; 
+        // TODO: extract requested location 
+        // for census pop data service call from entities
+        console.log(`\n> bot.getPopulation(("${location}"):`);
         logBotInfo(context, entities, text);
       },
       thanks({sessionId, context, text, entities}) {
-        console.log('\n> bot.thanks():');
+        console.log(`\n> bot.thanks("${text}"):`);
         logBotInfo(context, entities, text);
       },    
       disconnect({sessionId, context, text, entities}) {
-        console.log('\n> bot.disconnect():');
+        console.log(`\n> bot.disconnect("${text}"):`);
         logBotInfo(context, entities, text);
       }
       
-      // TODO: implement other custom bot actions here
+      // TODO: add other custom bot actions here
       // see https://wit.ai/docs/quickstart
     };
 
