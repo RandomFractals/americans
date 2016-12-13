@@ -18,7 +18,6 @@ describe('App Config Tests', () => {
     expect(config.WIT_TOKEN).not.toContain('token>');    
   });
 
-
   it('FB_APP_SECRET is set', () => {
     expect(config.FB_APP_SECRET).not.toBe(null);
     expect(config.WIT_TOKEN).not.toContain('secret>');    
