@@ -32,14 +32,17 @@ const witAiClient = new Wit({
       // for census pop data service call from entities
       console.log(`\n> bot.getPopulation(("${location}"):`);
       logBotInfo(context, entities, text);
+      return Promise.resolve(context);      
     },
     thanks({sessionId, context, text, entities}) {
       console.log(`\n> bot.thanks("${text}"):`);
       logBotInfo(context, entities, text);
+      return Promise.resolve(context);      
     },    
     disconnect({sessionId, context, text, entities}) {
       console.log(`\n> bot.disconnect("${text}"):`);
       logBotInfo(context, entities, text);
+      return Promise.resolve(context);      
     }
   },
   logger: new log.Logger(log.DEBUG) //INFO)  

@@ -63,14 +63,17 @@ class WitAI {
         // for census pop data service call from entities
         console.log(`\n> bot.getPopulation(("${location}"):`);
         logBotInfo(context, entities, text);
+        return Promise.resolve(context);        
       },
       thanks({sessionId, context, text, entities}) {
         console.log(`\n> bot.thanks("${text}"):`);
         logBotInfo(context, entities, text);
+        return Promise.resolve(context);        
       },    
       disconnect({sessionId, context, text, entities}) {
         console.log(`\n> bot.disconnect("${text}"):`);
         logBotInfo(context, entities, text);
+        return Promise.resolve(context);        
       }
       
       // TODO: add other custom bot actions here
