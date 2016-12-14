@@ -6,6 +6,7 @@ const config = require('../../src/utils/app-config.js');
 // create Messenger interface instance
 const Messenger = require('../../src/clients/messenger.js');
 const messenger = new Messenger(config);
+const testUserId = '1165704360144557';
 
 describe('Messenger Interface Tests', () => {
 
@@ -50,7 +51,7 @@ describe('Messenger processMessage() Tests', () => {
 
   it('can send a "test message"', () => {
     const testMessage = 'test message';
-    return messenger.sendMessage('1165704360144557', testMessage)
+    return messenger.sendMessage(testUserId, testMessage)
       .then( (response) => {
         console.log(`send test message response: ${JSON.stringify(response)}`);
         expect(response.message).toEqual(testMessage); 
@@ -59,7 +60,7 @@ describe('Messenger processMessage() Tests', () => {
 
   it('What is the population of USA?', () => {
     return messenger.processMessage({
-      sender: {id: '1165704360144557'}, 
+      sender: {id: testUserId}, 
       recipient: {id: 'PAGE_ID'}, 
       message: {text: 'What is the population of USA?'}
     })
