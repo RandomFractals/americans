@@ -6,7 +6,7 @@ const State = require('../../src/census/state.js');
 // create state test data
 const state = {
   code: 'IL',
-  name: 'Cook County'
+  name: 'Illinois'
 };
 
 // create test state instance
