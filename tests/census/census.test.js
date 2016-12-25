@@ -10,15 +10,23 @@ const census = new Census(config);
 describe('Census Data Service Interface Tests', () => {
 
   it('has loaded US states FIPS config data', () => {
-    expect(census.states.length).toBeGreaterThanOrEqual(50);
+    expect(Object.keys(census.states).length).toBeGreaterThanOrEqual(50);
+  });
+
+  it('has loaded IL state info', () => {
+    expect(census.states['IL']).toEqual('Illinois');
   });
 
   it('has loaded US counties FIPS config data', () => {
     expect(census.counties.size).toBeGreaterThan(3000);
   });
 
+  it('has loaded Cook County info', () => {
+    expect(census.counties.get('cook,IL').toString()).toEqual('Cook County, IL');
+  });
+
   it('has some matching county names across all states', () => {
-    expect(Object.values(census.countyMapList).length).toBeLessThan(census.counties.size);
+    expect(census.countyMapList.size).toBeLessThan(census.counties.size);
   });
 
   it('has more than 1 Lake County across all states', () => {

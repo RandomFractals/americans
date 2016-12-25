@@ -60,7 +60,7 @@ class Census {
    * Gets states list.
    */
   get states() {
-    return Object.values(this._states);
+    return this._states;
   }
 
 
