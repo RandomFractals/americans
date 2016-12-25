@@ -36,7 +36,7 @@ class Census {
     this._states = stateMap;
 
     // TODO: load zip codes Fips data
-    
+
     // load counties FIPS data
     const countyMap = new Map();
     const countyMapList = new Map();
@@ -59,6 +59,8 @@ class Census {
   } // end of constructor()
 
 
+  /*------------------- Census Data Service Config Methods ---------------------------*/
+
   /**
    * Gets Census data service config.
    */
@@ -68,7 +70,7 @@ class Census {
 
 
   /**
-   * Gets states list.
+   * Gets loaded states map.
    */
   get states() {
     return this._states;
@@ -90,6 +92,8 @@ class Census {
     return this._countyMapList;
   }
 
+
+  /*---------------------- Census Data Service API Methods ----------------------------*/
 
   /**
    * Gets US population stats.
