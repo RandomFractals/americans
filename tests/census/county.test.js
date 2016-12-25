@@ -31,6 +31,10 @@ describe('County Data Model Tests', () => {
   it('county toString() test', () => {
     expect(testCounty.toString()).toEqual(`${county.name}, ${county.state}`);
   });
+
+  it('county key test', () => {
+    expect(testCounty.key).toEqual('cook,IL');
+  });
   
 });
 
