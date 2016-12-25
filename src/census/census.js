@@ -38,7 +38,7 @@ class Census {
     this._states = stateMap;
     this._stateNameMap = stateNameMap;
 
-    // TODO: load zip codes Fips data
+    // TODO: load valid zip codes from ZCTA (ZIP Code Tabulation Areas) config data
 
     // load counties FIPS data
     const countyMap = new Map();
@@ -122,7 +122,7 @@ class Census {
    * @param stateName State name or code.
    */
   isValidState(stateName) {
-    // TODO
+    return ( this.states.has(stateName) || this.stateNameMap.has(stateName) );
   }
 
 
@@ -132,7 +132,7 @@ class Census {
    * @param zipCode 5 digit zip code.
    */
   isValidZipCode(zipCode) {
-    // TODO
+    // TODO: check against valid zip codes from ZCTA (ZIP Code Tabulation Areas) config data
   }
 
 
