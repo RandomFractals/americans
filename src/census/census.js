@@ -29,7 +29,7 @@ class Census {
       countyMap[county.key] = county;
     });
     this._counties = countyMap;
-    console.log(`Census(): loaded ${Object.keys(this._counties).length} US counties`);
+    console.log(`Census(): loaded ${this.counties.length} US counties`);
   }
 
 
@@ -38,6 +38,14 @@ class Census {
    */
   get config() {
     return this._config;
+  }
+
+
+  /**
+   * Gets a list of loaded counties.
+   */
+  get counties() {
+    return Object.values(this._counties);
   }
 
 
