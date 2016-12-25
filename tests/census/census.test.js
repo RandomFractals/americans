@@ -21,6 +21,10 @@ describe('Census Data Service Interface Tests', () => {
     expect(Object.values(census.countyMapList).length).toBeLessThan(census.counties.size);
   });
 
+  it('has more than 1 Lake County across all states', () => {
+    expect(census.countyMapList.get('lake').length).toBeGreaterThan(1);
+  });
+
   it('has getPopulation(location) defined', () => {
     expect(census.getPopulation).toBeDefined();
   });
