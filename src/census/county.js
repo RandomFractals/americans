@@ -40,12 +40,22 @@ class County {
 
 
   /**
-   * Gets county key for lookups and county query validation.
+   * Gets short county name key, without state,
+   * for counties lookup without state code.
+   */
+  get shortNameKey() {
+    return this.name.toLowerCase().replace(' ', '').replace('county', '');
+  }
+
+
+  /**
+   * Gets county key with state code
+   * for lookups and county query validation.
    * 
    * Example: 'Cook County, IL' => 'cook,IL'
    */
   get key() {
-    return `${this.name.toLowerCase().replace(' ', '').replace('county', '')},${this.state}`;
+    return `${this.shortNameKey},${this.state}`;
   }
 
 

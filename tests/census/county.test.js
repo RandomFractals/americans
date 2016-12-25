@@ -35,6 +35,10 @@ describe('County Data Model Tests', () => {
   it('county key test', () => {
     expect(testCounty.key).toEqual('cook,IL');
   });
+
+  it('county short name key test', () => {
+    expect(testCounty.shortNameKey).toEqual('cook');
+  });
   
 });
 
