@@ -28,5 +28,9 @@ describe('County Data Model Tests', () => {
     expect(testCounty.state).toEqual(county.state);
   });
   
+  it('county toString() test', () => {
+    expect(testCounty.toString()).toEqual(`${county.name}, ${county.state}`);
+  });
+  
 });
 
