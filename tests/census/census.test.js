@@ -17,6 +17,10 @@ describe('Census Data Service Interface Tests', () => {
     expect(census.states.get('IL').toString()).toEqual('Illinois');
   });
 
+  it('has Illinois state info', () => {
+    expect(census.stateNameMap.get('Illinois').toString()).toEqual('Illinois');
+  });
+
   it('has loaded 3000+ US counties FIPS config data', () => {
     expect(census.counties.size).toBeGreaterThan(3000);
   });

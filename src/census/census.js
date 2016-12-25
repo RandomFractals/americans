@@ -29,11 +29,14 @@ class Census {
 
     // load states FIPS data
     const stateMap = new Map();
+    const stateNameMap = new Map();
     Object.keys(states).forEach( code => {
       let state = new State(code, states[code]);
       stateMap.set(code, state);
+      stateNameMap.set(state.name, state);
     });
     this._states = stateMap;
+    this._stateNameMap = stateNameMap;
 
     // TODO: load zip codes Fips data
 
@@ -59,7 +62,7 @@ class Census {
   } // end of constructor()
 
 
-  /*------------------- Census Data Service Config Methods ---------------------------*/
+  /*-------------------- Census Data Service Config Methods ---------------------------*/
 
   /**
    * Gets Census data service config.
@@ -78,6 +81,14 @@ class Census {
 
 
   /**
+   * Gets state name map.
+   */
+  get stateNameMap() {
+    return this._stateNameMap;
+  }
+
+
+  /**
    * Gets loaded counties map.
    */
   get counties() {
@@ -92,6 +103,11 @@ class Census {
     return this._countyMapList;
   }
 
+  /*----------------- Census Data Service Region Validation Methods -------------------*/
+
+  isValidCounty(countyName) {
+    //return this._counties
+  }
 
   /*---------------------- Census Data Service API Methods ----------------------------*/
 
