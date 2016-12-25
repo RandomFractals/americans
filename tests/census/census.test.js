@@ -14,11 +14,11 @@ describe('Census Data Service Interface Tests', () => {
   });
 
   it('has loaded US counties FIPS config data', () => {
-    expect(census.counties.length).toBeGreaterThan(3000);
+    expect(census.counties.size).toBeGreaterThan(3000);
   });
 
   it('has some matching county names across all states', () => {
-    expect(Object.values(census.countyMapList).length).toBeLessThan(census.counties.length);
+    expect(Object.values(census.countyMapList).length).toBeLessThan(census.counties.size);
   });
 
   it('has getPopulation(location) defined', () => {

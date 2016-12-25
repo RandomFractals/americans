@@ -26,25 +26,24 @@ class Census {
     this._states = states;
 
     // load counties
-    const countyMap = {};
-    const countyMapList = {};
+    const countyMap = new Map();
+    const countyMapList = new Map();
     Object.keys(counties).forEach( code => {
       let countyData = counties[code];
       let county = new County(code, countyData.name, countyData.state);
-      countyMap[county.key] = county;
+      countyMap.set(county.key, county);
       // update matching county without state code map list
-      let countyList = countyMap[county.shortNameKey];
-      if (countyList === null || countyList === undefined) {
-        countyList = [];
-        countyMapList[county.shortNameKey] = countyList;
+      if ( !countyMapList.has(county.shortNameKey) ) {
+        countyMapList.set(county.shortNameKey, []);
       }
+      let countyList = countyMapList.get(county.shortNameKey);
       countyList.push(county);
     });
 
     this._counties = countyMap;
     this._countyMapList = countyMapList;
 
-    console.log(`Census(): loaded ${this.states.length} states and ${this.counties.length} US counties`);
+    console.log(`Census(): loaded ${this.states.length} states and ${this.counties.size} US counties`);
 
   } // end of constructor()
 
@@ -66,10 +65,10 @@ class Census {
 
 
   /**
-   * Gets a list of loaded counties.
+   * Gets loaded counties map.
    */
   get counties() {
-    return Object.values(this._counties);
+    return this._counties;
   }
 
 
