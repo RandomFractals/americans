@@ -9,15 +9,15 @@ const census = new Census(config);
 
 describe('Census Data Service Interface Tests', () => {
 
-  it('has loaded US states FIPS config data', () => {
-    expect(Object.keys(census.states).length).toBeGreaterThanOrEqual(50);
+  it('has loaded 50+ US states FIPS config data', () => {
+    expect(census.states.size).toBeGreaterThanOrEqual(50);
   });
 
   it('has loaded IL state info', () => {
-    expect(census.states['IL']).toEqual('Illinois');
+    expect(census.states.get('IL').toString()).toEqual('Illinois');
   });
 
-  it('has loaded US counties FIPS config data', () => {
+  it('has loaded 3000+ US counties FIPS config data', () => {
     expect(census.counties.size).toBeGreaterThan(3000);
   });
 

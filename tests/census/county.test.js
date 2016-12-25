@@ -1,6 +1,6 @@
 jest.dontMock('../../src/census/county.js');
 
-// import county class
+// import county model class
 const County = require('../../src/census/county.js');
 
 // create county test data

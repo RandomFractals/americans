@@ -7,7 +7,7 @@
 class County {
 
   /**
-  * Creates new county instance.
+  * Creates new County class instance.
   *
   * @param code 5 digit FIPS code.
   * @param name County name.

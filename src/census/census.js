@@ -1,10 +1,13 @@
 'use strict';
 
-// load US states and counties data
+// load US states, zip codes, and counties FIPS data config
 const states = require('./resources/us-states.json');
+// TODO: const zipCodes = require('./resources/us-zip-codes.json');
 const counties = require('./resources/us-counties.json');
 
-// import County data model
+// import State, ZipCode, and County model classes
+const State = require('./state.js');
+// TODO: const ZipCode = require('./zip-code.js');
 const County = require('./county.js');
 
 /**
@@ -16,16 +19,25 @@ class Census {
   /**
   * Creates new Census data service instance.
   *
+  * Loads US states, zip codes, and counties FIPS data config.
+  *
   * @param config Census data service config.
   */
   constructor(config) {
     // save config
     this._config = config;
 
-    // set states
-    this._states = states;
+    // load states FIPS data
+    const stateMap = new Map();
+    Object.keys(states).forEach( code => {
+      let state = new State(code, states[code]);
+      stateMap.set(code, state);
+    });
+    this._states = stateMap;
 
-    // load counties
+    // TODO: load zip codes Fips data
+    
+    // load counties FIPS data
     const countyMap = new Map();
     const countyMapList = new Map();
     Object.keys(counties).forEach( code => {
@@ -39,11 +51,10 @@ class Census {
       let countyList = countyMapList.get(county.shortNameKey);
       countyList.push(county);
     });
-
     this._counties = countyMap;
     this._countyMapList = countyMapList;
 
-    console.log(`Census(): loaded ${this.states.length} states and ${this.counties.size} US counties`);
+    console.log(`Census(): loaded ${this.states.size} states and ${this.counties.size} US counties`);
 
   } // end of constructor()
 
