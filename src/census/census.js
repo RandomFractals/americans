@@ -103,11 +103,46 @@ class Census {
     return this._countyMapList;
   }
 
+
   /*----------------- Census Data Service Region Validation Methods -------------------*/
 
-  isValidCounty(countyName) {
-    //return this._counties
+  /**
+   * Checks if given region name is a valid state, county, or zip code.
+   * 
+   * @param regionName State name or code, zip code, or county name.
+   */
+  isValidRegion(regionName) {
+    // TODO: use isValidState/ZipCode/County to check if given US geography exists
   }
+
+
+  /**
+   * Checks if given state exists.
+   * 
+   * @param stateName State name or code.
+   */
+  isValidState(stateName) {
+    // TODO
+  }
+
+
+  /**
+   * Checks if given zip code exits.
+   * 
+   * @param zipCode 5 digit zip code.
+   */
+  isValidZipCode(zipCode) {
+    // TODO
+  }
+
+
+  /**
+   * Checks if given county exists.
+   */
+  isValidCounty(countyName) {
+    // TODO
+  }
+
 
   /*---------------------- Census Data Service API Methods ----------------------------*/
 
