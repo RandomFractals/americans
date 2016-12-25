@@ -1,5 +1,11 @@
 'use strict';
 
+// import US counties data
+const counties = require('./resources/us-counties.json');
+
+// import County data model
+const County = require('./county.js');
+
 /**
  * Defines top-level Census data service api for getting US pop,
  * biz, trade, incomes, and housing data stats.  
@@ -14,6 +20,16 @@ class Census {
   constructor(config) {
     // save config
     this._config = config;
+
+    // load counties
+    const countyMap = {};
+    Object.keys(counties).forEach( code => {
+      let countyData = counties[code];
+      let county = new County(code, countyData.name, countyData.state);
+      countyMap[county.key] = county;
+    });
+    this._counties = countyMap;
+    console.log(`Census(): loaded ${Object.keys(this._counties).length} US counties`);
   }
 
 
