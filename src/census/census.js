@@ -27,12 +27,23 @@ class Census {
 
     // load counties
     const countyMap = {};
+    const countyMapList = {};
     Object.keys(counties).forEach( code => {
       let countyData = counties[code];
       let county = new County(code, countyData.name, countyData.state);
       countyMap[county.key] = county;
+      // update matching county without state code map list
+      let countyList = countyMap[county.shortNameKey];
+      if (countyList === null || countyList === undefined) {
+        countyList = [];
+        countyMapList[county.shortNameKey] = countyList;
+      }
+      countyList.push(county);
     });
+
     this._counties = countyMap;
+    this._countyMapList = countyMapList;
+
     console.log(`Census(): loaded ${this.states.length} states and ${this.counties.length} US counties`);
 
   } // end of constructor()
@@ -59,6 +70,14 @@ class Census {
    */
   get counties() {
     return Object.values(this._counties);
+  }
+
+
+  /**
+   * Gets county map list for county lookups without state code.
+   */
+  get countyMapList() {
+    return this._countyMapList;
   }
 
 

@@ -17,6 +17,10 @@ describe('Census Data Service Interface Tests', () => {
     expect(census.counties.length).toBeGreaterThan(3000);
   });
 
+  it('has some matching county names across all states', () => {
+    expect(Object.values(census.countyMapList).length).toBeLessThan(census.counties.length);
+  });
+
   it('has getPopulation(location) defined', () => {
     expect(census.getPopulation).toBeDefined();
   });
