@@ -1,6 +1,7 @@
 'use strict';
 
-// import US counties data
+// load US states and counties data
+const states = require('./resources/us-states.json');
 const counties = require('./resources/us-counties.json');
 
 // import County data model
@@ -21,6 +22,9 @@ class Census {
     // save config
     this._config = config;
 
+    // set states
+    this._states = states;
+
     // load counties
     const countyMap = {};
     Object.keys(counties).forEach( code => {
@@ -29,8 +33,9 @@ class Census {
       countyMap[county.key] = county;
     });
     this._counties = countyMap;
-    console.log(`Census(): loaded ${this.counties.length} US counties`);
-  }
+    console.log(`Census(): loaded ${this.states.length} states and ${this.counties.length} US counties`);
+
+  } // end of constructor()
 
 
   /**
@@ -38,6 +43,14 @@ class Census {
    */
   get config() {
     return this._config;
+  }
+
+
+  /**
+   * Gets states list.
+   */
+  get states() {
+    return Object.values(this._states);
   }
 
 

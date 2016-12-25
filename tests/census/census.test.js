@@ -9,6 +9,14 @@ const census = new Census(config);
 
 describe('Census Data Service Interface Tests', () => {
 
+  it('has loaded US states FIPS config data', () => {
+    expect(census.states.length).toBeGreaterThanOrEqual(50);
+  });
+
+  it('has loaded US counties FIPS config data', () => {
+    expect(census.counties.length).toBeGreaterThan(3000);
+  });
+
   it('has getPopulation(location) defined', () => {
     expect(census.getPopulation).toBeDefined();
   });
