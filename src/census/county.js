@@ -40,7 +40,7 @@ class County extends Region {
    * Example: 'Cook County, IL' => 'cook,IL'
    */
   get key() {
-    return `${this.shortNameKey},${this.state}`;
+    return `${this.shortNameKey},${this.state.toLowerCase()}`;
   }
 
 

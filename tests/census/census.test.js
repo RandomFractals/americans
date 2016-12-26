@@ -46,7 +46,7 @@ describe('Census Data Service Interface Tests', () => {
   });
 
   it('has loaded Cook County info', () => {
-    expect(census.counties.get('cook,IL').toString()).toEqual('Cook County, IL');
+    expect(census.counties.get('cook,il').toString()).toEqual('Cook County, IL');
   });
 
   it('has some matching county names across all states', () => {
