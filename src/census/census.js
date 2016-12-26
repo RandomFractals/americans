@@ -159,11 +159,11 @@ class Census {
       countyKey = countyTokens[0];
       const stateName = countyTokens[countyTokens.length-1];
       const state = this.stateNameMap.get(stateName);
-      console.log(JSON.stringify(countyTokens));
-      console.log(state.toString());
+      //console.log(JSON.stringify(countyTokens));
+      //console.log(state.toString());
       if (state !== null && //this.stateNameMap.has(stateName) && 
-        this.countyMapList.has(`${countyKey},${state.code.toLowerCase()}`)) {
-          return true; 
+        this.counties.has(`${countyKey},${state.code.toLowerCase()}`)) {
+          return true;
       }
     }
 
