@@ -18,8 +18,6 @@ class County extends Region {
   * @see https://en.wikipedia.org/wiki/FIPS_county_code
   */
   constructor(code, name, state) {
-    //this._code = code;
-    //this._name = name;
     super(code, name);
     this._state = state;
   }
