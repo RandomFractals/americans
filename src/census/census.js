@@ -28,34 +28,29 @@ class Census {
     this._config = config;
 
     // load states FIPS data
-    const stateMap = new Map();
-    const stateNameMap = new Map();
+    this._stateMap = new Map();
+    this._stateNameMap = new Map();
     Object.keys(states).forEach( code => {
       let state = new State(code, states[code]);
-      stateMap.set(code, state);
-      stateNameMap.set(state.name, state);
+      this._stateMap.set(code, state);
+      this._stateNameMap.set(state.name, state);
     });
-    this._states = stateMap;
-    this._stateNameMap = stateNameMap;
 
     // TODO: load valid zip codes from ZCTA (ZIP Code Tabulation Areas) config data
 
     // load counties FIPS data
-    const countyMap = new Map();
-    const countyMapList = new Map();
+    this._countyMap = new Map();
+    this._countyMapList = new Map();
     Object.keys(counties).forEach( code => {
       let countyData = counties[code];
       let county = new County(code, countyData.name, countyData.state);
-      countyMap.set(county.key, county);
-      // update matching county without state code map list
-      if ( !countyMapList.has(county.shortNameKey) ) {
-        countyMapList.set(county.shortNameKey, []);
+      this._countyMap.set(county.key, county);
+      if ( !this._countyMapList.has(county.shortNameKey) ) {
+        this._countyMapList.set(county.shortNameKey, []);
       }
-      let countyList = countyMapList.get(county.shortNameKey);
+      let countyList = this._countyMapList.get(county.shortNameKey);
       countyList.push(county);
     });
-    this._counties = countyMap;
-    this._countyMapList = countyMapList;
 
     console.log(`Census(): loaded ${this.states.size} states and ${this.counties.size} US counties`);
 
@@ -76,7 +71,7 @@ class Census {
    * Gets loaded states map.
    */
   get states() {
-    return this._states;
+    return this._stateMap;
   }
 
 
@@ -92,7 +87,7 @@ class Census {
    * Gets loaded counties map.
    */
   get counties() {
-    return this._counties;
+    return this._countyMap;
   }
 
 
