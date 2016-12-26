@@ -122,7 +122,7 @@ class Census {
     }
 
     // gen. lower case state key without white spaces
-    const stateKey = stateName.toLowerCase().replace(' ', '');
+    const stateKey = stateName.toLowerCase().split(' ').join('');
     return ( this.states.has(stateKey) || this.stateNameMap.has(stateKey) );
   }
 
@@ -145,8 +145,8 @@ class Census {
       return false;
     }
 
-    // gen. lower case county key without white spaces and 'county suffix
-    const countyKey = countyName.toLowerCase().replace(' ', '').replace('county', '');
+    // gen. lower case county key without white spaces and 'county' suffix
+    const countyKey = countyName.toLowerCase().split(' ').join('').replace('county', '');
     console.log(countyKey);
     return ( this.counties.has(countyKey) || this.countyMapList.has(countyKey) );
   }

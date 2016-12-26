@@ -39,7 +39,7 @@ class Region {
    * without white spaces for hashing and lookups.
    */
   get lowerCaseKey() {
-    return this.name.toLowerCase().replace(' ', '');
+    return this.name.toLowerCase().split(' ').join('');
   }
 
 
