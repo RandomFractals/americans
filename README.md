@@ -2,6 +2,10 @@
 
 Bots demo project of US pop, biz, trade, incomes, and housing data stats
 
+Think 'Quick Facts' census data bot you can ping for some USA pop data info:
+
+https://www.census.gov/quickfacts/table/PST045216/00
+
 ## Project Info
 
 Future home of Americans bot on FB: https://www.facebook.com/Americans-1836666999901817/
