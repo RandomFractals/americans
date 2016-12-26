@@ -45,6 +45,23 @@ describe('Census Data Service States Lookup Tests', () => {
 });
 
 
+describe('Census Data Service ZipCode Lookup Tests', () => {
+
+  it('80081 is a valid zip code', () => {
+    expect(census.isValidZipCode('80081')).toEqual(true);
+  });
+
+  it('8000 is NOT a valid zip code', () => {
+    expect(census.isValidZipCode('8000')).toEqual(false);
+  });
+
+  it('ZipCo is NOT a valid zip code', () => {
+    expect(census.isValidZipCode('ZipCo')).toEqual(false);
+  });
+
+});
+
+
 describe('Census Data Service Counties Lookup Tests', () => {
 
   it('has loaded 3000+ US counties FIPS config data', () => {

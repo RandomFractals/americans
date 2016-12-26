@@ -133,7 +133,13 @@ class Census {
    * @param zipCode 5 digit zip code.
    */
   isValidZipCode(zipCode) {
+    if (zipCode === null || zipCode === undefined ||
+      zipCode.length < 5 || isNaN(zipCode)) {
+      return false; // not a valid zip code
+    }
+    
     // TODO: check against valid zip codes from ZCTA (ZIP Code Tabulation Areas) config data
+    return true; // for now
   }
 
 
