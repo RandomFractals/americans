@@ -141,7 +141,12 @@ class Census {
    * Checks if given county exists.
    */
   isValidCounty(countyName) {
-    // TODO
+    if (countyName === null || countyName === undefined) {
+      return false;
+    }
+
+    // gen. lower case county key without white spaces and 'county suffix
+    return ( this.counties.has(countyKey) || this.countyMapList.has(countyKey) );
   }
 
 
