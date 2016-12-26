@@ -139,6 +139,8 @@ class Census {
 
   /**
    * Checks if given county exists.
+   * 
+   * @param countyName County name string, with or without state name or code suffix.
    */
   isValidCounty(countyName) {
     if (countyName === null || countyName === undefined) {
@@ -146,10 +148,28 @@ class Census {
     }
 
     // gen. lower case county key without white spaces and 'county' suffix
-    const countyKey = countyName.toLowerCase().split(' ').join('').replace('county', '');
-    console.log(countyKey);
-    return ( this.counties.has(countyKey) || this.countyMapList.has(countyKey) );
-  }
+    let countyKey = countyName.toLowerCase().split(' ').join('').replace('county', '');
+    if ( this.counties.has(countyKey) || this.countyMapList.has(countyKey) ) {
+      return true; // matches loaded countie(s) name or county with state abbreviation
+    }
+
+    // check for full state name suffix at last
+    const countyTokens = countyKey.split(',');
+    if ( countyTokens.length > 1) {
+      countyKey = countyTokens[0];
+      const stateName = countyTokens[countyTokens.length-1];
+      const state = this.stateNameMap.get(stateName);
+      console.log(JSON.stringify(countyTokens));
+      console.log(state.toString());
+      if (state !== null && //this.stateNameMap.has(stateName) && 
+        this.countyMapList.has(`${countyKey},${state.code.toLowerCase()}`)) {
+          return true; 
+      }
+    }
+
+    return false; // not a valid county name string
+
+  } // end of isValidCounty(countyString)
 
 
   /*---------------------- Census Data Service API Methods ----------------------------*/
