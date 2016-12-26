@@ -146,6 +146,7 @@ class Census {
     }
 
     // gen. lower case county key without white spaces and 'county suffix
+    const countyKey = countyName.toLowerCase().replace(' ', '').replace('county', '');
     return ( this.counties.has(countyKey) || this.countyMapList.has(countyKey) );
   }
 
