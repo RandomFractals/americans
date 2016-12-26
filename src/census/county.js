@@ -1,10 +1,12 @@
 'use strict';
 
+const Region = require('./region.js');
+
 /**
  * Defines US county with 5 digit FIPS code,
  * county name and state for county census data lookups.
  */
-class County {
+class County extends Region {
 
   /**
   * Creates new County class instance.
@@ -16,26 +18,10 @@ class County {
   * @see https://en.wikipedia.org/wiki/FIPS_county_code
   */
   constructor(code, name, state) {
-    // save county info
-    this._code = code;
-    this._name = name;
+    //this._code = code;
+    //this._name = name;
+    super(code, name);
     this._state = state;
-  }
-
-
-  /**
-   * Gets county code.
-   */
-  get code() {
-    return this._code;
-  }
-
-
-  /**
-   * Gets county name.
-   */
-  get name() {
-    return this._name;    
   }
 
 
