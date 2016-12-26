@@ -7,7 +7,8 @@ const config = require('../../src/utils/app-config.js');
 const Census = require('../../src/census/census.js');
 const census = new Census(config);
 
-describe('Census Data Service Interface Tests', () => {
+
+describe('Census Data Service States Lookup Tests', () => {
 
   it('has loaded 50+ US states FIPS config data', () => {
     expect(census.states.size).toBeGreaterThanOrEqual(50);
@@ -41,6 +42,11 @@ describe('Census Data Service Interface Tests', () => {
     expect(census.isValidState('Illinoise')).toEqual(false);
   });
 
+});
+
+
+describe('Census Data Service Counties Lookup Tests', () => {
+
   it('has loaded 3000+ US counties FIPS config data', () => {
     expect(census.counties.size).toBeGreaterThan(3000);
   });
@@ -68,9 +74,13 @@ describe('Census Data Service Interface Tests', () => {
   it('Brew is NOT a valid county!', () => {
     expect(census.isValidCounty('Brew')).toEqual(false);
   });
+});
 
+
+describe('Census Data Service Interface Tests', () => {
+  // TODO
   it('has getPopulation(location) defined', () => {
     expect(census.getPopulation).toBeDefined();
   });
-});
 
+});
