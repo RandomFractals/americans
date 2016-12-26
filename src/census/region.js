@@ -35,6 +35,15 @@ class Region {
 
 
   /**
+   * Generates lower case region name key
+   * without white spaces for hashing and lookups.
+   */
+  get lowerCaseKey() {
+    return this.name.toLowerCase().replace(' ', '');
+  }
+
+
+  /**
    * @return Returns region name string for display.
    */
   toString() {

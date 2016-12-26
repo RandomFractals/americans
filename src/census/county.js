@@ -28,7 +28,8 @@ class County extends Region {
    * for counties lookup without state code.
    */
   get shortNameKey() {
-    return this.name.toLowerCase().replace(' ', '').replace('county', '');
+    // strip out 'county'
+    return this.lowerCaseKey.replace('county', '');
   }
 
 

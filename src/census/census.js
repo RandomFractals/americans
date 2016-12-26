@@ -32,8 +32,8 @@ class Census {
     this._stateNameMap = new Map();
     Object.keys(states).forEach( code => {
       let state = new State(code, states[code]);
-      this._stateMap.set(code, state);
-      this._stateNameMap.set(state.name, state);
+      this._stateMap.set(code.toLowerCase(), state);
+      this._stateNameMap.set(state.lowerCaseKey, state);
     });
 
     // TODO: load valid zip codes from ZCTA (ZIP Code Tabulation Areas) config data
@@ -117,7 +117,13 @@ class Census {
    * @param stateName State name or code.
    */
   isValidState(stateName) {
-    return ( this.states.has(stateName) || this.stateNameMap.has(stateName) );
+    if (stateName === null || stateName === undefined) {
+      return false;
+    }
+
+    // gen. lower case state key without white spaces
+    const stateKey = stateName.toLowerCase().replace(' ', '');
+    return ( this.states.has(stateKey) || this.stateNameMap.has(stateKey) );
   }
 
 

@@ -14,11 +14,11 @@ describe('Census Data Service Interface Tests', () => {
   });
 
   it('has loaded IL state info', () => {
-    expect(census.states.get('IL').toString()).toEqual('Illinois');
+    expect(census.states.get('il').toString()).toEqual('Illinois');
   });
 
   it('has Illinois state info', () => {
-    expect(census.stateNameMap.get('Illinois').toString()).toEqual('Illinois');
+    expect(census.stateNameMap.get('illinois').toString()).toEqual('Illinois');
   });
 
   it('IL is a valid state', () => {
