@@ -107,7 +107,10 @@ class Census {
    * @param regionName State name or code, zip code, or county name.
    */
   isValidRegion(regionName) {
-    // TODO: use isValidState/ZipCode/County to check if given US geography exists
+    // use isValidState/ZipCode/County to check if given US geography exists
+    return ( this.isValidState(regionName) ||
+      this.isValidZipCode(regionName) ||
+      this.isValidCounty(regionName) );
   }
 
 
