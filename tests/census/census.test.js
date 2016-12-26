@@ -57,6 +57,18 @@ describe('Census Data Service Interface Tests', () => {
     expect(census.countyMapList.get('lake').length).toBeGreaterThan(1);
   });
 
+  it('Brewster is a valid county', () => {
+    expect(census.isValidCounty('Brewster county')).toEqual(true);
+  });
+
+  it('Brewster, TX is a valid county', () => {
+    expect(census.isValidCounty('Brewster County, TX')).toEqual(true);
+  });
+
+  it('Brew is NOT a valid county!', () => {
+    expect(census.isValidCounty('Brew')).toEqual(false);
+  });
+
   it('has getPopulation(location) defined', () => {
     expect(census.getPopulation).toBeDefined();
   });
