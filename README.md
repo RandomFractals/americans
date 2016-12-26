@@ -14,7 +14,7 @@ Alpha v. webhooks hosted on heroku: https://americans.herokuapp.com/
 
 Current Wit.AI bot brains: https://wit.ai/RandomFractals/americans/stories
 
-API.AI bot engine hookup and Slack chat integration coming to chat clients near you by Christmas time! :)
+API.AI bot engine hookup and Slack chat integration coming to chat clients near by year's end! :)
 
 ## Build
 
