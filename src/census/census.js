@@ -127,7 +127,7 @@ class Census {
 
 
   /**
-   * Checks if given zip code exits.
+   * Checks if given zip code exitss.
    * 
    * @param zipCode 5 digit zip code.
    */

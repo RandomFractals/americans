@@ -21,6 +21,26 @@ describe('Census Data Service Interface Tests', () => {
     expect(census.stateNameMap.get('Illinois').toString()).toEqual('Illinois');
   });
 
+  it('IL is a valid state', () => {
+    expect(census.isValidState('IL')).toEqual(true);
+  });
+
+  it('Illinois is a valid state', () => {
+    expect(census.isValidState('Illinois')).toEqual(true);
+  });
+
+  it('BR is NOT a valid state!', () => {
+    expect(census.isValidState('BR')).toEqual(false);
+  });
+
+  it('Brr! is NOT a valid state!', () => {
+    expect(census.isValidState('Brr!')).toEqual(false);
+  });
+
+  it('Illinoise is NOT a valid state! :)', () => {
+    expect(census.isValidState('Illinoise')).toEqual(false);
+  });
+
   it('has loaded 3000+ US counties FIPS config data', () => {
     expect(census.counties.size).toBeGreaterThan(3000);
   });
