@@ -1,44 +1,21 @@
 'use strict';
 
+const Region = require('./region.js');
+
 /**
  * Defines US state info for state census data lookups.
  */
-class State {
+class State extends Region {
 
   /**
-  * Creates new State class instance.
+  * Creates new State class instance
+  * with state code and name to display.
   *
   * @param code State code/abbreviation, i.e. IL.
   * @param name State name.
   */
   constructor(code, name) {
-    // save state info
-    this._code = code;
-    this._name = name;
-  }
-
-
-  /**
-   * Gets state code.
-   */
-  get code() {
-    return this._code;
-  }
-
-
-  /**
-   * Gets state name.
-   */
-  get name() {
-    return this._name;    
-  }
-
-
-  /**
-   * @return Returns state name string.
-   */
-  toString() {
-    return `${this.name}`;
+    super(code, name);
   }
 
 } 
