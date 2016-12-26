@@ -63,12 +63,16 @@ describe('Census Data Service Counties Lookup Tests', () => {
     expect(census.countyMapList.get('lake').length).toBeGreaterThan(1);
   });
 
-  it('Brewster is a valid county', () => {
+  it('Brewster county is a valid county', () => {
     expect(census.isValidCounty('Brewster county')).toEqual(true);
   });
 
   it('Brewster, TX is a valid county', () => {
-    expect(census.isValidCounty('Brewster County, TX')).toEqual(true);
+    expect(census.isValidCounty('Brewster, TX')).toEqual(true);
+  });
+
+  it('Brewster County, Texas is a valid county', () => {
+    expect(census.isValidCounty('Brewster County, Texas')).toEqual(true);
   });
 
   it('Brew is NOT a valid county!', () => {
