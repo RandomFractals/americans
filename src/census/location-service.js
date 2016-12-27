@@ -7,7 +7,7 @@ const counties = require('./resources/us-counties.json');
 
 // import State, ZipCode, and County model classes
 const State = require('./state.js');
-// TODO: const ZipCode = require('./zip-code.js');
+const ZipCode = require('./zip-code.js');
 const County = require('./county.js');
 
 /**
@@ -167,7 +167,46 @@ class LocationService {
 
   } // end of isValidCounty(countyString)
 
+
+  /*----------------- Location Service Region Lookup Methods ---------------------*/
+
+  /**
+   * Gets region info the specified location string.
+   * 
+   * @param Location Location string.
+   */
+  getRegion(location) {
+    let region = null;
+    let regionKey = location.toLowerCase().split(' ').join('');
+    if ( this.states.has(regionKey) ) {
+      return this.states.get(regionKey);
+    } else if ( this.stateNameMap.has(regionKey) ) {
+      return this.statesNameMap.get(regionKey);
+    } else if ( this.isValidZipCode(regionKey) ) {
+      // create and return numeric zip code for now
+      // withat checks against ZCTA config data
+      return new ZipCode(regionKey);
+    } else {
+      // check counties
+      regionKey = regionKey.replace('county', '');
+      if ( this.counties.has(regionKey) ) {
+        return this.counties.get(regionKey);
+      } else if ( this.countyMapList.has(regionKey) ) {
+        // return a list of matching counties
+        return this.countyMapList(regionKey);
+      } else {
+        // TODO: handle Brewster, Texas and other edge cases
+        return null;
+      }
+
+    }
+
+    return region;
+  }
+
+
 } // end of LocationService class
+
 
 //export {LocationService as default}
 // use old school for jest.js
