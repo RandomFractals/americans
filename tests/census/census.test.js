@@ -17,7 +17,7 @@ describe('Census Data Service Interface Tests', () => {
     //expect(census.getPopulation("usa")).toBeGreaterThan(0);
     return census.getPopulation("usa")
       .then( (response) => {
-        console.log(`send test message response: ${JSON.stringify(response)}`);
+        console.log(`getPopulation() response: ${JSON.stringify(response)}`);
         expect(Number(response.population)).toBeGreaterThan(0);
         expect(Number(response.density)).toBeGreaterThan(0);
         expect(response.location).toBe('USA');
