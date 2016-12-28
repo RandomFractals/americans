@@ -1,9 +1,9 @@
 {
   "population": {
-    "host": "api.census.gov/data",
-    "url": "/pep/population",
+    "host": "https://api.census.gov/data",
+    "url": "pep/population",
     "year": "2015",
-    "get": "POP,GEONAME,REGION,DENSITY",
+    "get": "POP,DENSITY,GEONAME,REGION",
     "for": "us"
   }
 }
