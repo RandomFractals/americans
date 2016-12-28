@@ -13,4 +13,8 @@ describe('Census Data Service Interface Tests', () => {
     expect(census.getPopulation).toBeDefined();
   });
 
+  it('getPopulation(location="usa") > 0', () => {
+    expect(census.getPopulation("usa")).toBeGreaterThan(0);
+  });
+
 });

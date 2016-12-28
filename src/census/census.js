@@ -1,10 +1,13 @@
 'use strict';
 
+const Region = require('./region.js');
+
 // import LocationService for location query validation
 const LocationService = require('./location-service.js');
 
 // import census data services config
 const servicesConfig = require('./resources/services-config.json');
+
 
 /**
  * Defines top-level Census data service api for getting US pop,
@@ -30,7 +33,7 @@ class Census {
     // create location service for open text location queries validation
     this.locationService = new LocationService();
 
-    console.log(`Census(): created Census data service instance`);
+    console.log('Census(): Census data service instance created');
   }
 
 
@@ -46,11 +49,33 @@ class Census {
    */
   getPopulation(location='us', year='2015') {
     console.log(`Census:getPopulation(): location=${location} year=${year}`);
-    
+
     // get population data service config
     const populationDataService = this.services.get('population');
-    // TODO
-  }
+    console.log('Census.getPopulation(): service config:\n', 
+      JSON.stringify(populationDataService));
+
+    let region = this.locationService.getRegion(location);
+    if ( region === null) {
+      // defualt to USA
+      region = new Region('us', 'USA');
+    }
+
+    // create census pop data query params
+    let queryParams = {
+      year: year,
+      get: populationDataService.get,
+      for: region.code,
+      key: this.config.CENSUS_DATA_API_KEY
+    };
+    console.log('Census.getPopulation(): query:\n', 
+      JSON.stringify(queryParams));
+
+    let population = 0;    
+    // TODO: get region pop data
+
+    return population;
+  } // end of getPopulation()
 
 } // end of Census class
 
