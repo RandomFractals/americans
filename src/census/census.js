@@ -1,5 +1,6 @@
 'use strict';
 
+const fetch = require('node-fetch');
 const Region = require('./region.js');
 
 // import LocationService for location query validation
@@ -51,30 +52,42 @@ class Census {
     console.log(`Census:getPopulation(): location=${location} year=${year}`);
 
     // get population data service config
-    const populationDataService = this.services.get('population');
+    const popService = this.services.get('population');
     console.log('Census.getPopulation(): service config:\n', 
-      JSON.stringify(populationDataService));
+      JSON.stringify(popService));
 
+    // get valid region info
     let region = this.locationService.getRegion(location);
     if ( region === null) {
       // defualt to USA
       region = new Region('us', 'USA');
     }
 
-    // create census pop data query params
-    let queryParams = {
+    // create census pop data service query params
+    const queryParams = {
       year: year,
-      get: populationDataService.get,
+      get: popService.get,
       for: region.code,
       key: this.config.CENSUS_DATA_API_KEY
     };
     console.log('Census.getPopulation(): query:\n', 
       JSON.stringify(queryParams));
 
-    let population = 0;    
-    // TODO: get region pop data
-
-    return population;
+    // get region pop data
+    return fetch(`${popService.host}/${year}/${popService.url}?get=${popService.get}&for=${region.code}&key=${this.config.CENSUS_DATA_API_KEY}`, {
+      method: 'GET',
+      headers: {'Content-Type': 'application/json'},
+    })
+    .then(response => response.json())
+    .then(jsonResponse => {
+      console.log(`Census.getPopulation(): response:${JSON.stringify(jsonResponse)}`);
+      // extract population data
+      const popData = jsonResponse[1]; // skip header data row
+      return { 
+        population: popData[0],
+        density: popData[1],
+        location: region.toString()};
+    });
   } // end of getPopulation()
 
 } // end of Census class

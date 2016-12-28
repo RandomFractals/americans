@@ -14,7 +14,14 @@ describe('Census Data Service Interface Tests', () => {
   });
 
   it('getPopulation(location="usa") > 0', () => {
-    expect(census.getPopulation("usa")).toBeGreaterThan(0);
+    //expect(census.getPopulation("usa")).toBeGreaterThan(0);
+    return census.getPopulation("usa")
+      .then( (response) => {
+        console.log(`send test message response: ${JSON.stringify(response)}`);
+        expect(Number(response.population)).toBeGreaterThan(0);
+        expect(Number(response.density)).toBeGreaterThan(0);
+        expect(response.location).toBe('USA');
+      });
   });
 
 });
