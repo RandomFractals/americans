@@ -145,27 +145,35 @@ class LocationService {
 
     // gen. lower case county key without white spaces and 'county' suffix
     let countyKey = countyName.toLowerCase().split(' ').join('').replace('county', '');
-    if ( this.counties.has(countyKey) || this.countyMapList.has(countyKey) ) {
-      return true; // matches loaded countie(s) name or county with state abbreviation
-    }
+    let countyStateKey = this.getCountyStateKey(countyKey);
+    console.log(`${countyKey} -> ${countyStateKey}`);
+    return ( this.counties.has(countyKey) || 
+      this.counties.has(countyStateKey) ||
+      this.countyMapList.has(countyKey) ); 
+  } 
 
-    // check for full state name suffix at last
-    const countyTokens = countyKey.split(',');
+
+  /**
+   * Gets county,state.code key for [county],[state.name] strings.
+   * 
+   * @param countyStateString county,state.name key string, i.e. cook,illinois.
+   * 
+   * @return county,state.code key, i.e. cook,il.
+   */
+  getCountyStateKey(countyStateString) {
+    // check for full state name suffix
+    const countyTokens = countyStateString.split(',');
     if ( countyTokens.length > 1) {
-      countyKey = countyTokens[0];
+      const countyKey = countyTokens[0];
       const stateName = countyTokens[countyTokens.length-1];
-      const state = this.stateNameMap.get(stateName);
       //console.log(JSON.stringify(countyTokens));
-      //console.log(state.toString());
-      if (state !== null && //this.stateNameMap.has(stateName) && 
-        this.counties.has(`${countyKey},${state.code.toLowerCase()}`)) {
-          return true;
+      if ( this.stateNameMap.has(stateName) ) {
+        const state = this.stateNameMap.get(stateName);        
+        return `${countyKey},${state.code.toLowerCase()}`;
       }
     }
-
-    return false; // not a valid county name string
-
-  } // end of isValidCounty(countyString)
+    return countyStateString;
+  }
 
 
   /*----------------- Location Service Region Lookup Methods ---------------------*/
@@ -189,18 +197,16 @@ class LocationService {
     } else {
       // check counties
       regionKey = regionKey.replace('county', '');
+      let countyStateKey = this.getCountyStateKey(regionKey);
       if ( this.counties.has(regionKey) ) {
         return this.counties.get(regionKey);
+      } else if ( this.counties.has(countyStateKey) ) {
+        return this.counties.get(countyStateKey);
       } else if ( this.countyMapList.has(regionKey) ) {
         // return a list of matching counties
-        return this.countyMapList(regionKey);
-      } else {
-        // TODO: handle Brewster, Texas and other edge cases
-        return null;
-      }
-
+        return this.countyMapList.get(regionKey);
+      } 
     }
-
     return region;
   }
 

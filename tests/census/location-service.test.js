@@ -104,5 +104,9 @@ describe('Location Service Counties Lookup Tests', () => {
   it('getRegion("Brewster county, TX") county test', () => {
     expect(locationService.getRegion('Brewster county, TX').toString()).toEqual('Brewster County, TX');
   });
+
+  it('getRegion("Brewster county, Texas") county test', () => {
+    expect(locationService.getRegion('Brewster county, Texas').toString()).toEqual('Brewster County, TX');
+  });
   
 });
