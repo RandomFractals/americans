@@ -184,7 +184,7 @@ class LocationService {
       return this.statesNameMap.get(regionKey);
     } else if ( this.isValidZipCode(regionKey) ) {
       // create and return numeric zip code for now
-      // withat checks against ZCTA config data
+      // without checks against ZCTA config data
       return new ZipCode(regionKey);
     } else {
       // check counties

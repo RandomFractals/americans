@@ -39,6 +39,10 @@ describe('Location Service States Lookup Tests', () => {
     expect(locationService.isValidState('Illinoise')).toEqual(false);
   });
 
+  it('getRegion("IL") state test', () => {
+    expect(locationService.getRegion('IL').toString()).toEqual('Illinois');
+  });
+
 });
 
 
@@ -54,6 +58,10 @@ describe('Location Service ZipCode Lookup Tests', () => {
 
   it('ZipCo is NOT a valid zip code', () => {
     expect(locationService.isValidZipCode('ZipCo')).toEqual(false);
+  });
+
+  it('getRegion("80082") zip code test', () => {
+    expect(locationService.getRegion('80082').toString()).toEqual('80082');
   });
 
 });
@@ -92,4 +100,9 @@ describe('Location Service Counties Lookup Tests', () => {
   it('Brew is NOT a valid county!', () => {
     expect(locationService.isValidCounty('Brew')).toEqual(false);
   });
+
+  it('getRegion("Brewster county, TX") county test', () => {
+    expect(locationService.getRegion('Brewster county, TX').toString()).toEqual('Brewster County, TX');
+  });
+  
 });
