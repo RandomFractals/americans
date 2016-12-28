@@ -1,0 +1,8 @@
+{
+  "population": {
+    "url": "/pep/population",
+    "year": "2015",
+    "get": "POP,GEONAME,REGION,DENSITY",
+    "for": ":*"
+  }
+}
