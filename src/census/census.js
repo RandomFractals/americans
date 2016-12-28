@@ -53,8 +53,7 @@ class Census {
 
     // get population data service config
     const popService = this.services.get('population');
-    console.log('Census.getPopulation(): service config:\n', 
-      JSON.stringify(popService));
+    //console.log('Census.getPopulation(): service config:\n', JSON.stringify(popService));
 
     // get valid region info
     let region = this.locationService.getRegion(location);
@@ -70,8 +69,7 @@ class Census {
       for: region.code,
       key: this.config.CENSUS_DATA_API_KEY
     };
-    console.log('Census.getPopulation(): query:\n', 
-      JSON.stringify(queryParams));
+    //console.log('Census.getPopulation(): query:\n', JSON.stringify(queryParams));
 
     // get region pop data
     return fetch(`${popService.host}/${year}/${popService.url}?get=${popService.get}&for=${region.code}&key=${this.config.CENSUS_DATA_API_KEY}`, {
