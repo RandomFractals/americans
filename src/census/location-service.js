@@ -146,7 +146,7 @@ class LocationService {
     // gen. lower case county key without white spaces and 'county' suffix
     let countyKey = countyName.toLowerCase().split(' ').join('').replace('county', '');
     let countyStateKey = this.getCountyStateKey(countyKey);
-    console.log(`${countyKey} -> ${countyStateKey}`);
+    //console.log(`${countyKey} -> ${countyStateKey}`);
     return ( this.counties.has(countyKey) || 
       this.counties.has(countyStateKey) ||
       this.countyMapList.has(countyKey) ); 
