@@ -62,17 +62,10 @@ class Census {
       region = new Region('us', 'USA');
     }
 
-    // create census pop data service query params
-    const queryParams = {
-      year: year,
-      get: popService.get,
-      for: region.code,
-      key: this.config.CENSUS_DATA_API_KEY
-    };
-    //console.log('Census.getPopulation(): query:\n', JSON.stringify(queryParams));
-
     // get region pop data
-    return fetch(`${popService.host}/${year}/${popService.url}?get=${popService.get}&for=${region.code}&key=${this.config.CENSUS_DATA_API_KEY}`, {
+    return fetch(`${popService.host}/${year}/${popService.url}` +
+      `?get=${popService.get}&for=${region.code}` +
+      `&key=${this.config.CENSUS_DATA_API_KEY}`, {
       method: 'GET',
       headers: {'Content-Type': 'application/json'},
     })
