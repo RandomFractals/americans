@@ -43,7 +43,7 @@ class Census {
   /*---------------------- Census Data Service API Methods ----------------------------*/
 
   /**
-   * Gets US population stats for census.gov popu.
+   * Gets US population stats from census.gov.
    * 
    * @param location US location: state, county, zip or USA (default).
    * 
