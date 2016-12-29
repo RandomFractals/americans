@@ -20,19 +20,20 @@
       "tests"
     ],
     "testRunner": "jasmine2",
-    "verbose": true    
+    "verbose": true
   },
   "dependencies": {
-    "dotenv": "^2.0.0",
-    "express": "^4.14.0",
-    "request": "^2.79.0",
-    "body-parser": "^1.15.2",
-    "isomorphic-fetch": "^2.2.1",
     "babel-core": "^6.18.2",
     "babel-polyfill": "^6.16.0",
     "bl": "^1.1.2",
-    "uuid": "^3.0.0",
-    "node-wit": "^4.1.0"
+    "body-parser": "^1.15.2",
+    "dotenv": "^2.0.0",
+    "express": "^4.14.0",
+    "isomorphic-fetch": "^2.2.1",
+    "node-wit": "^4.1.0",
+    "numeral": "^2.0.4",
+    "request": "^2.79.0",
+    "uuid": "^3.0.0"
   },
   "devDependencies": {
     "jest": "^17.0.3",
