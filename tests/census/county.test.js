@@ -17,7 +17,7 @@ const testCounty = new County(county.code, county.name, county.state);
 describe('County Data Model Tests', () => {
 
   it('county code set/get test', () => {
-    expect(testCounty.code).toEqual('031');
+    expect(testCounty.code).toEqual(county.code);
   });
 
   it('county name set/get test', () => {

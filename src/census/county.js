@@ -21,8 +21,6 @@ class County extends Region {
     super(code, name);
     this.state = state;
     this.type = 'county';
-    // strip out state code
-    this.code = String(code).substring(2);
   }
 
 

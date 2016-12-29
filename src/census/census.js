@@ -62,9 +62,20 @@ class Census {
       region = new Region('1', 'USA');
     }
 
+    // create for and in query params
+    let forQueryParam = region.code;
+    let inQueryParam = '';
+    if (region.type === 'county') {
+      // qualify county query with state code param
+      inQueryParam = `&in=state:${String(region.code).substring(0,1)}`;
+      // strip out state code
+      forQueryParam = String(region.code).substring(2);
+    }
+    console.log(`Census:getPopulation(): fo=${region.type}:${forQueryParam}${inQueryParam}`);
+
     // get region pop data
     return fetch(`${popService.host}/${year}/${popService.url}` +
-      `?get=${popService.get}&for=${region.type}:${region.code}` +
+      `?get=${popService.get}&for=${region.type}:${forQueryParam}${inQueryParam}` +
       `&key=${this.config.CENSUS_DATA_API_KEY}`, {
       method: 'GET',
       headers: {'Content-Type': 'application/json'},
