@@ -9,6 +9,9 @@ const config = require('./src/utils/app-config.js');
 // wit.ai imports
 const {Wit, interactive, log} = require('node-wit');
 
+// import numeral for numbers formating
+const numeral = require('numeral');
+
 // create census data service
 const Census = require('./src/census/census.js');
 const censusService = new Census(config);
@@ -39,7 +42,7 @@ const witAiClient = new Wit({
       console.log(`\n> bot.getPopulation(("${location}"):`);
       censusService.getPopulation('usa')
         .then( (response) => {
-          console.log(`\n>${response.population} live in ${response.location}`);
+          console.log(`\n>${numeral(response.population).format('0,0')} people live in ${response.location}`);
           context.location = response.location;
         });
       logBotInfo(context, entities, text);
