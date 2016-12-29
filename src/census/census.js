@@ -24,8 +24,10 @@ class Census {
   * @param config Census data service config.
   */
   constructor(config) {
-    // save config
+    // save app config
     this.config = config;
+
+    // load census data services config
     this.services = new Map();
     Object.keys(servicesConfig).forEach( serviceName => {
       this.services.set(serviceName, servicesConfig[serviceName]);
