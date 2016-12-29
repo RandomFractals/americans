@@ -9,11 +9,17 @@ const config = require('./src/utils/app-config.js');
 // wit.ai imports
 const {Wit, interactive, log} = require('node-wit');
 
+// create census data service
+const Census = require('./src/census/census.js');
+const censusService = new Census(config);
+
 // create wit.ai client
 const witAiClient = new Wit({
   accessToken: config.WIT_TOKEN,
   actions: {
     send(request, response) {
+      const {sessionId, context, entities} = request;
+      const {text, quickreplies} = response;      
       return new Promise( function(resolve, reject) {
         console.log(`> bot.send() request: ${JSON.stringify(request)}`);        
         console.log(`> bot.send() response: ${JSON.stringify(response)}`);
@@ -31,6 +37,11 @@ const witAiClient = new Wit({
       // TODO: extract requested location 
       // for census pop data service call from entities
       console.log(`\n> bot.getPopulation(("${location}"):`);
+      censusService.getPopulation('usa')
+        .then( (response) => {
+          console.log(`\n>${response.population} live in ${response.location}`);
+          context.location = response.location;
+        });
       logBotInfo(context, entities, text);
       return Promise.resolve(context);      
     },
