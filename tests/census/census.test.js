@@ -13,7 +13,7 @@ describe('Census Data Service Interface Tests', () => {
     expect(census.getPopulation).toBeDefined();
   });
 
-  it('getPopulation(location="usa") > 0', () => {
+  it('can get USA population data', () => {
     return census.getPopulation('usa')
       .then( (response) => {
         console.log(`getPopulation() response: ${JSON.stringify(response)}`);
@@ -23,7 +23,7 @@ describe('Census Data Service Interface Tests', () => {
       });
   });
 
-  it('getPopulation(location="IL") > 0', () => {
+  it('can get IL state population data', () => {
     return census.getPopulation('IL')
       .then( (response) => {
         console.log(`getPopulation() response: ${JSON.stringify(response)}`);
@@ -33,13 +33,13 @@ describe('Census Data Service Interface Tests', () => {
       });
   });
 
-  it('getPopulation(location="Cook county, illinois") > 0', () => {
-    return census.getPopulation('Cook county, illinois')
+  it('can get Cook county, IL population data', () => {
+    return census.getPopulation('Cook county, IL')
       .then( (response) => {
         console.log(`getPopulation() response: ${JSON.stringify(response)}`);
         expect(Number(response.population)).toBeGreaterThan(0);
         expect(Number(response.density)).toBeGreaterThan(0);
-        expect(response.location).toBe('Cook County, Illinois');
+        expect(response.location).toBe('Cook County, IL');
       });
   });
 });
