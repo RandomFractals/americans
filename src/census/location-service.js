@@ -26,8 +26,9 @@ class LocationService {
     this._stateMap = new Map();
     this._stateNameMap = new Map();
     Object.keys(states).forEach( code => {
-      let state = new State(code, states[code]);
-      this._stateMap.set(code.toLowerCase(), state);
+      let stateData = states[code];
+      let state = new State(code, stateData.name, stateData.key);
+      this._stateMap.set(state.key.toLowerCase(), state);
       this._stateNameMap.set(state.lowerCaseKey, state);
     });
 
@@ -169,7 +170,7 @@ class LocationService {
       //console.log(JSON.stringify(countyTokens));
       if ( this.stateNameMap.has(stateName) ) {
         const state = this.stateNameMap.get(stateName);        
-        return `${countyKey},${state.code.toLowerCase()}`;
+        return `${countyKey},${state.key.toLowerCase()}`;
       }
     }
     return countyStateString;

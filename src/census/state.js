@@ -11,11 +11,13 @@ class State extends Region {
   * Creates new State class instance
   * with state code and name to display.
   *
-  * @param code State code/abbreviation, i.e. IL.
+  * @param code 2 digit state code.
   * @param name State name.
+  * @param key State key/abbreviation, i.e. IL
   */
-  constructor(code, name) {
+  constructor(code, name, key) {
     super(code, name);
+    this.key = key;
   }
 
 } 
