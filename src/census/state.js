@@ -18,6 +18,7 @@ class State extends Region {
   constructor(code, name, key) {
     super(code, name);
     this.key = key;
+    this.type = 'state';
   }
 
 } 

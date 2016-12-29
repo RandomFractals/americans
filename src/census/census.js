@@ -59,12 +59,12 @@ class Census {
     let region = this.locationService.getRegion(location);
     if ( region === null) {
       // defualt to USA
-      region = new Region('us', 'USA');
+      region = new Region('1', 'USA');
     }
 
     // get region pop data
     return fetch(`${popService.host}/${year}/${popService.url}` +
-      `?get=${popService.get}&for=${region.code}` +
+      `?get=${popService.get}&for=${region.type}:${region.code}` +
       `&key=${this.config.CENSUS_DATA_API_KEY}`, {
       method: 'GET',
       headers: {'Content-Type': 'application/json'},

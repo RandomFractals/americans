@@ -19,7 +19,10 @@ class County extends Region {
   */
   constructor(code, name, state) {
     super(code, name);
-    this._state = state;
+    this.state = state;
+    this.type = 'county';
+    // strip out state code
+    this.code = String(code).substring(2);
   }
 
 
@@ -41,14 +44,6 @@ class County extends Region {
    */
   get key() {
     return `${this.shortNameKey},${this.state.toLowerCase()}`;
-  }
-
-
-  /**
-   * Gets county state abbreviation.
-   */
-  get state() {
-    return this._state;
   }
 
 

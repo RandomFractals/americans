@@ -13,24 +13,9 @@ class Region {
   * @param name Region name.
   */
   constructor(code, name) {
-    this._code = code;
-    this._name = name;
-  }
-
-
-  /**
-   * Gets region code.
-   */
-  get code() {
-    return this._code;
-  }
-
-
-  /**
-   * Gets region name.
-   */
-  get name() {
-    return this._name;    
+    this.code = code;
+    this.name = name;
+    this.type = 'us'; // default to us
   }
 
 

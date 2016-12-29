@@ -5,7 +5,7 @@ const County = require('../../src/census/county.js');
 
 // create county test data
 const county = {
-  code: 17031,
+  code: '17031',
   name: 'Cook County',
   state: 'IL'
 };
@@ -17,7 +17,7 @@ const testCounty = new County(county.code, county.name, county.state);
 describe('County Data Model Tests', () => {
 
   it('county code set/get test', () => {
-    expect(testCounty.code).toEqual(county.code);
+    expect(testCounty.code).toEqual('031');
   });
 
   it('county name set/get test', () => {
