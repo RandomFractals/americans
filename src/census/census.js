@@ -51,7 +51,7 @@ class Census {
    * @see http://api.census.gov/data/2015/pep/population/examples.html
    */
   getPopulation(location='us', year='2015') {
-    console.log(`Census:getPopulation(): location=${location} year=${year}`);
+    console.log(`Census:getPopulation():location=${location}, year=${year}`);
 
     // get population data service config
     const popService = this.services.get('population');
@@ -73,7 +73,7 @@ class Census {
       // strip out state code
       forQueryParam = String(region.code).substring(2);
     }
-    console.log(`Census:getPopulation(): fo=${region.type}:${forQueryParam}${inQueryParam}`);
+    console.log(`Census:getPopulation():query: for=${region.type}:${forQueryParam}${inQueryParam}`);
 
     // get region pop data
     return fetch(`${popService.host}/${year}/${popService.url}` +
