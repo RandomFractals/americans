@@ -3,6 +3,13 @@
 // wit.ai imports
 const {Wit, log} = require('node-wit');
 
+// import numeral for numbers formating
+const numeral = require('numeral');
+
+// import census data service
+const Census = require('../census/census.js');
+
+
 /**
  * Defines wit.ai bot engine instance.
  */
@@ -26,6 +33,8 @@ class WitAI {
     const sessions = {};
     this._sessions = sessions;
     const logBotInfo = this.logBotInfo;
+    const getFirstEntityValue = this.getFirstEntityValue;
+    const censusService = new Census(config);
 
     // create wit.ai bot actions
     const actions = {
@@ -58,10 +67,20 @@ class WitAI {
         return Promise.resolve(context);
       },
       getPopulation({sessionId, context, text, entities}) {
-        let location = 'USA'; 
-        // TODO: extract requested location 
-        // for census pop data service call from entities
+        // extract requested location for census pop data service call from entities
+        let location = getFirstEntityValue(entities, 'location');
+        if (!location) {
+          location = 'usa'; // default to usa
+        }
         console.log(`\n> bot.getPopulation(("${location}"):`);
+        censusService.getPopulation(location)
+          .then( (response) => {
+            console.log(`~${numeral(response.population).format('0,0')} people live in ${response.location}`);
+            if (response.location !== 'USA') {
+              // save new location in wit.ai context
+              context.location = response.location;
+            }
+          });        
         logBotInfo(context, entities, text);
         return Promise.resolve(context);        
       },
@@ -123,6 +142,22 @@ class WitAI {
     return sessionId;
   }
 
+  /**
+  * Gets first entity value from wit.ai entities collection.
+  * 
+  * @param entities Wit.ai entities collection.
+  * @param entityName Name of the extracted entity.
+  */
+  getFirstEntityValue(entities, entityName) {
+    const entityValue = entities && entities[entityName] &&
+      Array.isArray(entities[entityName]) &&
+      entities[entityName].length > 0 &&
+      entities[entityName][0].value;
+    if (!entityValue) {
+      return null;
+    }
+    return typeof entityValue === 'object' ? entityValue.value : entityValue;
+  }
 
   /**
    * Logs wit.ai message text request, context, and entities 
