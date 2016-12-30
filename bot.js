@@ -43,7 +43,8 @@ const witAiClient = new Wit({
       console.log(`\n> bot.getPopulation(("${location}"):`);
       censusService.getPopulation(location)
         .then( (response) => {
-          console.log(`\n>~${numeral(response.population).format('0,0')} people live in ${response.location}`);
+          console.log(`\n>~${numeral(response.population).format('0,0')} people live in ${response.location}`,
+            `\n  Population density: ${numeral(response.density).format('0,0')} p/mi²`);
           if (response.location !== 'USA') {
             // save new location in wit.ai context
             context.location = response.location;
