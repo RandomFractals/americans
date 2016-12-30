@@ -72,7 +72,7 @@ describe('Location Service ZipCode Lookup Tests', () => {
     expect(locationService.isValidZipCode('ZipCo')).toEqual(false);
   });
 
-  it('getRegion("80082") zip code test', () => {
+  xit('getRegion("80082") zip code test', () => {
     expect(locationService.getRegion('80082').toString()).toEqual('80082');
   });
 
