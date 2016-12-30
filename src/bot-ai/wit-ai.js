@@ -75,7 +75,17 @@ class WitAI {
         console.log(`\n> bot.getPopulation(("${location}"):`);
         censusService.getPopulation(location)
           .then( (response) => {
-            console.log(`~${numeral(response.population).format('0,0')} people live in ${response.location}`);
+            // create pop data response message
+            let message = `~${numeral(response.population).format('0,0')} people live in ${response.location}`;
+            console.log(message);
+
+            // get recipient id from sessions            
+            const recipientId = sessions[sessionId].userId;
+            if (recipientId && chatClient) {
+              // send pop data response              
+              chatClient.sendMessage(recipientId, message);
+            }
+
             if (response.location !== 'USA') {
               // save new location in wit.ai context
               context.location = response.location;
