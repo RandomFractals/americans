@@ -19,12 +19,20 @@ describe('Location Service States Lookup Tests', () => {
     expect(locationService.stateNameMap.get('illinois').toString()).toEqual('Illinois');
   });
 
+  it('has New York state info', () => {
+    expect(locationService.stateNameMap.get('newyork').toString()).toEqual('New York');
+  });
+
   it('IL is a valid state', () => {
     expect(locationService.isValidState('IL')).toEqual(true);
   });
 
   it('Illinois is a valid state', () => {
     expect(locationService.isValidState('Illinois')).toEqual(true);
+  });
+
+  it('New York is a valid state', () => {
+    expect(locationService.isValidState('New York')).toEqual(true);
   });
 
   it('BR is NOT a valid state!', () => {
@@ -41,6 +49,10 @@ describe('Location Service States Lookup Tests', () => {
 
   it('getRegion("IL") state test', () => {
     expect(locationService.getRegion('IL').toString()).toEqual('Illinois');
+  });
+
+  it('getRegion("New York") state test', () => {
+    expect(locationService.getRegion('New York').toString()).toEqual('New York');
   });
 
 });
