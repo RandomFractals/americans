@@ -44,7 +44,10 @@ const witAiClient = new Wit({
       censusService.getPopulation(location)
         .then( (response) => {
           console.log(`\n>~${numeral(response.population).format('0,0')} people live in ${response.location}`);
-          context.location = response.location;
+          if (response.location !== 'USA') {
+            // save new location in wit.ai context
+            context.location = response.location;
+          }
         });
       logBotInfo(context, entities, text);
       return Promise.resolve(context);      
