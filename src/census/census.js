@@ -69,7 +69,8 @@ class Census {
     let inQueryParam = '';
     if (region.type === 'county') {
       // qualify county query with state code param
-      inQueryParam = `&in=state:${String(region.code).substring(0,1)}`;
+      let state = this.locationService.getRegion(region.state.toLowerCase());
+      inQueryParam = `&in=state:${state.code}`;
       // strip out state code
       forQueryParam = String(region.code).substring(2);
     }
