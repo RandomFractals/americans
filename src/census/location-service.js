@@ -190,7 +190,7 @@ class LocationService {
     if ( this.states.has(regionKey) ) {
       return this.states.get(regionKey);
     } else if ( this.stateNameMap.has(regionKey) ) {
-      return this.statesNameMap.get(regionKey);
+      return this.stateNameMap.get(regionKey);
     } else if ( this.isValidZipCode(regionKey) ) {
       // create and return numeric zip code for now
       // without checks against ZCTA config data
