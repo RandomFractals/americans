@@ -36,13 +36,14 @@ const witAiClient = new Wit({
       return Promise.resolve(context);
     },
     getPopulation({sessionId, context, text, entities}) {
-      let location = 'USA'; 
-      // TODO: extract requested location 
-      // for census pop data service call from entities
+      let location = getFirstEntityValue(entities, 'location');
+      if (!location) {
+        location = 'usa'; // default to usa
+      }
       console.log(`\n> bot.getPopulation(("${location}"):`);
-      censusService.getPopulation('usa')
+      censusService.getPopulation(location)
         .then( (response) => {
-          console.log(`\n>${numeral(response.population).format('0,0')} people live in ${response.location}`);
+          console.log(`\n>~${numeral(response.population).format('0,0')} people live in ${response.location}`);
           context.location = response.location;
         });
       logBotInfo(context, entities, text);
@@ -61,6 +62,24 @@ const witAiClient = new Wit({
   },
   logger: new log.Logger(log.DEBUG) //INFO)  
 });
+
+
+/**
+ * Gets first entity value from wit.ai entities collection.
+ * 
+ * @param entities Wit.ai entities collection.
+ * @param entityName Name of the extracted entity.
+ */
+function getFirstEntityValue(entities, entityName) {
+  const entityValue = entities && entities[entityName] &&
+    Array.isArray(entities[entityName]) &&
+    entities[entityName].length > 0 &&
+    entities[entityName][0].value;
+  if (!entityValue) {
+    return null;
+  }
+  return typeof entityValue === 'object' ? entityValue.value : entityValue;
+}
 
 
 /**
