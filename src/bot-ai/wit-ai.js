@@ -76,7 +76,8 @@ class WitAI {
         censusService.getPopulation(location)
           .then( (response) => {
             // create pop data response message
-            let message = `~${numeral(response.population).format('0,0')} people live in ${response.location}`;
+            let message = `~${numeral(response.population).format('0,0')} people live in ${response.location}` +
+              `\n Population density: ${numeral(response.density).format('0,0')} p/mi²`;
             console.log(message);
 
             // get recipient id from sessions            
