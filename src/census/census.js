@@ -47,6 +47,7 @@ class Census {
    * 
    * @param location US location: state, county, zip or USA (default).
    * 
+   * @see http://www.census.gov/data/developers/data-sets/popest-popproj/popest.html
    * @see http://api.census.gov/data/2015/pep/population.html
    * @see http://api.census.gov/data/2015/pep/population/examples.html
    */
