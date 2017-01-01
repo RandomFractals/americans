@@ -9,21 +9,22 @@ const states = require('./resources/us-states.json');
 // TODO: const zipCodes = require('./resources/us-zip-codes.json');
 const counties = require('./resources/us-counties.json');
 
-// import State, ZipCode, and County model classes
+// import state, county, place model classes
 const State = require('./state.js');
-const ZipCode = require('./zip-code.js');
 const County = require('./county.js');
+const Place = require('./place.js');
+const ZipCode = require('./zip-code.js');
 
 /**
  * Defines location service api for validating 
- * US state, county, and zip code location queries.
+ * US state, county, place, and zip code location queries.
  */
 class LocationService {
 
   /**
   * Creates new LocationService service instance.
   *
-  * Loads US states, zip codes, and counties FIPS config data.
+  * Loads US states, counties, and places FIPS config data.
   */
   constructor() {
     // load states config data
@@ -53,16 +54,30 @@ class LocationService {
     });
 
     // load US places: cities, towns, villages, etc.
+    let placesCount = 0;
+    this.places = new Map();    
     const placesConfig = readLine.createInterface({
       input: fs.createReadStream('./src/census/resources/us-places.txt', {flags:'r', autoClose: true}),
       terminal: false
     });
 
-    let placesCount = 0;
-    placesConfig.on('line', function(line) {
-      placesCount++;
-      if (placesCount < 10) {
-        console.log(line);
+    placesConfig.on('line', (line) => {
+      // create place tokens from place text line
+      // example: IL|17|34722|Highland Park city|Incorporated Place|A|Lake County      
+      let placeTokens = line.trim().split('|');
+      if (placeTokens.length == 7) {
+        // create new place info
+        let place = new Place(
+          placeTokens[2], // code
+          placeTokens[3], // name
+          placeTokens[0], // state
+          placeTokens[6] // county
+        );
+        // add to loaded places
+        this.places.set(place.key, place);
+        placesCount++;
+
+        if (placesCount < 5) console.log(place.toString());
       }
     });
 
