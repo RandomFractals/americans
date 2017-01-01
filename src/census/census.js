@@ -68,12 +68,14 @@ class Census {
     // create for and in query params
     let forQueryParam = region.code;
     let inQueryParam = '';
-    if (region.type === 'county') {
+    if (region.type === 'county' || region.type === 'place') {
       // qualify county query with state code param
       let state = this.locationService.getRegion(region.state.toLowerCase());
       inQueryParam = `&in=state:${state.code}`;
-      // strip out state code
-      forQueryParam = String(region.code).substring(2);
+      if (region.type === 'county') {
+        // strip out county state code for census county ds query
+        forQueryParam = String(region.code).substring(2);
+      }
     }
     console.log(`Census:getPopulation():query: for=${region.type}:${forQueryParam}${inQueryParam}`);
 

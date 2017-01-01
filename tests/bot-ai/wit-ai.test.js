@@ -28,11 +28,11 @@ describe('Bot AI processMessage() Tests', () => {
     }).toThrowError('Missing message text.');
   });
 
-  xit('What is the population of USA?', () => {
+  it('What is the population of Chicago, IL?', () => {
     return witAI.processMessage({
         sender: {id: "1165704360144557"}, 
         recipient: {id: "PAGE_ID"}, 
-        message: {text: "What is the population of USA?"}      
+        message: {text: "What is the population of Chicago, IL?"}
     }).then( (context) => { 
       expect(context).toEqual('Hi');
     });
