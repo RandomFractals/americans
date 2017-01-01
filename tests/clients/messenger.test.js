@@ -49,7 +49,7 @@ describe('Messenger processMessage() Tests', () => {
     });
   });
 
-  it('can send a "test message"', () => {
+  xit('can send a "test message"', () => {
     const testMessage = 'test message';
     return messenger.sendMessage(testUserId, testMessage)
       .then( (response) => {
@@ -58,7 +58,7 @@ describe('Messenger processMessage() Tests', () => {
       });
   });    
 
-  it('What is the population of USA?', () => {
+  xit('What is the population of USA?', () => {
     return messenger.processMessage({
       sender: {id: testUserId}, 
       recipient: {id: 'PAGE_ID'}, 
