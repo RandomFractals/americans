@@ -26,14 +26,15 @@ class Place extends Region {
     this.county = county;
     this.type = 'place';
 
-    // create place key for lookups: lowercase and
-    // strip out ' city', ' town', ' village', and ' CDP'
+    // create place key for lookups:
+    // strip out ' city', ' town', ' village', and ' CDP',
+    // lowercase, strip out spaces, and append state code
     this.key = this.name.replace(' city', '')
       .replace(' town', '')
       .replace(' village', '')
       .replace(' CDP', '') // CDP - Census Designated Place
       .toLowerCase()
-      .split(' ').join('');
+      .split(' ').join('') + ',' + this.state.toLowerCase();
   }
 
 
