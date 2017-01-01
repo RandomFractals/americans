@@ -76,14 +76,15 @@ class LocationService {
         // add to loaded places
         this.places.set(place.key, place);
         placesCount++;
-
-        if (placesCount < 5) console.log(place.toString());
       }
     });
 
-    console.log(`LocationService(): loaded ${this.states.size} states`,
-      `, ${this.counties.size} counties`,
-      `, and ${placesCount} places.`);
+    placesConfig.on('close', () => {
+      console.log(`LocationService(): loaded ${this.places.size} USA places.`);
+    });
+
+    console.log(`LocationService(): loaded ${this.states.size} USA states`,
+      `and ${this.counties.size} counties.`);
 
   } // end of constructor()
 
