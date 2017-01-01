@@ -1,5 +1,9 @@
 'use strict';
 
+// import fs and readline for laoding us-places.txt config
+const fs = require('fs');
+const readLine = require('readline');
+
 // load US states, zip codes, and counties FIPS data config
 const states = require('./resources/us-states.json');
 // TODO: const zipCodes = require('./resources/us-zip-codes.json');
@@ -48,7 +52,23 @@ class LocationService {
       countyList.push(county);
     });
 
-    console.log(`LocationService(): loaded ${this.states.size} states and ${this.counties.size} US counties`);
+    // load US places: cities, towns, villages, etc.
+    const placesConfig = readLine.createInterface({
+      input: fs.createReadStream('./src/census/resources/us-places.txt', {flags:'r', autoClose: true}),
+      terminal: false
+    });
+
+    let placesCount = 0;
+    placesConfig.on('line', function(line) {
+      placesCount++;
+      if (placesCount < 10) {
+        console.log(line);
+      }
+    });
+
+    console.log(`LocationService(): loaded ${this.states.size} states`,
+      `, ${this.counties.size} counties`,
+      `, and ${placesCount} places.`);
 
   } // end of constructor()
 
