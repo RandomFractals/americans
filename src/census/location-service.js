@@ -221,31 +221,57 @@ class LocationService {
    * @param Location Location string.
    */
   getRegion(location) {
-    let region = null;
+    if (!location || location.length < 2) {
+      return null; // invalid location string
+    }
+
+    // gen. lower case region key without white spaces
     let regionKey = location.toLowerCase().split(' ').join('');
+
+    // check states
     if ( this.states.has(regionKey) ) {
       return this.states.get(regionKey);
-    } else if ( this.stateNameMap.has(regionKey) ) {
+    }     
+    if ( this.stateNameMap.has(regionKey) ) {
       return this.stateNameMap.get(regionKey);
-    /*} else if ( this.isValidZipCode(regionKey) ) {
+    }
+
+    // check counties
+    let countyKey = regionKey.replace('county', '');
+    let countyStateKey = this.getCountyStateKey(countyKey);
+    if ( this.counties.has(countyKey) ) {
+      return this.counties.get(countyKey);
+    }    
+    if ( this.counties.has(countyStateKey) ) {
+      return this.counties.get(countyStateKey);
+    }
+    if ( this.countyMapList.has(countyKey) ) {
+      // return a list of matching counties
+      return this.countyMapList.get(countyKey);
+    }
+
+    // check places
+    let placeKey = location.replace(' city', '')
+      .replace(' town', '')
+      .replace(' village', '')
+      .replace(' CDP', '') // CDP - Census Designated Place
+      .toLowerCase()
+      .split(' ').join('');
+    if (this.places.has(placeKey)) {
+      return this.places.get(placeKey);
+    }
+
+    // TODO: check zip codes
+    /*if ( this.isValidZipCode(regionKey) ) {
       // create and return numeric zip code for now
       // without checks against ZCTA config data
-      return new ZipCode(regionKey);*/
-    } else {
-      // check counties
-      regionKey = regionKey.replace('county', '');
-      let countyStateKey = this.getCountyStateKey(regionKey);
-      if ( this.counties.has(regionKey) ) {
-        return this.counties.get(regionKey);
-      } else if ( this.counties.has(countyStateKey) ) {
-        return this.counties.get(countyStateKey);
-      } else if ( this.countyMapList.has(regionKey) ) {
-        // return a list of matching counties
-        return this.countyMapList.get(regionKey);
-      } 
-    }
-    return region;
-  }
+        return new ZipCode(regionKey);
+    }*/
+    
+    // no valid US region info found
+    return null;
+
+  } // end of getRegion(location)
 
 
 } // end of LocationService class
