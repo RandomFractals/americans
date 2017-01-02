@@ -36,6 +36,8 @@ cp .env.template .env
 Follow instructions in .env config file to procure required tokens 
 and service api access keys for Wit.ai, FB Messenger, and Census data calls.
 
+Note: only WIT_TOKEN and CENSUS_DATA_API_KEY .env vars are required for local bot.js CLI runs.
+
 ## Test
 ### Jest
 ```bash
