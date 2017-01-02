@@ -1,7 +1,7 @@
 {
   "name": "Americans-bot",
   "author": "Random Fractals, Inc.",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "version": "1.0.2",
   "description": "Bots demo project of US pop, biz, trade, incomes, and housing data stats",
   "keywords": [
