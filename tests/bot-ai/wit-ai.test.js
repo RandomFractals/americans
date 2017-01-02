@@ -34,17 +34,9 @@ describe('Bot AI processMessage() Tests', () => {
         recipient: {id: "PAGE_ID"}, 
         message: {text: "What is the population of Chicago, IL?"}
     }).then( (context) => { 
-      expect(context).toEqual('Hi');
+      // check if location was added to chat session context
+      expect(context.location).toEqual('Chicago city, IL');
     });
-
-    /*return expect( () => {
-      witAI.processMessage({
-        sender: {id: "1165704360144557"}, 
-        recipient: {id: "PAGE_ID"}, 
-        message: {text: "What is the population of USA?"}
-      });
-    }).toBe('Hi'); //.toBeDefined(); // TODO: should return current USA pop text response
-    */
   });    
 
 });
