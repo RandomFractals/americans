@@ -12,7 +12,7 @@ const BotClient = require('./bot-client.js');
 class Slack extends BotClient {
 
   /**
-  * Creates new Slack bot client instance for Slack chat.
+  * Creates new Slack bot client instance for Slack chats.
   *
   * @param config Slack bot config.
   */
