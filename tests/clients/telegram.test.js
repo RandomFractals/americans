@@ -58,7 +58,7 @@ describe('Telegram processMessage() Tests', () => {
       message: {text: 'usa pop?'}
     })
     .then( (response) => {
-      console.log(`population test response:  ${JSON.stringify(response)}`);
+      console.log(`Telegram.test: pop test msg response:  ${JSON.stringify(response)}`);
       expect(response).not.toBeNull(); 
     });
   });    

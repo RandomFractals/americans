@@ -65,7 +65,7 @@ describe('Messenger processMessage() Tests', () => {
       message: {text: 'What is the population of USA?'}
     })
     .then( (response) => {
-      console.log(`population test response:  ${JSON.stringify(response)}`);
+      console.log(`Messenger.test: pop test msg response:  ${JSON.stringify(response)}`);
       expect(response).not.toBeNull(); 
     });
   });    
