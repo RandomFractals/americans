@@ -78,15 +78,9 @@ class Slack {
       headers: {'Content-Type': 'application/json'},
       body: messageData,
     })
-    .then(messageResponse => messageResponse.json())
-    .then(messageJsonResponse => {
-      console.log(`Messenger.sendMessage(): response:${JSON.stringify(messageJsonResponse)}`);
-      if ( messageJsonResponse.error && messageJsonResponse.error.message ) {
-        throw new Error(messageJsonResponse.error.message);
-      }
-      // append sent message text
-      messageJsonResponse.message = messageText; 
-      return messageJsonResponse;
+    .then(messageResponse => {
+      console.log(`Messenger.sendMessage(): response:${messageResponse}`);
+      return messageResponse;
     });
   } // end of sendMessage()
 
