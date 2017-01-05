@@ -1,7 +1,7 @@
 'use strict';
 
-// import bot brains
-const BotAIFactory = require('../bot-ai/bot-ai-factory.js');
+// import bot client base class
+const BotClient = require('./bot-client.js');
 
 /**
  * Defines Slack class for Slack chats.
@@ -9,7 +9,7 @@ const BotAIFactory = require('../bot-ai/bot-ai-factory.js');
  * @see https://api.slack.com/slack-apps
  * @see https://api.slack.com/custom-integrations
  */
-class Slack {
+class Slack extends BotClient {
 
   /**
   * Creates new Slack bot client instance for Slack chat.
@@ -17,40 +17,8 @@ class Slack {
   * @param config Slack bot config.
   */
   constructor(config) {
-    // save bot config
-    this.config = config;
-
-    // get bot AI engine instance
-    this.botAI = new BotAIFactory(config, this).botAI;
+    super(config, 'Slack'); // chat client name
   }
-
-
-  /**
-   * Processes Slack chat bot pings.
-   * 
-   * @param message Slack bot ping message request.
-   */
-  processMessage(message) {
-    // get sender and recipient Slack user ids
-    const senderId = message.sender.id;
-    const recipientId = message.recipient.id;
-
-    // get message text, attachments, and timestamp
-    const {text, attachments} = message.message;
-    const messageTime = message.timestamp;
-
-    if (attachments) {
-      return sendMessage(senderId, 'Sorry I can only process text messages for now :(')
-        .catch(console.error);
-    } else if (text) {
-      // forward message to wit.ai bot engine to run it through all bot ai actions
-      console.log(`Slack.processMessage(): "${text}" for:${senderId}`);
-      return this.botAI.processMessage(message, this);
-    } else {
-      //console.error('Messenger.processMessage(): missing message text!');    
-      throw new Error('Missing message text.');
-    }
-  } // end of processMessage()
 
 
   /**

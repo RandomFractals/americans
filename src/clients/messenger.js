@@ -3,25 +3,21 @@
 // crypto lib import for FB requests verification
 const crypto = require('crypto');
 
-// import bot brains
-const BotAIFactory = require('../bot-ai/bot-ai-factory.js');
+// import bot client base class
+const BotClient = require('./bot-client.js');
 
 /**
  * Defines Messenger class for FB page chats.
  */
-class Messenger {
+class Messenger extends BotClient {
 
   /**
-  * Creates new Messenger instance for FB page chat.
+  * Creates new Messenger instance for FB page chats.
   *
   * @param config Messenger bot config.
   */
   constructor(config) {
-    // save bot config
-    this.config = config;
-
-    // get bot AI engine instance
-    this.botAI = new BotAIFactory(config, this).botAI;
+    super(config, 'Messenger'); // chat client name
   }
 
 
@@ -56,36 +52,6 @@ class Messenger {
     }
     
   } // end of verifyRequestSignature()
-
-
-  /**
-   * Processes Messenger chat bot pings.
-   * 
-   * @param message Messenger bot ping message request.
-   * 
-   * see https://developers.facebook.com/docs/messenger-platform/webhook-reference
-   */
-  processMessage(message) {
-    // get sender and recipient FB user ids
-    const senderId = message.sender.id;
-    const recipientId = message.recipient.id;
-
-    // get message text, attachments, and timestamp
-    const {text, attachments} = message.message;
-    const messageTime = message.timestamp;
-
-    if (attachments) {
-      return sendMessage(senderId, 'Sorry I can only process text messages for now :(')
-        .catch(console.error);
-    } else if (text) {
-      // forward message to wit.ai bot engine to run it through all bot ai actions
-      console.log(`Messenger.processMessage(): "${text}" for:${senderId}`);
-      return this.botAI.processMessage(message, this);
-    } else {
-      //console.error('Messenger.processMessage(): missing message text!');    
-      throw new Error('Missing message text.');
-    }
-  } // end of processMessage()
 
 
   /**
