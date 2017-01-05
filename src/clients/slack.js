@@ -64,9 +64,9 @@ class Slack {
   sendMessage(recipientId, messageText) {
     // create post message json data
     let messageData = JSON.stringify({
-      channel: '#americans', // recipientId
-      username: 'AmericansBot',
-      icon_emoji: ':ghost:',
+      channel: recipientId,
+      username: 'Americans',
+      icon_emoji: ':us:',
       text: messageText
     });
 
