@@ -53,11 +53,23 @@ describe('Slack processMessage() Tests', () => {
       });
   });    
 
-  it('usa pop?', () => {
+  xit('usa pop?', () => {
     return slack.processMessage({
       sender: {id: testUserId}, 
       recipient: {id: testUserId}, 
       message: {text: 'usa pop?'}
+    })
+    .then( (response) => {
+      console.log(`Slack.test: pop test msg response:  ${JSON.stringify(response)}`);
+      expect(response).not.toBeNull(); 
+    });
+  });    
+
+  it('chicago,il pop?', () => {
+    return slack.processMessage({
+      sender: {id: testUserId}, 
+      recipient: {id: testUserId}, 
+      message: {text: 'chicago,il pop?'}
     })
     .then( (response) => {
       console.log(`Slack.test: pop test msg response:  ${JSON.stringify(response)}`);
