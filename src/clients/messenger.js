@@ -18,18 +18,10 @@ class Messenger {
   */
   constructor(config) {
     // save bot config
-    this._config = config;
+    this.config = config;
 
     // get bot AI engine instance
     this.botAI = new BotAIFactory(config, this).botAI;
-  }
-
-
-  /**
-   * Gets messenger bot config.
-   */
-  get config() {
-    return this._config;
   }
 
 
