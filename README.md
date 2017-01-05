@@ -21,6 +21,15 @@ Latest FB Messenger interface v.:
 ![Alt text](https://github.com/RandomFractals/americans/blob/master/screens/AmericansBotMVP.png?raw=true 
  "latest") 
 
+05-01-2017 Update: 
+
+Huston, we got Slack lift off! :)
+
+![Alt text](https://github.com/RandomFractals/americans/blob/master/screens/AmericansBotUSAPop.png
+ "Slack Americans bot dev in progress...") 
+
+https://twitter.com/TarasNovak/status/817072830873473024
+
 ## Build
 
 ```bash
