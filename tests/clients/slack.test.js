@@ -44,7 +44,7 @@ describe('Slack processMessage() Tests', () => {
     });
   });
 
-  it('can send a "test message"', () => {
+  xit('can send a "test message"', () => {
     const testMessage = 'test message';
     return slack.sendMessage(testUserId, testMessage)
       .then( (response) => {
@@ -53,11 +53,11 @@ describe('Slack processMessage() Tests', () => {
       });
   });    
 
-  xit('What is the population of USA?', () => {
+  it('usa pop?', () => {
     return slack.processMessage({
       sender: {id: testUserId}, 
       recipient: {id: testUserId}, 
-      message: {text: 'What is the population of USA?'}
+      message: {text: 'usa pop?'}
     })
     .then( (response) => {
       console.log(`population test response:  ${JSON.stringify(response)}`);
