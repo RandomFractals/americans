@@ -1,0 +1,60 @@
+'use strict';
+
+// import bot brains
+const BotAIFactory = require('../bot-ai/bot-ai-factory.js');
+
+/**
+ * Defines Bot client base class for Messenger, Slack, and Telegram chats.
+ */
+class BotClient {
+
+  /**
+  * Creates new Bot client chat instance for Messenger, Slack, and Telegram chats.
+  *
+  * @param config Bot config.
+  */
+  constructor (config, name) {
+    // save bot config
+    this.config = config;
+
+    // save chat client name for debug
+    this.name = name;
+
+    // get bot AI engine instance
+    this.botAI = new BotAIFactory(config, this).botAI;
+  }
+
+
+  /**
+   * Processes bot message pings.
+   * 
+   * @param message Bot message request.
+   */
+  processMessage(message) {
+    // get sender and recipient user ids
+    const senderId = message.sender.id;
+    const recipientId = message.recipient.id;
+
+    // get message text, attachments, and timestamp
+    const {text, attachments} = message.message;
+    const messageTime = message.timestamp;
+
+    if (attachments) {
+      return sendMessage(senderId, 'Sorry I can only process text messages for now :(')
+        .catch(console.error);
+    } else if (text) {
+      // forward message to configured bot.ai engine to run it through all bot ai actions
+      console.log(`BotClient.processMessage():${this.name}: "${text}" for:${senderId}`);
+      return this.botAI.processMessage(message, this);
+    } else {
+      //console.error('BotClient.processMessage(): missing message text!');
+      throw new Error('Missing message text.');
+    }
+  } // end of processMessage()
+
+}
+
+//export {BotClient as default}
+// use old school for jest.js
+exports["default"] = BotClient;
+module.exports = exports["default"];
