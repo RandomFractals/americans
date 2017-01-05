@@ -13,6 +13,16 @@ describe('App Config Tests', () => {
     expect(config.WIT_TOKEN).not.toContain('token>');
   });
 
+  it('CENSUS_DATA_API_KEY is set', () => {
+    expect(config.CENSUS_DATA_API_KEY).not.toBe(null);
+    expect(config.WIT_TOKEN).not.toContain('key>');    
+  });
+
+  it('SLACK_WEBHOOK_URL is set', () => {
+    expect(config.SLACK_WEBHOOK_URL).not.toBe(null);
+    expect(config.SLACK_WEBHOOK_URL).not.toBe('<your incoming Slack bot webhook url>');
+  });
+
   it('FB_PAGE_TOKEN is set', () => {
     expect(config.FB_PAGE_TOKEN).not.toBe(null);
     expect(config.WIT_TOKEN).not.toContain('token>');    
@@ -25,11 +35,6 @@ describe('App Config Tests', () => {
 
   it('FB_VERIFY_TOKEN is created', () => {
     expect(config.FB_VERIFY_TOKEN).not.toBe(null);
-  });
-
-  it('CENSUS_DATA_API_KEY is set', () => {
-    expect(config.CENSUS_DATA_API_KEY).not.toBe(null);
-    expect(config.WIT_TOKEN).not.toContain('key>');    
   });
   
 });
