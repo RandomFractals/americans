@@ -79,7 +79,7 @@ class Slack {
       body: messageData,
     })
     .then(messageResponse => {
-      console.log(`Messenger.sendMessage(): response:${messageResponse}`);
+      console.log(`Slack.sendMessage(): response:${messageResponse}`);
       return messageResponse;
     });
   } // end of sendMessage()
