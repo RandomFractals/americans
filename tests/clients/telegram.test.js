@@ -51,7 +51,7 @@ describe('Telegram processMessage() Tests', () => {
       });
   });    
 
-  it('usa pop?', () => {
+  xit('usa pop?', () => {
     return telegram.processMessage({
       sender: {id: testUserId}, 
       recipient: {id: testUserId}, 
@@ -62,5 +62,18 @@ describe('Telegram processMessage() Tests', () => {
       expect(response).not.toBeNull(); 
     });
   });    
+
+  it('chicago,il pop?', () => {
+    return telegram.processMessage({
+      sender: {id: testUserId}, 
+      recipient: {id: testUserId}, 
+      message: {text: 'chicago,il pop?'}
+    })
+    .then( (response) => {
+      console.log(`Telegram.test: pop test msg response:  ${JSON.stringify(response)}`);
+      expect(response).not.toBeNull(); 
+    });
+  });    
+  
 
 });
