@@ -47,7 +47,9 @@ class Slack extends BotClient {
       body: messageData,
     })
     .then(messageResponse => {
-      console.log(`Slack.sendMessage(): response:${JSON.stringify(messageResponse)}`);
+      // see: https://api.slack.com/changelog/2016-05-17-changes-to-errors-for-incoming-webhooks
+      console.log(`Slack.sendMessage(): response: ${messageResponse.status}:${messageResponse.statusText}`);
+        //${JSON.stringify(messageResponse)}`);
       return messageResponse;
     });
   } // end of sendMessage()

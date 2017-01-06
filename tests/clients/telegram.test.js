@@ -63,7 +63,7 @@ describe('Telegram processMessage() Tests', () => {
     });
   });    
 
-  it('chicago,il pop?', () => {
+  xit('chicago,il pop?', () => {
     return telegram.processMessage({
       sender: {id: testUserId}, 
       recipient: {id: testUserId}, 
