@@ -77,6 +77,7 @@ Some borrowed and refactored code from:
 
 * https://github.com/jw84/messenger-bot-tutorial
 * https://github.com/hunkim/Wit-Facebook
+* https://github.com/girliemac/slack-httpstatuscats
 
 
 # License
