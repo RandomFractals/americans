@@ -80,6 +80,18 @@ function processSlashQuery(query, response) {
 
 /*----------------------------- Slack OAuth Routes -------------------------------------------------*/
 
+// Slack ping verification handler
+app.post('/slack', (req, res) => {
+  if(req.body.token !== process.env.SLACK_CLIENT_TOKEN) {
+    // not a Slack slash command query request
+    return; // bail out!
+  }
+
+  // echo Slack ping verification request
+  console.log(req.body.challenge);
+  res.send(req.body.challenge);
+});
+
 // GET endpoint for Slack OAuth
 app.get('/slack', function(req, res){ 
   let data = {form: { 
