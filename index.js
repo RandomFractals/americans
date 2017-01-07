@@ -83,7 +83,7 @@ function processSlashQuery(query, response) {
 // Slack ping verification handler
 app.post('/slack', (req, res) => {
   if(req.body.token !== process.env.SLACK_CLIENT_TOKEN) {
-    // not a Slack slash command query request
+    // not a Slack ping verification request
     return; // bail out!
   }
 
