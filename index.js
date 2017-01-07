@@ -6,6 +6,8 @@ const crypto = require('crypto');
 const express = require('express');
 const fetch = require('node-fetch');
 const request = require('request');
+const http = require('http');
+const path = require('path');
 
 // app config
 const config = require('./src/utils/app-config.js');
@@ -13,8 +15,9 @@ const config = require('./src/utils/app-config.js');
 // set web server port
 const PORT = process.env.PORT || 8445;
 
-// create and start express web app
+// create express web app
 const app = express();
+app.set('port', PORT);
 app.use(({method, url}, response, next) => {
   response.on('finish', () => {
     console.log(`${response.statusCode} ${method} ${url}`);
@@ -22,24 +25,34 @@ app.use(({method, url}, response, next) => {
   next();
 });
 
+// create and start http server
+const server = http.createServer(app);
+server.listen(PORT);
+
 // create Messenger interface instance
 const Messenger = require('./src/clients/messenger.js');
 const messenger = new Messenger(config);
 
 // verify FB request signature for all requests
-app.use( bodyParser.json() ); //{verify: messenger.verifyRequestSignature}));
+app.use(bodyParser.json()); //{verify: messenger.verifyRequestSignature}));
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// hook to serve static html files
+app.use(express.static(path.join(__dirname, './')));
 
 // listen for requests
-app.listen(PORT);
+//app.listen(PORT);
 console.log(`index.js: Listening on Port: ${PORT}...`);
 
 // create user-friendly web app info page handler
-app.get('/', (req, res) => {
+/*app.get('/', (req, res) => {
   // TODO: create simple html that describes Americans bot functionality,
   // provides links for FB Messenger and later Slack webhooks config, 
   // and sample bot usage examples to query census data
-  res.send('"Only those who will risk going too far can possibly find out how far one can go." - T.S. Eliot');
-});
+  //res.send('"Only those who will risk going too far can possibly find out how far one can go." - T.S. Eliot');
+  res.redirect('./index.html');
+});*/
 
 /*----------------------------- Slack OAuth Routes -------------------------------------------------*/
 
