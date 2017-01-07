@@ -54,6 +54,30 @@ console.log(`index.js: Listening on Port: ${PORT}...`);
   res.redirect('./index.html');
 });*/
 
+/*----------------------- Americans Bot Slash Commands :) -----------------------------------------*/
+
+app.get('/', (req, res) => {
+  processSlashQuery(req.query, res);
+});
+
+app.post('/', (req, res) => {
+  processSlashQuery(req.body, res);
+});
+
+function processSlashQuery(query, response) {
+  if(query.token !== process.env.SLACK_CLIENT_TOKEN) {
+    // not a Slack slash command query request
+    return; // bail out!
+  }
+
+  if (query.text) {
+    let messageText = query.text;
+    // echo it for now
+    console.log(JSON.stringify(response));
+    response.json(`You asked about: ${messageText}`);
+  }
+}
+
 /*----------------------------- Slack OAuth Routes -------------------------------------------------*/
 
 // GET endpoint for Slack OAuth
