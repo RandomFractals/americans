@@ -16,6 +16,8 @@ Current Wit.AI bot brains: https://wit.ai/RandomFractals/americans/stories
 
 API.AI bot engine hookup and Slack chat integration coming to chat clients near you soon.
 
+More project info on linkedin: https://www.linkedin.com/pulse/americans-bot-app-taras-novak
+
 Latest FB Messenger interface v.: 
 
 ![Alt text](https://github.com/RandomFractals/americans/blob/master/screens/AmericansBotMVP.png?raw=true 
@@ -32,7 +34,6 @@ https://twitter.com/TarasNovak/status/817072830873473024
 
 ![Alt text](https://github.com/RandomFractals/americans/blob/master/screens/AmericansBotHomePageTake2.png
  "Americans Bot home page dev in progress...") 
-
 
 ## Build
 
