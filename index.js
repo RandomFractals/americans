@@ -78,7 +78,13 @@ function processSlashQuery(query, response) {
   }
 }
 
-/*----------------------------- Slack OAuth Routes -------------------------------------------------*/
+/*----------------------------- Slack Chat Client Routes -------------------------------------------*/
+
+// Americans bot Slack command handler
+app.post('/slack/command', (req, res) => {
+  // TODO
+  console.log(JSON.stringify(req));
+});
 
 // Slack ping verification handler
 app.post('/slack', (req, res) => {
