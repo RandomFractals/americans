@@ -39,7 +39,7 @@ class Slack extends BotClient {
     });
 
     // send message via incoming Slack webhook url endpoint
-    console.log(`Slack.sendMessage(): request:${messageData}`);
+    console.log(`Slack.sendMessage(): request: ${messageData}`);
     const webHookUrl = this.config.SLACK_WEBHOOK_URL;
     return fetch(webHookUrl, {
       method: 'POST',
