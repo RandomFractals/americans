@@ -41,6 +41,38 @@ app.get('/', (req, res) => {
   res.send('"Only those who will risk going too far can possibly find out how far one can go." - T.S. Eliot');
 });
 
+/*----------------------------- Slack OAuth Routes -------------------------------------------------*/
+
+// GET endpoint for Slack OAuth
+app.get('/slack', function(req, res){ 
+  let data = {form: { 
+    client_id: process.env.SLACK_CLIENT_ID, 
+    client_secret: process.env.SLACK_CLIENT_SECRET, 
+    code: req.query.code 
+  }}; 
+
+  // request OAuth token
+  request.post('https://slack.com/api/oauth.access', data, function (error, response, body) { 
+    if (!error && response.statusCode == 200) { 
+      // get OAuth token
+      let token = JSON.parse(body).access_token; 
+      // get Slack team info to rediret to team Url after auth
+      request.post('https://slack.com/api/team.info', 
+        {form: {token: token}}, function (error, response, body) { 
+        if (!error && response.statusCode == 200) { 
+          if(JSON.parse(body).error == 'missing_scope') {
+            res.send('Americans bot has been added to your team!');
+          } else { 
+            // get team domain
+            let team = JSON.parse(body).team.domain; 
+            // redirect to Slack team domain after auth
+            res.redirect('http://' +team+ '.slack.com');
+          }
+        } 
+      });
+    }
+  });
+});
 
 /*----------------------------- FB Messenger Webhook Routes -----------------------------------------*/
 
