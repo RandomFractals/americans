@@ -8,9 +8,9 @@ https://www.census.gov/quickfacts/table/PST045216/00
 
 ## Project Info
 
-Americans bot Facebook home page: https://www.facebook.com/Americans-1836666999901817/
+Americans bot Facebook page: https://www.facebook.com/Americans-1836666999901817/
 
-Alpha v. webhooks hosted on heroku: https://americans.herokuapp.com/
+Americans bot home page: https://americans.herokuapp.com/
 
 Current Wit.AI bot brains: https://wit.ai/RandomFractals/americans/stories
 
