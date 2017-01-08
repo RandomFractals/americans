@@ -2,10 +2,12 @@
   "name": "Americans-bot",
   "author": "Random Fractals, Inc.",
   "license": "Apache-2.0",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Bots demo project of US pop, biz, trade, incomes, and housing data stats",
   "keywords": [
     "Americans",
+    "Slack",
+    "Messenger",
     "bot"
   ],
   "main": "index.js",
