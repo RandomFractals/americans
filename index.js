@@ -74,7 +74,7 @@ function processSlashQuery(query, response) {
 // Americans bot Slack command handler
 app.post('/slack/command', (req, res) => {
   // TODO
-  console.log(JSON.stringify(res));
+  console.log(JSON.stringify(req.body));
 });
 
 // Slack ping verification handler
