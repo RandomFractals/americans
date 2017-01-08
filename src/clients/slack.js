@@ -44,8 +44,9 @@ class Slack extends BotClient {
     let postUrl = this.config.SLACK_WEBHOOK_URL;
     if (responseUrl !== null && responseUrl !== undefined) {
       // use provided response url
-      postUrl = responseUrl
+      postUrl = responseUrl;
     }
+    console.log('Slack.sendMessage(): postUrl:', postUrl);
     return fetch(postUrl, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
