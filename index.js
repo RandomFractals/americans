@@ -98,7 +98,7 @@ app.post('/slack/command', (req, res) => {
   // process Slack message request
   //slack.processMessage(message);
   slack.sendMessage(message.recipient.id,
-    `You asked about: ${message.text}`, message.responseUrl);
+    `You asked about: ${message.text}`); //, message.responseUrl);
   res.sendStatus(200);
 });
 
