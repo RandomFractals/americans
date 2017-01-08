@@ -89,15 +89,16 @@ app.post('/slack/command', (req, res) => {
   // create Slack message request for our bot api
   const message = {
     sender: {id: messageBody.user_name},
-    recipient: {id: messageBody.channel_name},
-    text: messageBody.text
+    recipient: {id: messageBody.channel_id},
+    text: messageBody.text,
+    responseUrl: messageBody.response_url
   };
-  console.log(JSON.stringify(message));
+  console.log('slack/command bot request:', JSON.stringify(message));
 
   // process Slack message request
   //slack.processMessage(message);
-  slack.sendMessage(req.body.channel_name,
-    `You asked about: ${req.body.text}`, req.body.response_url);
+  slack.sendMessage(message.recipient.id,
+    `You asked about: ${message.text}`, message.responseUrl);
   res.sendStatus(200);
 });
 
