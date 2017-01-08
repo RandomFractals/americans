@@ -90,7 +90,7 @@ app.post('/slack/command', (req, res) => {
   const message = {
     sender: {id: messageBody.user_name},
     recipient: {id: messageBody.channel_id},
-    text: messageBody.text,
+    message: {text: messageBody.text, attachments: false},
     responseUrl: messageBody.response_url
   };
   console.log('slack/command bot request:', JSON.stringify(message));
