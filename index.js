@@ -9,7 +9,7 @@ const request = require('request');
 const http = require('http');
 const path = require('path');
 
-// app config
+// load app config
 const config = require('./src/utils/app-config.js');
 
 // create Slack app interface instance
@@ -78,16 +78,23 @@ function processSlashQuery(query, response) {
 // Americans bot Slack command handler
 app.post('/slack/command', (req, res) => {
   if(req.body.token !== process.env.SLACK_CLIENT_TOKEN) {
-    // not a Slack ping request
+    // not a Slack message ping request
     return; // bail out!
   }
 
-  console.log(JSON.stringify(req.body));  
+  // get Slack message body
+  const messageBody = req.body;
+  console.log(JSON.stringify(messageBody));  
 
-  // process Slack command request:
-  // just echo msg text for now
-  slack.sendMessage(req.body.channel_name,
-    `You asked about: ${req.body.text}`);
+  // create Slack message request for our bot api
+  const message = {
+    sender: {id: messageBody.user_name},
+    recipient: {id: messageBody.channel_name},
+    text: messageBody.text
+  };
+
+  // process Slack message request
+  slack.processMessage(message);
 });
 
 // Slack ping verification handler
