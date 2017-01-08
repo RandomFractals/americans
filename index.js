@@ -84,7 +84,7 @@ app.post('/slack/command', (req, res) => {
 
   // get Slack message body
   const messageBody = req.body;
-  console.log(JSON.stringify(messageBody));  
+  console.log('/slack/command request:', JSON.stringify(messageBody));  
 
   // create Slack message request for our bot api
   const message = {
@@ -97,7 +97,8 @@ app.post('/slack/command', (req, res) => {
   // process Slack message request
   //slack.processMessage(message);
   slack.sendMessage(req.body.channel_name,
-    `You asked about: ${req.body.text}`);
+    `You asked about: ${req.body.text}`, req.body.response_url);
+  //res.sendStatus(200);
 });
 
 // Slack ping verification handler

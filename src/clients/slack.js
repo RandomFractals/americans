@@ -26,10 +26,11 @@ class Slack extends BotClient {
    * 
    * @param recipientId Slack recipient channel or user id.
    * @param messageText Message text to send.
+   * @param responseUrl Alternative response url.
    * 
    * @see https://api.slack.com/incoming-webhooks
    */
-  sendMessage(recipientId, messageText) {
+  sendMessage(recipientId, messageText, responseUrl) {
     // create post message json data
     let messageData = JSON.stringify({
       channel: recipientId,
@@ -40,8 +41,12 @@ class Slack extends BotClient {
 
     // send message via incoming Slack webhook url endpoint
     console.log(`Slack.sendMessage(): request: ${messageData}`);
-    const webHookUrl = this.config.SLACK_WEBHOOK_URL;
-    return fetch(webHookUrl, {
+    let postUrl = this.config.SLACK_WEBHOOK_URL;
+    if (responseUrl !== null && responseUrl !== undefined) {
+      // use provided response url
+      postUrl = responseUrl
+    }
+    return fetch(postUrl, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: messageData,
