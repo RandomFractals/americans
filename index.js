@@ -92,9 +92,12 @@ app.post('/slack/command', (req, res) => {
     recipient: {id: messageBody.channel_name},
     text: messageBody.text
   };
+  console.log(JSON.stringify(message));
 
   // process Slack message request
-  slack.processMessage(message);
+  //slack.processMessage(message);
+  slack.sendMessage(message.recipient.id, 
+    `You asked about: ${message.text}`);
 });
 
 // Slack ping verification handler
