@@ -84,7 +84,7 @@ class WitAI {
             const recipientId = sessions[sessionId].userId;
             if (recipientId && chatClient) {
               // send pop data response              
-              chatClient.sendMessage(recipientId, message);
+              chatClient.sendMessage(recipientId, message, sessions[sessionId].responseUrl);
             }
 
             if (response.location !== 'USA') {
@@ -201,6 +201,9 @@ class WitAI {
 
     // get user session id for chat history lookup
     const sessionId = this.getSessionId(senderId);
+
+    // save response url for send message calls later
+    this._sessions[sessionId].responseUrl = message.responseUrl;
 
     if (attachments) {
       return this.chatClient.sendMessage(senderId, 'Sorry I can only process text messages for now.')
