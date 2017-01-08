@@ -12,6 +12,14 @@ const path = require('path');
 // app config
 const config = require('./src/utils/app-config.js');
 
+// create Slack app interface instance
+const Slack = require('./src/clients/slack.js');
+const slack = new Slack(config);
+
+// create Messenger interface instance
+const Messenger = require('./src/clients/messenger.js');
+const messenger = new Messenger(config);
+
 // set web server port
 const PORT = process.env.PORT || 8445;
 
@@ -28,10 +36,6 @@ app.use(({method, url}, response, next) => {
 // create and start http server
 const server = http.createServer(app);
 server.listen(PORT);
-
-// create Messenger interface instance
-const Messenger = require('./src/clients/messenger.js');
-const messenger = new Messenger(config);
 
 // verify FB request signature for all requests
 app.use(bodyParser.json()); //{verify: messenger.verifyRequestSignature}));
@@ -73,8 +77,17 @@ function processSlashQuery(query, response) {
 
 // Americans bot Slack command handler
 app.post('/slack/command', (req, res) => {
-  // TODO
-  console.log(JSON.stringify(req.body));
+  if(req.body.token !== process.env.SLACK_CLIENT_TOKEN) {
+    // not a Slack ping request
+    return; // bail out!
+  }
+
+  console.log(JSON.stringify(req.body));  
+
+  // process Slack command request:
+  // just echo msg text for now
+  slack.sendMessage(req.body.channel_name,
+    `You asked about: ${req.body.text}`);
 });
 
 // Slack ping verification handler
