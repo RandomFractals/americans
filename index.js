@@ -96,8 +96,8 @@ app.post('/slack/command', (req, res) => {
 
   // process Slack message request
   //slack.processMessage(message);
-  slack.sendMessage(message.recipient.id, 
-    `You asked about: ${message.text}`);
+  slack.sendMessage(req.body.channel_name,
+    `You asked about: ${req.body.text}`);
 });
 
 // Slack ping verification handler
