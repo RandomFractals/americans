@@ -36,7 +36,7 @@ class Census {
     // create location service for open text location queries validation
     this.locationService = new LocationService();
 
-    console.log('Census(): Census data service instance created');
+    console.log('Census(): Census data service instance created!');
   }
 
 

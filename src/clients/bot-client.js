@@ -22,6 +22,8 @@ class BotClient {
 
     // get bot AI engine instance
     this.botAI = new BotAIFactory(config, this).botAI;
+
+    console.log(`BotClient(): ${name} chat client instance created!`)
   }
 
 

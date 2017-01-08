@@ -122,7 +122,7 @@ class WitAI {
     // send test message
     //chatClient.sendMessage('1165704360144557', 'Hi from wit.ai bot');
 
-    console.log('WitAI bot engine instance created!');
+    console.log('WitAI(): bot AI engine instance created!');
 
   } // end of WitAI() constructor
 
