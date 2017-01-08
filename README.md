@@ -23,16 +23,9 @@ Latest FB Messenger interface v.:
 ![Alt text](https://github.com/RandomFractals/americans/blob/master/screens/AmericansBotMVP.png?raw=true 
  "latest") 
 
-05-01-2017 Update: Huston, we got Slack lift off! :)
+Americans bot home page: 
 
-![Alt text](https://github.com/RandomFractals/americans/blob/master/screens/AmericansBotUSAPop.png
- "Slack Americans bot dev in progress...") 
-
-https://twitter.com/TarasNovak/status/817072830873473024
-
-07-01-2017: Created simple landing page for now:
-
-![Alt text](https://github.com/RandomFractals/americans/blob/master/screens/AmericansBotHomePageTake2.png
+![Alt text](https://github.com/RandomFractals/americans/blob/master/screens/AmericansBotHomePageTake3.png
  "Americans Bot home page dev in progress...") 
 
 ## Build
