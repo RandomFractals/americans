@@ -6,7 +6,7 @@ Think 'Quick Facts' census data bot you can ping for some USA pop data info:
 
 https://www.census.gov/quickfacts/table/PST045216/00
 
-## Project Info
+# Project Info
 
 Americans bot Facebook page: https://www.facebook.com/Americans-1836666999901817/
 
@@ -18,12 +18,12 @@ API.AI bot engine hookup and Slack chat integration coming to chat clients near 
 
 More project info on linkedin: https://www.linkedin.com/pulse/americans-bot-app-taras-novak
 
-Latest FB Messenger interface v.: 
+# Latest FB Messenger interface v.: 
 
 ![Alt text](https://github.com/RandomFractals/americans/blob/master/screens/AmericansBotMVP.png?raw=true 
  "latest") 
 
-Americans bot home page: 
+# Americans bot home page: https://americans.herokuapp.com/
 
 ![Alt text](https://github.com/RandomFractals/americans/blob/master/screens/AmericansBotHomePageTake3.png
  "Americans Bot home page dev in progress...") 
