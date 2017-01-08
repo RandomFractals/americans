@@ -96,12 +96,12 @@ app.post('/slack/command', (req, res) => {
   console.log('slack/command bot request:', JSON.stringify(message));
 
   // process Slack message request
-  return slack.processMessage(message);
+  slack.processMessage(message);
   //slack.sendMessage(message.recipient.id, `You asked about: ${message.text}`); //, message.responseUrl);
 
   // TODO: need to figure out why we needs this fro Slack to stop barfing
   // since bot clients send proper http post responses
-  //res.sendStatus(200);
+  res.sendStatus(200);
 });
 
 // Slack ping verification handler
