@@ -45,7 +45,7 @@ class WitAI {
         if (recipientId) {
           // send bot message response
           console.log(`BotAI.send(): to:${recipientId} response:"${text}"`);
-          return chatClient.sendMessage(recipientId, text)
+          return chatClient.sendMessage(recipientId, text, sessions[sessionId].responseUrl)
             //.then(() => null)
             .then( () => {
               console.log(`BotAI.send(): ${text} message sent!`);
