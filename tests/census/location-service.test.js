@@ -120,5 +120,17 @@ describe('Location Service Counties Lookup Tests', () => {
   it('getRegion("Brewster county, Texas") county test', () => {
     expect(locationService.getRegion('Brewster county, Texas').toString()).toEqual('Brewster County, TX');
   });
+
+  it('getRegion("San Francisco, ca") city test', () => {
+    expect(locationService.getRegion('San Francisco, ca').toString()).toEqual('San Francisco city, CA');
+  });
+
+  it('getRegion("San Francisco county, ca") county test', () => {
+    expect(locationService.getRegion('San Francisco county, ca').toString()).toEqual('San Francisco County, CA');
+  });
+
+  it('getRegion("San Francisco") test', () => {
+    expect(locationService.getRegion('San Francisco').toString()).toEqual('San Francisco city, CA');
+  });
   
 });
