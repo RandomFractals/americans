@@ -65,7 +65,7 @@ describe('Slack processMessage() Tests', () => {
     });
   });    
 
-  it('chicago,il pop?', () => {
+  xit('chicago,il pop?', () => {
     return slack.processMessage({
       sender: {id: testUserId}, 
       recipient: {id: testUserId}, 

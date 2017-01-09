@@ -4,7 +4,7 @@ jest.dontMock('../../src/census/location-service.js');
 const LocationService = require('../../src/census/location-service.js');
 const locationService = new LocationService();
 
-
+// usa states tests
 describe('Location Service States Lookup Tests', () => {
 
   it('has loaded 50+ US states FIPS config data', () => {
@@ -57,28 +57,25 @@ describe('Location Service States Lookup Tests', () => {
 
 });
 
+// usa places tests
+describe('Location Service Places Lookup Tests', () => {
 
-describe('Location Service ZipCode Lookup Tests', () => {
-
-  it('80081 is a valid zip code', () => {
-    expect(locationService.isValidZipCode('80081')).toEqual(true);
+  it('getRegion("Chicago, il") city test', () => {
+    expect(locationService.getRegion('Chicago, il').toString()).toEqual('Chicago city, IL');
   });
 
-  it('8000 is NOT a valid zip code', () => {
-    expect(locationService.isValidZipCode('8000')).toEqual(false);
+  it('getRegion("San Francisco, CA") city test', () => {
+    expect(locationService.getRegion('San Francisco, CA').toString()).toEqual('San Francisco city, CA');
   });
 
-  it('ZipCo is NOT a valid zip code', () => {
-    expect(locationService.isValidZipCode('ZipCo')).toEqual(false);
-  });
-
-  xit('getRegion("80082") zip code test', () => {
-    expect(locationService.getRegion('80082').toString()).toEqual('80082');
-  });
+  it('getRegion("San Francisco") test', () => {
+    expect(locationService.getRegion('San Francisco').toString()).toEqual('San Francisco city, CA');
+  });  
 
 });
 
 
+// usa counties tests
 describe('Location Service Counties Lookup Tests', () => {
 
   it('has loaded 3000+ US counties FIPS config data', () => {
@@ -121,16 +118,29 @@ describe('Location Service Counties Lookup Tests', () => {
     expect(locationService.getRegion('Brewster county, Texas').toString()).toEqual('Brewster County, TX');
   });
 
-  it('getRegion("San Francisco, ca") city test', () => {
-    expect(locationService.getRegion('San Francisco, ca').toString()).toEqual('San Francisco city, CA');
-  });
-
   it('getRegion("San Francisco county, ca") county test', () => {
     expect(locationService.getRegion('San Francisco county, ca').toString()).toEqual('San Francisco County, CA');
   });
-
-  it('getRegion("San Francisco") test', () => {
-    expect(locationService.getRegion('San Francisco').toString()).toEqual('San Francisco city, CA');
-  });
   
 });
+
+  // zipcode tests
+describe('Location Service ZipCode Lookup Tests', () => {
+
+  it('80081 is a valid zip code', () => {
+    expect(locationService.isValidZipCode('80081')).toEqual(true);
+  });
+
+  it('8000 is NOT a valid zip code', () => {
+    expect(locationService.isValidZipCode('8000')).toEqual(false);
+  });
+
+  it('ZipCo is NOT a valid zip code', () => {
+    expect(locationService.isValidZipCode('ZipCo')).toEqual(false);
+  });
+
+  xit('getRegion("80082") zip code test', () => {
+    expect(locationService.getRegion('80082').toString()).toEqual('80082');
+  });
+});
+
