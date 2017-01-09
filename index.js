@@ -12,11 +12,11 @@ const path = require('path');
 // load app config
 const config = require('./src/utils/app-config.js');
 
-// create Slack app interface instance
+// create Slack chat client interface instance
 const Slack = require('./src/clients/slack.js');
 const slack = new Slack(config);
 
-// create Messenger interface instance
+// create Messenger chat client interface instance
 const Messenger = require('./src/clients/messenger.js');
 const messenger = new Messenger(config);
 
@@ -33,45 +33,20 @@ app.use(({method, url}, response, next) => {
   next();
 });
 
-// create and start http server
+// create and start http server for landing page
 const server = http.createServer(app);
 server.listen(PORT);
 
 // verify FB request signature for all requests
 app.use(bodyParser.json()); //{verify: messenger.verifyRequestSignature}));
-
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// hook to serve static html files
+// hook up web app dir to serve html content
 app.use(express.static(path.join(__dirname, './')));
 
-// listen for requests
-//app.listen(PORT);
+// log port
 console.log(`index.js: Listening on Port: ${PORT}...`);
 
-/*----------------------- Americans Bot Slash Commands :) -----------------------------------------*/
-
-app.get('/', (req, res) => {
-  processSlashQuery(req.query, res);
-});
-
-app.post('/', (req, res) => {
-  processSlashQuery(req.body, res);
-});
-
-function processSlashQuery(query, response) {
-  if(query.token !== process.env.SLACK_CLIENT_TOKEN) {
-    // not a Slack slash command query request
-    return; // bail out!
-  }
-
-  if (query.text) {
-    let messageText = query.text;
-    // echo it for now
-    console.log(JSON.stringify(response));
-    response.json(`You asked about: ${messageText}`);
-  }
-}
 
 /*----------------------------- Slack Chat Client Routes -------------------------------------------*/
 
