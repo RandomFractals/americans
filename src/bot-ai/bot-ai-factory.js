@@ -17,45 +17,35 @@ class BotAIFactory {
   * @param chatClient Chat client instance, i.e. Messenger, Slack, etc.
   */
   constructor(config, chatClient) {
-    // save bot ai config and chat client instance
-    this._config = config;
-    this._chatClient = chatClient;
-
-    // create bot AI engine instance
-    switch (config.BOT_AI) {      
-      case 'api.ai':
-        // TODO
-      case 'wit.ai':
-      default: // wit.ai
-        //console.log('BotAIFactory:creating WitAI bot engine instance...');
-        this._botAI = new WitAI(config, chatClient);
-        break;        
-    }
-  }
-
-
-  /**
-   * Gets bot AI config.
-   */
-  get config() {
-    return this._config;
+    // save bot ai config and chat client instance ref
+    this.config = config;
+    this.chatClient = chatClient;
+    this.botAI = BotAIFactory.getBotAI(config.BOT_AI);
   }
 
 
   /**
    * Gets configured bot AI engine instance.
+   * 
+   * @param botAIName Configured bot ai name.
    */
-  get botAI() {
-    return this._botAI;
+  static getBotAI(botAIName) {
+    if (BotAIFactory.botAI !== null ) {
+      return BotAIFactory.botAI;
+    }
+    
+    // create bot AI engine instance
+    switch (botAIName) {
+      case 'api.ai':
+        // TODO
+      case 'wit.ai':
+      default: // wit.ai
+        //console.log('BotAIFactory:creating WitAI bot engine instance...');
+        BotAIFacotry.botAI = new WitAI(config, chatClient);
+    }
+    return BotAIFactory.botAI;
   }
 
-
-  /**
-   * Gets chat client instance.
-   */
-  get chatClient() {
-    return this._chatClient;
-  }
 }
 
 
