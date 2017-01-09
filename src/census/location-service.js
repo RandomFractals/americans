@@ -236,6 +236,17 @@ class LocationService {
       return this.stateNameMap.get(regionKey);
     }
 
+    // check places
+    let placeKey = location.replace(' city', '')
+      .replace(' town', '')
+      .replace(' village', '')
+      .replace(' CDP', '') // CDP - Census Designated Place
+      .toLowerCase()
+      .split(' ').join('');
+    if (this.places.has(placeKey)) {
+      return this.places.get(placeKey);
+    }
+
     // check counties
     let countyKey = regionKey.replace('county', '');
     let countyStateKey = this.getCountyStateKey(countyKey);
@@ -248,17 +259,6 @@ class LocationService {
     if ( this.countyMapList.has(countyKey) ) {
       // return a list of matching counties
       return this.countyMapList.get(countyKey);
-    }
-
-    // check places
-    let placeKey = location.replace(' city', '')
-      .replace(' town', '')
-      .replace(' village', '')
-      .replace(' CDP', '') // CDP - Census Designated Place
-      .toLowerCase()
-      .split(' ').join('');
-    if (this.places.has(placeKey)) {
-      return this.places.get(placeKey);
     }
 
     // TODO: check zip codes
