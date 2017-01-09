@@ -70,6 +70,10 @@ Wit.AI Node.js SDK:
 
 * https://github.com/wit-ai/node-wit
 
+Slack API:
+
+* https://api.slack.com/slack-apps
+
 ## Credits
 Some borrowed and refactored code from:
 
