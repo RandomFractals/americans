@@ -1,6 +1,6 @@
 # Americans
 
-Bots demo project of US pop, biz, trade, incomes, and housing data stats
+Americans is a hybrid ES5/ES6 Bots node.js demo project of US pop, biz, trade, incomes, and housing data stats
 
 Think 'Quick Facts' census data bot you can ping for some USA pop data info:
 
