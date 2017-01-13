@@ -7,17 +7,22 @@ const config = require('../../src/utils/app-config.js');
 const Messenger = require('../../src/clients/messenger.js');
 const messenger = new Messenger(config);
 
-const BotAIFactory = require('../../src/bot-ai/bot-ai-factory.js');
+// load bot AI factory module
+const botAIFactory = require('../../src/bot-ai/bot-ai-factory.js');
 
 describe('Bot AI Factory Interface Tests', () => {
 
-  const botAIFactory = new BotAIFactory(config, messenger); // chat client
-  it('can create bot AI engine for the given chat client', () => {
-    expect(botAIFactory.botAI).not.toBeNull();
+  it('has getBotAI() method defined', () => {
+    expect(botAIFactory.getBotAI).toBeDefined();
+  });
+
+  const messengerBotAI = botAIFactory.getBotAI(config, messenger); // chat client
+  it('can create Messenger bot AI engine instance', () => {
+    expect(botAIFactory.getBotAI(config, messenger)).not.toBeNull();
   });
 
   it('has a chat client associated with it', () => {
-    expect(botAIFactory.chatClient).not.toBeNull();
+    expect(botAIFactory.getBotAI(config, messenger).chatClient).not.toBeNull();
   });
 
 });

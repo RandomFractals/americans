@@ -23,10 +23,10 @@ class WitAI {
   */
   constructor(config, chatClient) {
     // save bot config
-    this._config = config;
+    this.config = config;
 
     // save chat client instance
-    this._chatClient = chatClient;
+    this.chatClient = chatClient;
 
     // create user sessions hash map for tracking user chat history:
     // sessionId -> {userId: userId, context: sessionState}

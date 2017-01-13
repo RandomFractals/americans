@@ -1,7 +1,7 @@
 'use strict';
 
-// import bot brains
-const BotAIFactory = require('../bot-ai/bot-ai-factory.js');
+// load bot AI factory module
+const botAIFactory = require('../bot-ai/bot-ai-factory.js');
 
 /**
  * Defines Bot client base class for Messenger, Slack, and Telegram chats.
@@ -20,8 +20,8 @@ class BotClient {
     // save chat client name for debug
     this.name = name;
 
-    // get bot AI engine instance
-    this.botAI = new BotAIFactory(config, this).botAI;
+    // create bot AI engine instance
+    this.botAI = botAIFactory.getBotAI(config, this);
 
     console.log(`BotClient(): ${name} chat client instance created!`)
   }
