@@ -20,7 +20,7 @@ class BotClient {
     // save chat client name for debug
     this.name = name;
 
-    // create bot AI engine instance
+    // get bot AI engine instance
     this.botAI = botAIFactory.getBotAI(config, this);
 
     console.log(`BotClient(): ${name} chat client instance created!`)

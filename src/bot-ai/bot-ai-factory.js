@@ -23,7 +23,7 @@ const getBotAI = function(config, chatClient) {
       // TODO: add Google api.ai bot engine support
     case 'wit.ai':
     default: // wit.ai
-      console.log(`BotAIFactory:creating WitAI ${chatClient.name} bot engine instance...`);
+      console.log(`BotAIFactory:getBotAI(): creating WitAI('${chatClient.name}') bot engine instance...`);
       _bots.set(chatClient.name, new WitAI(config, chatClient) );
   }
   return _bots.get(chatClient.name);
