@@ -17,45 +17,134 @@ const ZipCode = require('./zip-code.js');
 
 /**
  * Defines location service api for validating 
- * US state, county, place, and zip code location queries.
+ * USA state, county, place, and zip code location queries.
  */
 class LocationService {
 
   /**
   * Creates new LocationService service instance.
   *
-  * Loads US states, counties, and places FIPS config data.
+  * Loads USA states, counties, and places FIPS config data.
   */
   constructor() {
-    // load states config data
-    this._stateMap = new Map();
-    this._stateNameMap = new Map();
-    Object.keys(states).forEach( code => {
-      let stateData = states[code];
-      let state = new State(code, stateData.name, stateData.key);
-      this._stateMap.set(state.key.toLowerCase(), state);
-      this._stateNameMap.set(state.lowerCaseKey, state);
-    });
+    // load USA states config data
+    this.states = LocationService.getStates();
+    this.stateNameMap = LocationService.getStateNameMap();
 
     // TODO: load valid zip codes from ZCTA (ZIP Code Tabulation Areas) config data
 
+    // load USA counties FIPS config data
+    this.counties = LocationService.getCounties();
+    this.countyMapList = LocationService.getCountyMapList();
+
+    // load USA places: cities, towns, villages, etc.
+    this.places = LocationService.getPlaces();
+
+    console.log('LocationService(): LocationService instance created!');
+  }
+
+
+  /*-------------------- Location Service Data Load/Config Methods -----------------------*/
+
+  /**
+   * Gets loaded USA states data from ./resources/us-states.json config.
+   */
+  static getStates() {
+
+    if (LocationService.stateMap !== null && LocationService.stateMap !== undefined) {
+      return LocationService.stateMap;
+    }
+
+    console.log(`LocationService.getStates(): loading USA states config...`);
+    
+    // load states config data
+    LocationService.stateMap = new Map();
+    LocationService.stateNameMap = new Map();
+    Object.keys(states).forEach( code => {
+      let stateData = states[code];
+      let state = new State(code, stateData.name, stateData.key);
+      LocationService.stateMap.set(state.key.toLowerCase(), state);
+      LocationService.stateNameMap.set(state.lowerCaseKey, state);
+    });
+    console.log(`LocationService.getStates(): loaded ${LocationService.stateMap.size} USA states`);
+    
+    return LocationService.stateMap;
+  }
+
+
+  /**
+   * Gets loaded state name map.
+   */
+  static getStateNameMap() {
+    if (LocationService.stateNameMap !== null && LocationService.stateNameMap !== undefined) {
+      return LocationService.stateNameMap;
+    }
+
+    // load states data
+    LocationService.getStates();
+    return LocationService.stateNameMap;
+  }
+
+
+  /**
+   * Gets loaded USA counties data from ./resources/us-counties.json config.
+   */
+  static getCounties() {
+
+    if (LocationService.countyMap !== null && LocationService.countyMap !== undefined) {
+      return LocationService.countyMap;
+    }
+    
+    console.log(`LocationService.getCounties(): loading USA counties config...`);
+    
     // load counties FIPS config data
-    this._countyMap = new Map();
-    this._countyMapList = new Map();
+    LocationService.countyMap = new Map();
+    LocationService.countyMapList = new Map();
     Object.keys(counties).forEach( code => {
       let countyData = counties[code];
       let county = new County(code, countyData.name, countyData.state);
-      this._countyMap.set(county.key, county);
-      if ( !this._countyMapList.has(county.shortNameKey) ) {
-        this._countyMapList.set(county.shortNameKey, []);
+      LocationService.countyMap.set(county.key, county);
+      if ( !LocationService.countyMapList.has(county.shortNameKey) ) {
+        // create county name list for counties without state suffix lookups
+        LocationService.countyMapList.set(county.shortNameKey, []);
       }
-      let countyList = this._countyMapList.get(county.shortNameKey);
+      let countyList = LocationService.countyMapList.get(county.shortNameKey);
       countyList.push(county);
     });
 
-    // load US places: cities, towns, villages, etc.
-    let placesCount = 0;
-    this.places = new Map();    
+    console.log(`LocationService.getCounties(): loaded ${LocationService.countyMap.size} USA counties.`);
+
+    return LocationService.countyMap;
+  }
+
+
+  /**
+   * Gets county map list for county lookups without state code.
+   */
+  static getCountyMapList() {
+    if (LocationService.countyMapList !== null && LocationService.countyMapList !== undefined) {
+      return LocationService.countyMapList;
+    }
+
+    // load USA counties data
+    LocationService.getCounties();
+    return LocationService.countyMapList;
+  }
+
+
+  /**
+   * Gets loaded USA places data from ./resources/us-places.txt config.
+   */
+  static getPlaces() {
+    if (LocationService.placeMap !== null && LocationService.placeMap !== undefined) {
+      return LocationService.placeMap;
+    }
+    
+    console.log('LocationService.getPlaces(): loading USA places config...');
+
+    // load USA places: cities, towns, villages, etc.
+    let placesCount = 0;    
+    LocationService.placeMap = new Map();
     const placesConfig = readLine.createInterface({
       input: fs.createReadStream('./src/census/resources/us-places.txt', {flags:'r', autoClose: true}),
       terminal: false
@@ -74,52 +163,16 @@ class LocationService {
           placeTokens[6] // county
         );
         // add to loaded places
-        this.places.set(place.key, place);
+        LocationService.placeMap.set(place.key, place);
         placesCount++;
       }
     });
 
     placesConfig.on('close', () => {
-      console.log(`LocationService(): loaded ${this.places.size} USA places.`);
+      console.log(`LocationService.getPlaces(): loaded ${LocationService.placeMap.size} USA places.`);
     });
 
-    console.log(`LocationService(): loaded ${this.states.size} USA states`,
-      `and ${this.counties.size} counties.`);
-
-  } // end of constructor()
-
-
-  /*-------------------- Location Service Data Config Methods -----------------------*/
-
-  /**
-   * Gets loaded states map.
-   */
-  get states() {
-    return this._stateMap;
-  }
-
-
-  /**
-   * Gets state name map.
-   */
-  get stateNameMap() {
-    return this._stateNameMap;
-  }
-
-
-  /**
-   * Gets loaded counties map.
-   */
-  get counties() {
-    return this._countyMap;
-  }
-
-
-  /**
-   * Gets county map list for county lookups without state code.
-   */
-  get countyMapList() {
-    return this._countyMapList;
+    return LocationService.placeMap;
   }
 
 
