@@ -57,23 +57,6 @@ describe('Location Service States Lookup Tests', () => {
 
 });
 
-// usa places tests
-describe('Location Service Places Lookup Tests', () => {
-
-  it('getRegion("Chicago, il") city test', () => {
-    expect(locationService.getRegion('Chicago, il').toString()).toEqual('Chicago city, IL');
-  });
-
-  it('getRegion("San Francisco, CA") city test', () => {
-    expect(locationService.getRegion('San Francisco, CA').toString()).toEqual('San Francisco city, CA');
-  });
-
-  it('getRegion("San Francisco") test', () => {
-    expect(locationService.getRegion('San Francisco').toString()).toEqual('San Francisco city, CA');
-  });  
-
-});
-
 
 // usa counties tests
 describe('Location Service Counties Lookup Tests', () => {
@@ -124,7 +107,8 @@ describe('Location Service Counties Lookup Tests', () => {
   
 });
 
-  // zipcode tests
+
+// zipcode tests
 describe('Location Service ZipCode Lookup Tests', () => {
 
   it('80081 is a valid zip code', () => {
@@ -143,4 +127,23 @@ describe('Location Service ZipCode Lookup Tests', () => {
     expect(locationService.getRegion('80082').toString()).toEqual('80082');
   });
 });
+
+
+// usa places tests
+describe('Location Service Places Lookup Tests', () => {
+
+  it('getRegion("Chicago, il") city test', () => {
+    expect(locationService.getRegion('Chicago, il').toString()).toEqual('Chicago city, IL');
+  });
+
+  it('getRegion("San Francisco, CA") city test', () => {
+    expect(locationService.getRegion('San Francisco, CA').toString()).toEqual('San Francisco city, CA');
+  });
+
+  it('getRegion("San Francisco") test', () => {
+    expect(locationService.getRegion('San Francisco').toString()).toEqual('San Francisco city, CA');
+  });  
+
+});
+
 
