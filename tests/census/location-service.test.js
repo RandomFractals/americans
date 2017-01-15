@@ -132,6 +132,10 @@ describe('Location Service ZipCode Lookup Tests', () => {
 // usa places tests
 describe('Location Service Places Lookup Tests', () => {
 
+  it('has loaded 3K+ USA places FIPS config data', () => {
+    expect(locationService.places.size).toBeGreaterThanOrEqual(3000);
+  });
+
   it('getRegion("Chicago, il") city test', () => {
     expect(locationService.getRegion('Chicago, il').toString()).toEqual('Chicago city, IL');
   });
