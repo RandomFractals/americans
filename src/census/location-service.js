@@ -4,6 +4,9 @@
 const fs = require('fs');
 const readLine = require('readline');
 
+// import numeral for memory usage logging
+const numeral = require('numeral');
+
 // load US states, zip codes, and counties FIPS data config
 const states = require('./resources/us-states.json');
 // TODO: const zipCodes = require('./resources/us-zip-codes.json');
@@ -141,6 +144,7 @@ class LocationService {
     }
     
     console.log('LocationService.getPlaces(): loading USA places config...');
+    LocationService.logMemoryUsage();
 
     // load USA places: cities, towns, villages, etc.
     let placesCount = 0;    
@@ -170,11 +174,19 @@ class LocationService {
 
     placesConfig.on('close', () => {
       console.log(`LocationService.getPlaces(): loaded ${LocationService.placeMap.size} USA places.`);
+      LocationService.logMemoryUsage();
     });
 
     return LocationService.placeMap;
   }
 
+
+  /**
+   */
+  static logMemoryUsage() {
+    console.log('Heap: heapTotal:', numeral(process.memoryUsage().heapTotal).format('0,0'),
+      'heapUsed:', numeral(process.memoryUsage().heapUsed).format('0,0'));      
+  }
 
   /*----------------- Location Service Region Validation Methods ---------------------*/
 
