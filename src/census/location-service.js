@@ -182,10 +182,13 @@ class LocationService {
 
 
   /**
+   * Logs memory usage before and after USA places data load for heap size trace.
    */
   static logMemoryUsage() {
-    console.log('Heap: heapTotal:', numeral(process.memoryUsage().heapTotal).format('0,0'),
-      'heapUsed:', numeral(process.memoryUsage().heapUsed).format('0,0'));      
+    const memoryUsage = process.memoryUsage();
+    console.log(`Heap: RSS=${numeral(memoryUsage.rss).format('0,0')}`,
+      `heapTotal=${numeral(memoryUsage.heapTotal).format('0,0')}`,
+      `heapUsed=${numeral(memoryUsage.heapUsed).format('0,0')}`);
   }
 
   /*----------------- Location Service Region Validation Methods ---------------------*/
