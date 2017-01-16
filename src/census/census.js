@@ -102,5 +102,4 @@ class Census {
 
 //export {Census as default}
 // use old school for jest.js
-exports["default"] = Census;
-module.exports = exports["default"];
+module.exports = Census;

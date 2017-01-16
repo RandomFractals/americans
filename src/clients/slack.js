@@ -62,7 +62,4 @@ class Slack extends BotClient {
 
 }
 
-//export {Slack as default}
-// use old school for jest.js
-exports["default"] = Slack;
-module.exports = exports["default"];
+module.exports = Slack;

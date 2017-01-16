@@ -29,5 +29,4 @@ const getBotAI = function(config, chatClient) {
   return _bots.get(chatClient.name);
 }
 
-
 module.exports = {getBotAI: getBotAI};

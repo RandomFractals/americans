@@ -51,7 +51,4 @@ class Telegram extends BotClient {
 
 }
 
-//export {Telegram as default}
-// use old school for jest.js
-exports["default"] = Telegram;
-module.exports = exports["default"];
+module.exports = Telegram;

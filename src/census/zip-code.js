@@ -21,5 +21,4 @@ class ZipCode extends Region {
 
 } 
 
-exports["default"] = ZipCode;
-module.exports = exports["default"];
+module.exports = ZipCode;

@@ -54,5 +54,4 @@ class County extends Region {
 
 } 
 
-exports["default"] = County;
-module.exports = exports["default"];
+module.exports = County;

@@ -23,5 +23,4 @@ class State extends Region {
 
 } 
 
-exports["default"] = State;
-module.exports = exports["default"];
+module.exports = State;

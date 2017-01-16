@@ -47,5 +47,4 @@ class Place extends Region {
 
 } 
 
-exports["default"] = Place;
-module.exports = exports["default"];
+module.exports = Place;

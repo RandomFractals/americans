@@ -93,7 +93,4 @@ class Messenger extends BotClient {
 
 }
 
-//export {Messenger as default}
-// use old school for jest.js
-exports["default"] = Messenger;
-module.exports = exports["default"];
+module.exports = Messenger;

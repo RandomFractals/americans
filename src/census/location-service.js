@@ -341,11 +341,6 @@ class LocationService {
 
   } // end of getRegion(location)
 
-
 } // end of LocationService class
 
-
-//export {LocationService as default}
-// use old school for jest.js
-exports["default"] = LocationService;
-module.exports = exports["default"];
+module.exports = LocationService;

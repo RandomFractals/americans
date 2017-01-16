@@ -236,7 +236,4 @@ class WitAI {
 
 }
 
-//export {WitAI as default}
-// use old school for jest.js
-exports["default"] = WitAI;
-module.exports = exports["default"];
+module.exports = WitAI;

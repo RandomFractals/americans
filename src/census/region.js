@@ -37,5 +37,4 @@ class Region {
 
 } 
 
-exports["default"] = Region;
-module.exports = exports["default"];
+module.exports = Region;

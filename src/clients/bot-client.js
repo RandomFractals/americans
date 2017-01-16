@@ -56,7 +56,4 @@ class BotClient {
 
 }
 
-//export {BotClient as default}
-// use old school for jest.js
-exports["default"] = BotClient;
-module.exports = exports["default"];
+module.exports = BotClient;
