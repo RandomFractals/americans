@@ -1,6 +1,7 @@
 # Americans
 
-Americans is a hybrid ES5/ES6 Bots node.js demo project of US pop, biz, trade, incomes, and housing data stats
+Americans is a hybrid ES5/ES6 node.js chatbot demo app for
+USA census data pop, biz, trade, incomes, crime, education, and housing stats queries.
 
 Think 'Quick Facts' census data bot you can ping for some USA pop data info:
 
@@ -14,7 +15,7 @@ Americans bot home page: https://americans.herokuapp.com/
 
 Current Wit.AI bot brains: https://wit.ai/RandomFractals/americans/stories
 
-API.AI bot engine hookup and Slack chat integration coming to chat clients near you soon.
+API.AI bot engine hookup and more census data stats coming to chat clients near you soon.
 
 More project info on linkedin: https://www.linkedin.com/pulse/americans-bot-app-taras-novak
 
