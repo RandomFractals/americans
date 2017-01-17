@@ -36,6 +36,7 @@ class Slack extends BotClient {
       channel: recipientId,
       username: 'Americans',
       icon_emoji: ':us:',
+      response_type: 'in_channel',
       text: messageText
     });
 
