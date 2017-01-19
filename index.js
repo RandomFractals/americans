@@ -85,11 +85,12 @@ app.post('/slack', (req, res) => {
     // echo Slack ping verification request
     console.log(req.body.challenge);
     res.send(req.body.challenge);
-  } else if(req.body.token === process.env.SLACK_CLIENT_TOKEN) {
+  } else if (req.body.token === process.env.SLACK_CLIENT_TOKEN) {
     console.log('/slack request:', JSON.stringify(req.body));
     // TODO: check message and send response for mentions
+    // ack Slack request
+    res.sendStatus(200);
   }
-
 });
 
 // GET endpoint for Slack OAuth
