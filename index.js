@@ -57,21 +57,12 @@ app.post('/slack/command', (req, res) => {
     return; // bail out!
   }
 
-  // get Slack message body
+  // get Slack command message body
   const messageBody = req.body;
   console.log('/slack/command request:', JSON.stringify(messageBody));  
 
-  // create Slack message request for our bot api
-  const message = {
-    sender: {id: messageBody.user_name},
-    recipient: {id: messageBody.channel_id},
-    message: {text: messageBody.text, attachments: false},
-    responseUrl: messageBody.response_url
-  };
-  console.log('slack/command bot request:', JSON.stringify(message));
-
   // process Slack message request
-  slack.processMessage(message);
+  slack.processMessage(slack.createMessage(messageBody));
   //slack.sendMessage(message.recipient.id, `You asked about: ${message.text}`); //, message.responseUrl);
 
   // TODO: need to figure out why we needs this fro Slack to stop barfing
@@ -87,7 +78,16 @@ app.post('/slack', (req, res) => {
     res.send(req.body.challenge);
   } else if (req.body.token === process.env.SLACK_CLIENT_TOKEN) {
     console.log('/slack request:', JSON.stringify(req.body));
-    // TODO: check message and send response for mentions
+    // check message text
+    const messageText = req.body.text;
+    if (messageText !== undefined && 
+      // TODO: check message for other relevant bot mentions
+      String(messageText).toLowerCase().indexOf('population' >= 0) ) {
+        
+      // process Slack message request
+      slack.processMessage(slack.createMessage(req.body));
+    }
+
     // ack Slack request
     res.sendStatus(200);
   }
