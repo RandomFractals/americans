@@ -81,6 +81,13 @@ app.post('/slack/command', (req, res) => {
 
 // Slack ping verification/message handler for events
 app.post('/slack', (req, res) => {
+  if (req.body.challenge !== undefined) {
+    // echo Slack ping verification request
+    console.log(req.body.challenge);
+    res.send(req.body.challenge);
+  } else if(req.body.token === process.env.SLACK_CLIENT_TOKEN) {
+    console.log('/slack request:', JSON.stringify(req.body));
+    // TODO: check message and send response for mentions
   }
 
 });
