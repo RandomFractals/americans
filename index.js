@@ -79,7 +79,7 @@ app.post('/slack', (req, res) => {
   } else if (req.body.token === process.env.SLACK_CLIENT_TOKEN) {
     console.log('/slack request:', JSON.stringify(req.body));
     // check message text
-    const messageText = req.body.text;
+    const messageText = req.body.event.text;
     if (messageText !== undefined && 
       // TODO: check message for other relevant bot mentions
       String(messageText).toLowerCase().indexOf('population' >= 0) ) {
