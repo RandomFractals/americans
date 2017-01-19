@@ -81,6 +81,7 @@ app.post('/slack/command', (req, res) => {
 
 // Slack ping verification handler
 app.post('/slack', (req, res) => {
+  console.log(JSON.stringify(req.body));
   if(req.body.token !== process.env.SLACK_CLIENT_TOKEN) {
     // not a Slack ping verification request
     return; // bail out!
