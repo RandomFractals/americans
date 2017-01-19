@@ -23,16 +23,22 @@ class Slack extends BotClient {
   /**
    * Creates Slack message request for our bot api.
    * 
-   * @messageBody Slack message post request body.
+   * @requestBody Slack message post request body.
    */
-  createMessage(messageBody) {
+  createMessage(requestBody) {
   // create Slack message request for our bot api
     const message = {
-      sender: {id: messageBody.user_name},
-      recipient: {id: messageBody.channel_id},
-      message: {text: messageBody.text, attachments: false},
-      responseUrl: messageBody.response_url
+      sender: {id: requestBody.user_name},
+      recipient: {id: requestBody.channel_id},
+      message: {text: requestBody.text, attachments: false},
+      responseUrl: requestBody.response_url
     };
+    if (requestBody.event !== undefined) {
+      //get message info from event
+      message.sender.id = requestBody.event.user;
+      message.recipient.id = requestBody.event.channel;
+      message.message.text = requestBody.event.text;
+    }
     console.log('Slack.createMessage(): Slack request:', JSON.stringify(message));
     return message;
   }
