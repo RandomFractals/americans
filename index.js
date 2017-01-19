@@ -79,17 +79,10 @@ app.post('/slack/command', (req, res) => {
   res.sendStatus(200);
 });
 
-// Slack ping verification handler
+// Slack ping verification/message handler for events
 app.post('/slack', (req, res) => {
-  console.log(JSON.stringify(req.body));
-  if(req.body.token !== process.env.SLACK_CLIENT_TOKEN) {
-    // not a Slack ping verification request
-    return; // bail out!
   }
 
-  // echo Slack ping verification request
-  console.log(req.body.challenge);
-  res.send(req.body.challenge);
 });
 
 // GET endpoint for Slack OAuth
