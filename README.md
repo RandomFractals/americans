@@ -15,7 +15,9 @@ Americans bot home page: https://americans.herokuapp.com/
 
 Current Wit.AI bot brains: https://wit.ai/RandomFractals/americans/stories
 
-API.AI bot engine hookup and more census data stats coming to chat clients near you soon.
+New Google API.AI public bot agent configuration: https://bot.api.ai/americans
+
+More census data stats coming to chat clients near you soon.
 
 More project info on linkedin: https://www.linkedin.com/pulse/americans-bot-app-taras-novak
 
