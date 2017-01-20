@@ -25,6 +25,7 @@
     "verbose": true
   },
   "dependencies": {
+    "apiai": "^3.0.3",
     "babel-core": "^6.18.2",
     "babel-polyfill": "^6.16.0",
     "bl": "^1.1.2",
