@@ -44,9 +44,9 @@ npm install
 cp .env.template .env
 ```
 Follow instructions in .env config file to procure required tokens 
-and service api access keys for Wit.ai, FB Messenger, and Census data calls.
+and service api access keys for api.ai, Wit.ai, FB Messenger, Slack, and Census API data calls.
 
-Note: only WIT_TOKEN and CENSUS_DATA_API_KEY .env vars are required for local bot.js CLI runs.
+Note: only WIT_AI_TOKEN or API_AI_TOKEN, and CENSUS_DATA_API_KEY .env vars are required for local bot.js CLI runs.
 
 ## Test
 ### Jest
@@ -65,13 +65,18 @@ npm start
 ```
 
 ## Dev Guides
-FB Messenger Platform Quick Start:
 
-* https://developers.facebook.com/docs/messenger-platform/quickstart
+Google api.ai docs:
+
+* https://docs.api.ai/docs/authentication
 
 Wit.AI Node.js SDK:
 
 * https://github.com/wit-ai/node-wit
+
+FB Messenger Platform Quick Start:
+
+* https://developers.facebook.com/docs/messenger-platform/quickstart
 
 Slack API:
 
