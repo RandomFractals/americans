@@ -4,18 +4,18 @@ describe('App Config Tests', () => {
 
   const config = require('../../src/utils/app-config.js');
   
-  xit('No WIT_TOKEN test',  () => {
-    expect(config.WIT_TOKEN).toThrow(new Error('missing WIT_TOKEN'));
+  xit('No WIT_AI_TOKEN test',  () => {
+    expect(config.WIT_AI_TOKEN).toThrow(new Error('missing WIT_AI_TOKEN'));
   });
 
-  it('WIT_TOKEN is set', () => {
-    expect(config.WIT_TOKEN).not.toBe(null);
-    expect(config.WIT_TOKEN).not.toContain('token>');
+  it('WIT_AI_TOKEN is set', () => {
+    expect(config.WIT_AI_TOKEN).not.toBe(null);
+    expect(config.WIT_AI_TOKEN).not.toContain('token>');
   });
 
   it('CENSUS_DATA_API_KEY is set', () => {
     expect(config.CENSUS_DATA_API_KEY).not.toBe(null);
-    expect(config.WIT_TOKEN).not.toContain('key>');    
+    expect(config.CENSUS_DATA_API_KEY).not.toContain('key>');    
   });
 
   it('SLACK_WEBHOOK_URL is set', () => {
@@ -25,12 +25,12 @@ describe('App Config Tests', () => {
 
   it('FB_PAGE_TOKEN is set', () => {
     expect(config.FB_PAGE_TOKEN).not.toBe(null);
-    expect(config.WIT_TOKEN).not.toContain('token>');    
+    expect(config.FB_PAGE_TOKEN).not.toContain('token>');
   });
 
   it('FB_APP_SECRET is set', () => {
     expect(config.FB_APP_SECRET).not.toBe(null);
-    expect(config.WIT_TOKEN).not.toContain('secret>');    
+    expect(config.FB_APP_SECRET).not.toContain('secret>');
   });
 
   it('FB_VERIFY_TOKEN is created', () => {
