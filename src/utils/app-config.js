@@ -12,10 +12,16 @@ const config = require('dotenv').config({silent:true});
 // get bot AI config
 const BOT_AI = process.env.BOT_AI;
 
+// get Google api.ai token from config
+const API_AI_TOKEN = process.env.API_AI_TOKEN;
+if (BOT_AI === 'api.ai' && !API_AI_TOKEN) {
+  throw new Error('Missing API_AI_TOKEN');
+}
+
 // get Wit.ai token from config
-const WIT_TOKEN = process.env.WIT_TOKEN;
-if (!WIT_TOKEN) {
-  throw new Error('Missing WIT_TOKEN');
+const WIT_AI_TOKEN = process.env.WIT_AI_TOKEN;
+if (BOT_AI === 'wit.ai' && !WIT_AI_TOKEN) {
+  throw new Error('Missing WIT_AI_TOKEN');
 }
 
 // get incoming Slack webhook url
@@ -55,7 +61,8 @@ if (!CENSUS_DATA_API_KEY) {
 
 module.exports = {
   BOT_AI: BOT_AI,
-  WIT_TOKEN: WIT_TOKEN,
+  API_AI_TOKEN: API_AI_TOKEN,
+  WIT_AI_TOKEN: WIT_AI_TOKEN,
   CENSUS_DATA_API_KEY: CENSUS_DATA_API_KEY,
   SLACK_WEBHOOK_URL: SLACK_WEBHOOK_URL,
   FB_PAGE_TOKEN: FB_PAGE_TOKEN,
