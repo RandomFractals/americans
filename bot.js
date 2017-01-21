@@ -18,7 +18,7 @@ const censusService = new Census(config);
 
 // create wit.ai client
 const witAiClient = new Wit({
-  accessToken: config.WIT_TOKEN,
+  accessToken: config.WIT_AI_TOKEN,
   actions: {
     send(request, response) {
       const {sessionId, context, entities} = request;
