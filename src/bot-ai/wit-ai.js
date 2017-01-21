@@ -40,7 +40,7 @@ class WitAI {
     const actions = {
       send({sessionId, context}, {text}) {
         // get chat user id from user session
-        console.log(`BotAi.send(): response:"${text}"`);
+        console.log(`BotAI.send(): response:"${text}"`);
         const recipientId = sessions[sessionId].userId;
         if (recipientId) {
           // send bot message response
@@ -114,7 +114,7 @@ class WitAI {
     // TODO: add configurable bot AI factory and config load
     // for using wit.ai, api.ai, or botkit.js later
     this._witAiClient = new Wit({
-      accessToken: config.WIT_TOKEN,
+      accessToken: config.WIT_AI_TOKEN,
       actions,
       logger: new log.Logger(log.INFO)
     });
