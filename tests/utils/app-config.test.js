@@ -13,6 +13,11 @@ describe('App Config Tests', () => {
     expect(config.WIT_AI_TOKEN).not.toContain('token>');
   });
 
+  it('API_AI_TOKEN is set', () => {
+    expect(config.API_AI_TOKEN).not.toBe(null);
+    expect(config.API_AI_TOKEN).not.toContain('token>');
+  });
+
   it('CENSUS_DATA_API_KEY is set', () => {
     expect(config.CENSUS_DATA_API_KEY).not.toBe(null);
     expect(config.CENSUS_DATA_API_KEY).not.toContain('key>');    
