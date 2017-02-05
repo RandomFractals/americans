@@ -152,19 +152,11 @@ class LocationService {
     const placeLines = fs.readFileSync('./src/census/resources/us-places.txt')
       .toString().split('\n');
     
-    placeLines.forEach( (line) => {
-      // create place tokens from place text line
-      // example: IL|17|34722|Highland Park city|Incorporated Place|A|Lake County      
-      let placeTokens = line.trim().split('|');
-      if (placeTokens.length == 7) {
-        // create new place info
-        let place = new Place(
-          placeTokens[2], // code
-          placeTokens[3], // name
-          placeTokens[0], // state
-          placeTokens[6] // county
-        );
-        // add to loaded places
+    placeLines.forEach( (placeTextLine) => {
+      // create new place
+      let place = Place.create(placeTextLine);
+      if (place && place.key) {
+        // add it to loaded places        
         LocationService.placeMap.set(place.key, place);
         placesCount++;
       }
@@ -196,19 +188,11 @@ class LocationService {
       terminal: false
     });
     
-    placesConfig.on('line', (line) => {
-      // create place tokens from place text line
-      // example: IL|17|34722|Highland Park city|Incorporated Place|A|Lake County      
-      let placeTokens = line.trim().split('|');
-      if (placeTokens.length == 7) {
-        // create new place info
-        let place = new Place(
-          placeTokens[2], // code
-          placeTokens[3], // name
-          placeTokens[0], // state
-          placeTokens[6] // county
-        );
-        // add to loaded places
+    placesConfig.on('line', (placeTextLine) => {
+      // create new place
+      let place = Place.create(placeTextLine);
+      if (place && place.key) {
+        // add it to loaded places        
         LocationService.placeMap.set(place.key, place);
         placesCount++;
       }

@@ -39,6 +39,7 @@ class Place extends Region {
 
 
   /**
+   * Creates new Place instance from place text line config.
    * 
    * @param placeTextLine Place config text line of form: 
    * 
@@ -58,6 +59,7 @@ class Place extends Region {
         placeTokens[6] // county
       );
     }
+
     return place;
   }
 
