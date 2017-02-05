@@ -12,11 +12,17 @@ const city = {
   county: 'Cook County, DuPage County'
 };
 
+const placeTextLineTest = 'IL|17|34722|Highland Park city|Incorporated Place|A|Lake County';
+
 // create test city instance
 const testCity = new Place(city.code, city.name, city.state, city.county);
 
 // test place data model interface
 describe('Place Data Model Tests', () => {
+
+  it('can create Place from text line', () => {
+    expect(Place.create(placeTextLineTest).toString()).toEqual('Highland Park city, IL');
+  });
 
   it('place code set/get test', () => {
     expect(testCity.code).toEqual(city.code);
@@ -42,5 +48,6 @@ describe('Place Data Model Tests', () => {
     expect(testCity.key).toEqual('chicago,il');
   });
   
+
 });
 
