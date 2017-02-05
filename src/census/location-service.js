@@ -1,6 +1,6 @@
 'use strict';
 
-// import fs and readline for laoding us-places.txt config
+// import fs and readline for loading us-places.txt config
 const fs = require('fs');
 const readLine = require('readline');
 
@@ -41,7 +41,7 @@ class LocationService {
     this.countyMapList = LocationService.getCountyMapList();
 
     // load USA places: cities, towns, villages, etc.
-    this.places = LocationService.getPlaces();
+    this.places = LocationService.getPlacesSync(); 
 
     console.log('LocationService(): LocationService instance created!');
   }
@@ -136,6 +136,48 @@ class LocationService {
 
 
   /**
+   * Gets loaded USA places data from ./resources/us-places.txt config. synchronously.
+   */
+  static getPlacesSync() {
+    if (LocationService.placeMap !== null && LocationService.placeMap !== undefined) {
+      return LocationService.placeMap;
+    }
+    
+    console.log('LocationService.getPlacesSync(): loading USA places config...');
+    LocationService.logMemoryUsage();
+
+    // load USA places: cities, towns, villages, etc.
+    let placesCount = 0;
+    LocationService.placeMap = new Map();
+    const placeLines = fs.readFileSync('./src/census/resources/us-places.txt')
+      .toString().split('\n');
+    
+    placeLines.forEach( (line) => {
+      // create place tokens from place text line
+      // example: IL|17|34722|Highland Park city|Incorporated Place|A|Lake County      
+      let placeTokens = line.trim().split('|');
+      if (placeTokens.length == 7) {
+        // create new place info
+        let place = new Place(
+          placeTokens[2], // code
+          placeTokens[3], // name
+          placeTokens[0], // state
+          placeTokens[6] // county
+        );
+        // add to loaded places
+        LocationService.placeMap.set(place.key, place);
+        placesCount++;
+      }
+    });
+
+    console.log(`LocationService.getPlacesSync(): loaded ${LocationService.placeMap.size} USA places.`);
+    LocationService.logMemoryUsage();
+
+    return LocationService.placeMap;
+  }
+  
+
+  /**
    * Gets loaded USA places data from ./resources/us-places.txt config.
    */
   static getPlaces() {
@@ -147,13 +189,13 @@ class LocationService {
     LocationService.logMemoryUsage();
 
     // load USA places: cities, towns, villages, etc.
-    let placesCount = 0;    
+    let placesCount = 0;
     LocationService.placeMap = new Map();
     const placesConfig = readLine.createInterface({
       input: fs.createReadStream('./src/census/resources/us-places.txt', {flags:'r', autoClose: true}),
       terminal: false
     });
-
+    
     placesConfig.on('line', (line) => {
       // create place tokens from place text line
       // example: IL|17|34722|Highland Park city|Incorporated Place|A|Lake County      
