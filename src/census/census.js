@@ -22,8 +22,9 @@ class Census {
   * Loads US states, zip codes, and counties FIPS data config.
   *
   * @param config Census data service config.
+  * @param client Optional client service name.
   */
-  constructor(config) {
+  constructor(config, client = 'test') {
     // save app config
     this.config = config;
 
@@ -34,9 +35,9 @@ class Census {
     });
 
     // create location service for open text location queries validation
-    this.locationService = new LocationService();
+    this.locationService = new LocationService(client);
 
-    console.log('Census(): Census data service instance created!');
+    console.log(`Census(): Census data service instance for ${client} initialized!`);
   }
 
 

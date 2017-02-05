@@ -29,7 +29,7 @@ class LocationService {
   *
   * Loads USA states, counties, and places FIPS config data.
   */
-  constructor() {
+  constructor(client = 'test') {
     // load USA states config data
     this.states = LocationService.getStates();
     this.stateNameMap = LocationService.getStateNameMap();
@@ -43,7 +43,7 @@ class LocationService {
     // load USA places: cities, towns, villages, etc.
     this.places = LocationService.getPlacesSync(); 
 
-    console.log('LocationService(): LocationService instance created!');
+    console.log(`LocationService(): LocationService instance for ${client} initialized!`);
   }
 
 
@@ -175,7 +175,7 @@ class LocationService {
 
     return LocationService.placeMap;
   }
-  
+
 
   /**
    * Gets loaded USA places data from ./resources/us-places.txt config.
@@ -228,7 +228,7 @@ class LocationService {
    */
   static logMemoryUsage() {
     const memoryUsage = process.memoryUsage();
-    console.log(`Heap: RSS=${numeral(memoryUsage.rss).format('0,0')}`,
+    console.log(`LocationService.logMemoryUsage():Heap: RSS=${numeral(memoryUsage.rss).format('0,0')}`,
       `heapTotal=${numeral(memoryUsage.heapTotal).format('0,0')}`,
       `heapUsed=${numeral(memoryUsage.heapUsed).format('0,0')}`);
   }

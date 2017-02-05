@@ -12,6 +12,7 @@ class BotClient {
   * Creates new Bot client chat instance for Messenger, Slack, and Telegram chats.
   *
   * @param config Bot config.
+  * @param name Chat client instance name.
   */
   constructor (config, name) {
     // save bot config

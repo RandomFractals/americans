@@ -34,7 +34,7 @@ class WitAI {
     this._sessions = sessions;
     const logBotInfo = this.logBotInfo;
     const getFirstEntityValue = this.getFirstEntityValue;
-    const censusService = new Census(config);
+    const censusService = new Census(config, chatClient.name);
 
     // create wit.ai bot actions
     const actions = {

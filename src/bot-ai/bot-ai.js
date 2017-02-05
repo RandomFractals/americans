@@ -31,7 +31,7 @@ class BotAI {
     // create user sessions hash map for tracking user chat history:
     // sessionId -> {userId: userId, context: sessionState}
     this.sessions = {};
-    this.censusService = new Census(config);
+    this.censusService = new Census(config, chatClient.name);
 
     // create api ai bot agent instance
     this.botAIClient = apiAI(config.API_AI_TOKEN);
