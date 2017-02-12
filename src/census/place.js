@@ -27,6 +27,7 @@ class Place extends Region {
     this.type = 'place';
 
     // create place key for lookups
+    this.key = `${this.shortNameKey}${this.state.toLowerCase()}`;
   }
 
 

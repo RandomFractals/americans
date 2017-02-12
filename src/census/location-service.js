@@ -369,6 +369,7 @@ class LocationService {
       .replace(' village', '')
       .replace(' CDP', '') // CDP - Census Designated Place
       .toLowerCase()
+      .split(' ').join('').replace(',', ''); // for state
     if (this.places.has(placeKey)) {
       return this.places.get(placeKey);
     }
