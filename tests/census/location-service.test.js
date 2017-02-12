@@ -144,8 +144,8 @@ describe('Location Service ZipCode Lookup Tests', () => {
 // usa places tests
 describe('Location Service Places Lookup Tests', () => {
 
-  it('has loaded >35+K USA places FIPS config data', () => {
-    expect(locationService.places.size).toBeGreaterThanOrEqual(35000);
+  it('has loaded >25+K USA places FIPS config data', () => {
+    expect(locationService.places.size).toBeGreaterThanOrEqual(25000);
   });
 
   it('getRegion("Chicago, il") city test', () => {

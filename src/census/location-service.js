@@ -149,6 +149,7 @@ class LocationService {
 
     // load USA places: cities, towns, villages, etc.
     let placesCount = 0;
+    let cdpCount = 0;
     LocationService.placeMap = new Map();
     LocationService.placeMapList = new Map();
 
@@ -159,21 +160,28 @@ class LocationService {
     // process each place text line config
     placeLines.forEach( (placeTextLine) => {
       // create new place
-      let place = Place.create(placeTextLine);
+      let place = Place.create(placeTextLine);      
       if (place && place.key) {
-        // add it to loaded places        
-        LocationService.placeMap.set(place.key, place);
-        if ( !LocationService.placeMapList.has(place.shortNameKey) ) {
-          // create place name list for places without state suffix lookups
-          LocationService.placeMapList.set(place.shortNameKey, []);
+        if (place.name.indexOf(' CDP') > 0 ) {
+          // skip, but count CDP places for now          
+          cdpCount++;
+        } else {
+          // add it to loaded places        
+          LocationService.placeMap.set(place.key, place);
+          if ( !LocationService.placeMapList.has(place.shortNameKey) ) {
+            // create place name list for places without state suffix lookups
+            LocationService.placeMapList.set(place.shortNameKey, []);
+          }
+          let placeList = LocationService.placeMapList.get(place.shortNameKey);
+          placeList.push(place);
+          placesCount++;
         }
-        let placeList = LocationService.placeMapList.get(place.shortNameKey);
-        placeList.push(place);
-        placesCount++;
       }
     });
 
     console.log(`LocationService.getPlacesSync(): loaded ${LocationService.placeMap.size} USA places.`);
+    console.log(`LocationService.getPlacesSync(): skipped ${cdpCount} CDP places.`);
+    
     LocationService.logMemoryUsage();
 
     return LocationService.placeMap;
