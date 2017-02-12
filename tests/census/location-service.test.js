@@ -116,6 +116,10 @@ describe('Location Service Counties Lookup Tests', () => {
   it('getRegion("arlington, va") county test', () => {
     expect(locationService.getRegion('arlington, va').toString()).toEqual('Arlington County, VA');
   });
+
+  it('getRegion("arlington va") county test', () => {
+    expect(locationService.getRegion('arlington va').toString()).toEqual('Arlington County, VA');
+  });
   
 });
 
@@ -150,6 +154,10 @@ describe('Location Service Places Lookup Tests', () => {
 
   it('getRegion("Chicago, il") city test', () => {
     expect(locationService.getRegion('Chicago, il').toString()).toEqual('Chicago city, IL');
+  });
+
+  it('getRegion("Chicago il") city test', () => {
+    expect(locationService.getRegion('Chicago il').toString()).toEqual('Chicago city, IL');
   });
 
   it('getRegion("San Francisco, CA") city test', () => {
