@@ -326,16 +326,26 @@ class LocationService {
    */
   getCountyStateKey(countyStateString) {
     // check for full state name suffix
-    const countyTokens = countyStateString.split(',');
+    let countyTokens = countyStateString.split(',');
     if ( countyTokens.length > 1) {
-      const countyKey = countyTokens[0];
-      const stateName = countyTokens[countyTokens.length-1];
+      const countyKey = countyTokens[0].replace(' ', '');
+      const stateName = countyTokens[countyTokens.length-1].replace(' ', '');
       //console.log(JSON.stringify(countyTokens));
       if ( this.stateNameMap.has(stateName) ) {
         const state = this.stateNameMap.get(stateName);        
         return `${countyKey},${state.key.toLowerCase()}`;
       }
+    } else {
+      // assume county with state predicate without comma
+      countyTokens = countyStateString.split(' ');
+      if (countyTokens.length > 1) {
+        // get last token, assume/support only state codes for now
+        const state = countyTokens[countyTokens.length-1];
+        if ( this.states.has(state) ) {
+        }
+      }
     }
+    // no county,state match: return original input
     return countyStateString;
   }
 
@@ -380,7 +390,7 @@ class LocationService {
 
     // check counties
     let countyKey = regionKey.replace('county', '');
-    let countyStateKey = this.getCountyStateKey(countyKey);
+    let countyStateKey = this.getCountyStateKey(location.toLowerCase().replace('county', ''));
     if ( this.counties.has(countyKey) ) {
       return this.counties.get(countyKey);
     }    
