@@ -45,7 +45,7 @@ describe('Place Data Model Tests', () => {
   });
 
   it('Chicago city key test', () => {
-    expect(testCity.key).toEqual('chicago,il');
+    expect(testCity.key).toEqual('chicagoil');
   });
   
 
