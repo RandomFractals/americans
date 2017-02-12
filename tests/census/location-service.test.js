@@ -160,6 +160,14 @@ describe('Location Service Places Lookup Tests', () => {
     expect(locationService.getRegion('San Francisco').toString()).toEqual('San Francisco city, CA');
   });  
 
+  it('getRegion("Arlington, TX") test', () => {
+    expect(locationService.getRegion('Arlington, TX').toString()).toEqual('Arlington city, TX');
+  });  
+
+  it('getRegion("Arlington") test', () => {
+    expect(locationService.getRegion('Arlington').toString()).toEqual('Arlington city, GA');
+  });  
+
 });
 
 
