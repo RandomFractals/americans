@@ -104,6 +104,10 @@ describe('Location Service Counties Lookup Tests', () => {
   it('getRegion("San Francisco county, ca") county test', () => {
     expect(locationService.getRegion('San Francisco county, ca').toString()).toEqual('San Francisco County, CA');
   });
+
+  it('getRegion("San Francisco county") county test', () => {
+    expect(locationService.getRegion('San Francisco county').toString()).toEqual('San Francisco County, CA');
+  });
   
 });
 
