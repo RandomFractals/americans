@@ -112,6 +112,10 @@ describe('Location Service Counties Lookup Tests', () => {
   it('getRegion("arlington county") county test', () => {
     expect(locationService.getRegion('arlington county').toString()).toEqual('Arlington County, VA');
   });
+
+  it('getRegion("arlington, va") county test', () => {
+    expect(locationService.getRegion('arlington, va').toString()).toEqual('Arlington County, VA');
+  });
   
 });
 
