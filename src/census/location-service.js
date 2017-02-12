@@ -342,6 +342,7 @@ class LocationService {
         // get last token, assume/support only state codes for now
         const state = countyTokens[countyTokens.length-1];
         if ( this.states.has(state) ) {
+          return countyStateString.replace(` ${state}`, `,${state}`).replace(' ', '');
         }
       }
     }
