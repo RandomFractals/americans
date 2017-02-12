@@ -41,7 +41,8 @@ class LocationService {
     this.countyMapList = LocationService.getCountyMapList();
 
     // load USA places: cities, towns, villages, etc.
-    this.places = LocationService.getPlacesSync(); 
+    this.places = LocationService.getPlacesSync();
+    this.placeMapList = LocationService.getPlaceMapList(); 
 
     console.log(`LocationService(): LocationService instance for ${client} initialized!`);
   }
@@ -149,15 +150,25 @@ class LocationService {
     // load USA places: cities, towns, villages, etc.
     let placesCount = 0;
     LocationService.placeMap = new Map();
+    LocationService.placeMapList = new Map();
+
+    // read us-places sync.
     const placeLines = fs.readFileSync('./src/census/resources/us-places.txt')
       .toString().split('\n');
     
+    // process each place text line config
     placeLines.forEach( (placeTextLine) => {
       // create new place
       let place = Place.create(placeTextLine);
       if (place && place.key) {
         // add it to loaded places        
         LocationService.placeMap.set(place.key, place);
+        if ( !LocationService.placeMapList.has(place.shortNameKey) ) {
+          // create place name list for places without state suffix lookups
+          LocationService.placeMapList.set(place.shortNameKey, []);
+        }
+        let placeList = LocationService.placeMapList.get(place.shortNameKey);
+        placeList.push(place);
         placesCount++;
       }
     });
@@ -204,6 +215,20 @@ class LocationService {
     });
 
     return LocationService.placeMap;
+  }
+
+
+  /**
+   * Gets places map list for places lookups without state code.
+   */
+  static getPlaceMapList() {
+    if (LocationService.placeMapList !== null && LocationService.placeMapList !== undefined) {
+      return LocationService.placeMapList;
+    }
+
+    // load USA places data
+    LocationService.getPlacesSync();
+    return LocationService.placeMapList;
   }
 
 
@@ -340,6 +365,10 @@ class LocationService {
     if (this.places.has(placeKey)) {
       return this.places.get(placeKey);
     }
+    if (this.placeMapList.has(placeKey)) {
+      // return first matching place from the list for now
+      return this.placeMapList.get(placeKey)[0];
+    }
 
     // check counties
     let countyKey = regionKey.replace('county', '');
@@ -351,8 +380,8 @@ class LocationService {
       return this.counties.get(countyStateKey);
     }
     if ( this.countyMapList.has(countyKey) ) {
-      // return a list of matching counties
-      return this.countyMapList.get(countyKey);
+      // return first matching county from the list for now
+      return this.countyMapList.get(countyKey)[0];
     }
 
     // TODO: check zip codes
