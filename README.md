@@ -66,6 +66,10 @@ npm start
 
 ## Dev Guides
 
+DialogFlow Google Assistant App and Alexa Echo Skills Tutorial:
+
+* http://blog.potatobon.com/2018/01/26/google-assistant-vs-amazon-echo/
+
 Google api.ai docs:
 
 * https://docs.api.ai/docs/authentication
