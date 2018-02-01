@@ -70,6 +70,21 @@ DialogFlow Google Assistant App and Alexa Echo Skills Tutorial:
 
 * http://blog.potatobon.com/2018/01/26/google-assistant-vs-amazon-echo/
 
+--------------------------------------------------------------------------
+
+## Retring Americans Bot v1.4 alpha dev docs 
+
+*NOTE:* these are most likely out of date since both wit.ai and api.ai finished their betas
+and went in totally different directions focusing on things most important for their target audience
+and platforms.
+
+See FB sunsetting their bot engine stories post here: https://wit.ai/blog/2017/07/27/sunsetting-stories
+
+Google rebranded to DialogFlow and extended their bots reach, 
+which will be the focus of further docs and code updates of this v2.0 feature branch of Americans bot.
+
+----------------------------------------------------------------------------
+
 Google api.ai docs:
 
 * https://docs.api.ai/docs/authentication
@@ -96,7 +111,7 @@ Some borrowed and refactored code from:
 
 # License
 
-Copyright © 2017 Random Fractals, Inc.
+Copyright © 2018 Random Fractals, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this software except in compliance with the License.
