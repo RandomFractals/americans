@@ -66,9 +66,11 @@ npm start
 
 ## Dev Guides
 
-DialogFlow Google Assistant App and Alexa Echo Skills Tutorial:
-
 * http://blog.potatobon.com/2018/01/26/google-assistant-vs-amazon-echo/
+
+* https://codelabs.developers.google.com/?cat=Assistant
+
+* https://github.com/dialogflow/dialogflow-fulfillment-nodejs#quick-start
 
 --------------------------------------------------------------------------
 
