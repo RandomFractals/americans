@@ -9,8 +9,13 @@ const config = require('dotenv').config({silent:true});
 // NOTE: set up your .env first
 // see .env.template for more info
 
+// TODO: convert this mess to single config obj export
+
 // get bot AI config
 const BOT_AI = process.env.BOT_AI;
+
+// get DialgoFlow service account file path
+const DIALOGFLOW_SERVICE_ACCOUNT_FILE = process.env.DIALOGFLOW_SERVICE_ACCOUNT_FILE
 
 // get Google api.ai token from config
 const API_AI_TOKEN = process.env.API_AI_TOKEN;
@@ -61,6 +66,7 @@ if (!CENSUS_DATA_API_KEY) {
 
 module.exports = {
   BOT_AI: BOT_AI,
+  DIALOGFLOW_SERVICE_ACCOUNT_FILE: DIALOGFLOW_SERVICE_ACCOUNT_FILE,  
   API_AI_TOKEN: API_AI_TOKEN,
   WIT_AI_TOKEN: WIT_AI_TOKEN,
   CENSUS_DATA_API_KEY: CENSUS_DATA_API_KEY,
