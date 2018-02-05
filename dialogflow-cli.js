@@ -55,12 +55,19 @@ sessionClient
   });
 
 
+  /**
+   * Logs dialogflow bot ai response.
+   * 
+   * @param {*} sessionClient DialogFlow session client instance.
+   * @param {*} result DialogFlow query result.
+   */
 function logQueryResult(sessionClient, result) {
-  // create context client
+  // create context client for bot ai debug
   const contextClient = new dialogflow.ContextsClient({
     keyFilename: config.DIALOGFLOW_SERVICE_ACCOUNT_FILE    
   });
 
+  // log query, repsonse, and intent
   console.log(`  Query: ${result.queryText}`);
   console.log(`  Response: ${result.fulfillmentText}`);
 
