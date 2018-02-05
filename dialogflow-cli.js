@@ -1,12 +1,18 @@
 'use strict';
 
-// load app config
+/**
+ * DialogFlow V2 beta1 bot AI CLI test based on:
+ * 
+ * https://github.com/dialogflow/dialogflow-nodejs-client-v2/blob/master/samples/detect.js
+ */
+
+// load our bot app config
 const config = require('./src/utils/app-config.js');
 
 // goog.protobuf.Struct to json util
 const structjson = require('./src/utils/structjson.js')
 
-// bot project id from from https://dialogflow.com/docs/agents#settings
+// bot project id from https://dialogflow.com/docs/agents#settings
 const projectId = config.GOOGLE_PROJECT_ID;
 const sessionId = 'americans-dalogflow-cli-test';
 const query = 'hello';
