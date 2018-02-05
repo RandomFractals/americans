@@ -43,12 +43,12 @@ function createBotChatSesssion() {
 /**
  * Runs DialogFlow chatbot text queries.
  *
- * @param {*} projectId Bot project id
- * @param {*} sessionId Bot chat session id
+ * @param {string} projectId Bot project id
+ * @param {string} sessionId Bot chat session id
  * @param {*} queries Bot queries
- * @param {*} languageCode Bot lang code
+ * @param {string} lang Bot lang code
  */
-function askBot(projectId, sessionId, queries, languageCode) {
+function askBot(projectId, sessionId, queries, lang) {
   if (!queries || !queries.length) {
     return; // abort mission! :)
   }
@@ -67,7 +67,7 @@ function askBot(projectId, sessionId, queries, languageCode) {
       queryInput: {
         text: {
           text: query,
-          languageCode: languageCode,
+          languageCode: lang,
         },
       },
     };
@@ -155,7 +155,7 @@ function logContextParams(result) {
     structjson.structProtoToJson(result.parameters)
   );
   console.log(`  Parameters: ${parameters}`);
-  
+
   if (result.outputContexts && result.outputContexts.length) {
     console.log(`  Output contexts:`);
     result.outputContexts.forEach(context => {
