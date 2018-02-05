@@ -72,6 +72,8 @@ npm start
 
 * https://github.com/dialogflow/dialogflow-fulfillment-nodejs#quick-start
 
+* https://github.com/dialogflow/dialogflow-nodejs-client-v2
+
 --------------------------------------------------------------------------
 
 ## Retring Americans Bot v1.4 alpha dev docs 
