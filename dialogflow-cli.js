@@ -6,58 +6,18 @@
  * https://github.com/dialogflow/dialogflow-nodejs-client-v2/blob/master/samples/detect.js
  */
 
+// init dialogflow bot AI client lib
+const dialogflow = require('dialogflow');
+
 // load our bot app config
 const config = require('./src/utils/app-config.js');
 
 // goog.protobuf.Struct to json util
 const structjson = require('./src/utils/structjson.js')
 
-// create test bot query
+// dialogflow bot proj./session keys
 const projectId = config.GOOGLE_PROJECT_ID;
 const sessionId = 'americans-dalogflow-cli-test';
-const query = 'hello';
-const languageCode = 'en-US';
-
-// create dialogflow client
-const dialogflow = require('dialogflow');
-
-// see these docs for google service account auth:
-// https://googlecloudplatform.github.io/google-cloud-node/#/docs/google-cloud/latest/guides/authentication
-// and dialog flow sessions client config:
-// https://github.com/dialogflow/dialogflow-nodejs-client-v2/blob/master/src/v2beta1/sessions_client.js
-
-// carete test bot client chat session
-const sessionClient = createBotChatSesssion()
-
-// define session path
-const sessionPath = sessionClient.sessionPath(config.GOOGLE_PROJECT_ID, sessionId);
-
-// create test query
-const request = {
-  session: sessionPath,
-  queryInput: {
-    text: {
-      text: query,
-      languageCode: languageCode,
-    },
-  },
-};
-
-// send bot ai request and log results
-sessionClient
-  .detectIntent(request)
-  .then(responses => {
-    console.log('bot>');
-    console.log(responses);
-    console.log('---')
-
-    // get and log query results for init bot app debug
-    const result = responses[0].queryResult;
-    logQueryResult(sessionClient, result) // responses[0].gueryResult)
-  })
-  .catch(err => {
-    console.error('ERROR:', err);
-  });
 
 
 /**
@@ -66,6 +26,12 @@ sessionClient
 
 /**
  * Creates new DialogFlow bot AI chat session.
+ * 
+ * see this docs for google service account auth:
+ * https://googlecloudplatform.github.io/google-cloud-node/#/docs/google-cloud/latest/guides/authentication
+ * 
+ * and dialog flow sessions client config:
+ * https://github.com/dialogflow/dialogflow-nodejs-client-v2/blob/master/src/v2beta1/sessions_client.js
  */
 function createBotChatSesssion() {
   return new dialogflow.SessionsClient({
@@ -92,10 +58,9 @@ function askBot(projectId, sessionId, queries, languageCode) {
   
   // create bot chat session
   const chatSession = sessionClient.sessionPath(projectId, sessionId);
-  
-  let promise;
-  
+    
   // create bot query requests
+  let promise;  
   for (const query of queries) {
     const request = {
       session: chatSession,
@@ -108,12 +73,13 @@ function askBot(projectId, sessionId, queries, languageCode) {
     };
   
     if (!promise) { // first bot query
-      console.log(`Sending query "${query}"`);
+      console.log(`query: ${query}`);
       promise = sessionClient.detectIntent(request);
     } 
     else {
       promise = promise.then(responses => {
         console.log('bot>');
+        console.log(responses);
         const response = responses[0];
         logQueryResult(sessionClient, response.queryResult);
   
@@ -130,7 +96,7 @@ function askBot(projectId, sessionId, queries, languageCode) {
           contexts: response.queryResult.outputContexts,
         };
   
-        console.log(`Sending query "${query}"`);
+        console.log(`query: ${query}`);
         return sessionClient.detectIntent(request);
       });
     }
@@ -139,6 +105,7 @@ function askBot(projectId, sessionId, queries, languageCode) {
   // process bot AI responses
   promise.then(responses => {
     console.log('bot>');
+    console.log(responses);
     logQueryResult(sessionClient, responses[0].queryResult);
   })
   .catch(err => {
