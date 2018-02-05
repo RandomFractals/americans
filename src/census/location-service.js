@@ -44,7 +44,7 @@ class LocationService {
     this.places = LocationService.getPlacesSync();
     this.placeMapList = LocationService.getPlaceMapList(); 
 
-    console.log(`LocationService(): LocationService instance for ${client} initialized!`);
+    console.log(`LocationService(): LocationService instance for bot '${client}' initialized!`);
   }
 
 

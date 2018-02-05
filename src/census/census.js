@@ -37,7 +37,7 @@ class Census {
     // create location service for open text location queries validation
     this.locationService = new LocationService(client);
 
-    console.log(`Census(): Census data service instance for ${client} initialized!`);
+    console.log(`Census(): Census data service instance for bot '${client}' initialized!`);
   }
 
 
