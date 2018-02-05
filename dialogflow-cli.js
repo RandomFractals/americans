@@ -13,6 +13,7 @@ const config = require('./src/utils/app-config.js');
 const structjson = require('./src/utils/structjson.js')
 
 // create test bot query
+const projectId = config.GOOGLE_PROJECT_ID;
 const sessionId = 'americans-dalogflow-cli-test';
 const query = 'hello';
 const languageCode = 'en-US';
@@ -46,7 +47,8 @@ const request = {
 sessionClient
   .detectIntent(request)
   .then(responses => {
-    console.log('Detected intent:', responses);
+    console.log('bot>');
+    console.log(responses);
     console.log('---')
 
     // get and log query results for init bot app debug
@@ -59,7 +61,7 @@ sessionClient
 
 
 /**
- * ---------- DialogFlow V2 Beta 1 Bot AI Detect Text/Event Handlers --------------
+ * -------------- DialogFlow V2 Beta 1 Bot AI Methods  -----------------
  */
 
 /**
@@ -80,7 +82,7 @@ function createBotChatSesssion() {
  * @param {*} queries Bot queries
  * @param {*} languageCode Bot lang code
  */
-function detectTextIntent(projectId, sessionId, queries, languageCode) {
+function askBot(projectId, sessionId, queries, languageCode) {
   if (!queries || !queries.length) {
     return; // abort mission! :)
   }
@@ -111,7 +113,7 @@ function detectTextIntent(projectId, sessionId, queries, languageCode) {
     } 
     else {
       promise = promise.then(responses => {
-        console.log('Detected intent');
+        console.log('bot>');
         const response = responses[0];
         logQueryResult(sessionClient, response.queryResult);
   
@@ -136,7 +138,7 @@ function detectTextIntent(projectId, sessionId, queries, languageCode) {
   
   // process bot AI responses
   promise.then(responses => {
-    console.log('Detected intent');
+    console.log('bot>');
     logQueryResult(sessionClient, responses[0].queryResult);
   })
   .catch(err => {
@@ -230,10 +232,11 @@ const cli = require(`yargs`)
       },
     },
     opts =>
-      detectTextIntent(
+      askBot(
+        projectId,
         opts.sessionId,
         opts.queries,
-        opts.languageCode
+        opts.lang        
       )
   )
   .example(
