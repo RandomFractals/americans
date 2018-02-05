@@ -4,7 +4,7 @@
 const config = require('./src/utils/app-config.js');
 
 // You can find your project ID in your Dialogflow agent settings
-const projectId = 'americans-aa6dc'; //https://dialogflow.com/docs/agents#settings
+const projectId = config.GOOGLE_PROJECT_ID; //https://dialogflow.com/docs/agents#settings
 const sessionId = 'americans-dalogflow-cli-test';
 const query = 'hello';
 const languageCode = 'en-US';
