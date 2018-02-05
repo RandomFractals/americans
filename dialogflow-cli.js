@@ -12,6 +12,13 @@ const dialogflow = require('dialogflow');
 // load our bot app config
 const config = require('./src/utils/app-config.js');
 
+// import numeral for numbers formating
+const numeral = require('numeral');
+
+// create census data service
+const Census = require('./src/census/census.js');
+const censusService = new Census(config);
+
 // goog.protobuf.Struct to json util
 const structjson = require('./src/utils/structjson.js')
 
