@@ -140,7 +140,7 @@ function logQueryResult(sessionClient, result) {
     console.log(`  No intent matched.`);
   }
 
-  // log bot context and params
+  // log bot response context and params
   logContextParams(result)
 }
 
