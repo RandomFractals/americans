@@ -39,7 +39,8 @@
     "node-wit": "^4.1.0",
     "numeral": "^2.0.4",
     "request": "^2.79.0",
-    "uuid": "^3.0.1"
+    "uuid": "^3.0.1",
+    "yargs": "^11.0.0"
   },
   "devDependencies": {
     "babel-jest": "^18.0.0",
