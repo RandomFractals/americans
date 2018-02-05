@@ -54,6 +54,12 @@ Note: only WIT_AI_TOKEN or API_AI_TOKEN, and CENSUS_DATA_API_KEY .env vars are r
 npm test 
 ```
 
+### DialogFlow CLI
+
+```
+node dialogflow-cli --help
+```
+
 ### Console
 ```bash
 node bot.js
