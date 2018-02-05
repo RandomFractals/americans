@@ -79,7 +79,7 @@ function askBot(projectId, sessionId, queries, languageCode) {
     else {
       promise = promise.then(responses => {
         console.log('bot>');
-        console.log(responses);
+        console.log(JSON.stringify(responses, null, '  '));
         const response = responses[0];
         logQueryResult(sessionClient, response.queryResult);
   
@@ -112,7 +112,7 @@ function askBot(projectId, sessionId, queries, languageCode) {
     console.error('ERROR:', err);
   });
   
-} // end of detectTextIntent()
+} // end of askBot()
 
 
 /**
@@ -134,20 +134,28 @@ function logQueryResult(sessionClient, result) {
   // log query, repsonse, and intent
   console.log(`  Query: ${result.queryText}`);
   console.log(`  Response: ${result.fulfillmentText}`);
-
   if (result.intent) {
     console.log(`  Intent: ${result.intent.displayName}`);
   } else {
     console.log(`  No intent matched.`);
   }
 
-  // get params
+  // log bot context and params
+  logContextParams(result)
+}
+
+
+/**
+ * Logs bot context and params.
+ * 
+ * @param {*} result Bot response result.
+ */
+function logContextParams(result) {
   const parameters = JSON.stringify(
     structjson.structProtoToJson(result.parameters)
   );
-
-  // log params and output context
   console.log(`  Parameters: ${parameters}`);
+  
   if (result.outputContexts && result.outputContexts.length) {
     console.log(`  Output contexts:`);
     result.outputContexts.forEach(context => {
@@ -160,7 +168,7 @@ function logQueryResult(sessionClient, result) {
       console.log(`      parameters: ${contextParameters}`);
     });
   }
-} // end of logQueryResult()
+}
 
 
 /**
