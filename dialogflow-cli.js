@@ -193,7 +193,7 @@ function processActions(responses) {
       case 'getPopulation':
         //console.log('bot> getPopulation:', response.queryResult.parameters)
         const location = structjson.structProtoToJson(response.queryResult.parameters);
-        console.log('bot> getPopulation:', location)
+        console.log('bot> getPopulation:', location, '\n---')
         getPopulation(`${location.city} ${location.county} ${location.state}`)
         break;
       case 'input.welcome':
@@ -209,15 +209,11 @@ function getPopulation(location = 'us') {
   if (!location) {
     location = 'usa'; // default to usa
   }
-  console.log(`\n> bot.getPopulation(("${location}"):`);
+  console.log(`bot> getPopulation(("${location}"):`, '\n---');
   censusService.getPopulation(location)
     .then( (response) => {
-      console.log(`\n>~${numeral(response.population).format('0,0')} people live in ${response.location}`,
+      console.log(`---\nbot>~${numeral(response.population).format('0,0')} people live in ${response.location}`,
         `\n  Population density: ${numeral(response.density).format('0,0')} p/mi²`);
-      if (response.location !== 'USA') {
-        // save new location in wit.ai context
-        context.location = response.location;
-      }
     });
   //logBotInfo(context, entities, text);
   //return Promise.resolve(context);      
