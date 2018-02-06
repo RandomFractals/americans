@@ -92,6 +92,8 @@ npm start
 
 * https://cloud.google.com/nodejs/getting-started/hello-world
 
+* https://plus.google.com/communities/103318168784860581977 - DialogFlow dev community
+
 --------------------------------------------------------------------------
 
 ## Retring Americans Bot v1.4 alpha dev docs 
