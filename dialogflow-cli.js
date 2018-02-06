@@ -184,16 +184,17 @@ function logContextParams(result) {
  * ------------- Census Pop Data DialogFlow Bot AI Action Handlers -------------------
  * TODO: move these to bot-ai/dialogflow-ai.js after hotwired tests!!!
  */
-
-
 function processActions(responses) {
   console.log('---');
   console.log('bot> processing bot request Actions...');
   for (const response of responses) {
     console.log('bot> action:', response.queryResult.action)
     switch (response.queryResult.action) {
-      case 'population':
-
+      case 'getPopulation':
+        //console.log('bot> getPopulation:', response.queryResult.parameters)
+        const location = structjson.structProtoToJson(response.queryResult.parameters);
+        console.log('bot> getPopulation:', location)
+        getPopulation(`${location.city} ${location.county} ${location.state}`)
         break;
       case 'input.welcome':
       default:
@@ -204,15 +205,7 @@ function processActions(responses) {
 
 }
 
-function greeting({sessionId, context, text, entities}) {
-  console.log(`\n> bot.greeting("${text}"):`);
-  console.log(`\t sessionId: ${sessionId}`);
-  //logBotInfo(context, entities, text);
-  //return Promise.resolve(context);
-}
-
-function getPopulation({sessionId, context, text, entities}) {
-  let location = getFirstEntityValue(entities, 'location');
+function getPopulation(location = 'us') {
   if (!location) {
     location = 'usa'; // default to usa
   }
@@ -226,12 +219,6 @@ function getPopulation({sessionId, context, text, entities}) {
         context.location = response.location;
       }
     });
-  //logBotInfo(context, entities, text);
-  //return Promise.resolve(context);      
-}
-
-function thanks({sessionId, context, text, entities}) {
-  console.log(`\n> bot.thanks("${text}"):`);
   //logBotInfo(context, entities, text);
   //return Promise.resolve(context);      
 }
