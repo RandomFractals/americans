@@ -177,6 +177,43 @@ function logContextParams(result) {
   }
 }
 
+/**
+ * ------------- Census Pop Data DialogFlow Bot AI Action Handlers -------------------
+ * TODO: move these to bot-ai/dialogflow-ai.js after hotwired tests!!!
+ */
+
+function greeting({sessionId, context, text, entities}) {
+  console.log(`\n> bot.greeting("${text}"):`);
+  console.log(`\t sessionId: ${sessionId}`);
+  //logBotInfo(context, entities, text);
+  //return Promise.resolve(context);
+}
+
+function getPopulation({sessionId, context, text, entities}) {
+  let location = getFirstEntityValue(entities, 'location');
+  if (!location) {
+    location = 'usa'; // default to usa
+  }
+  console.log(`\n> bot.getPopulation(("${location}"):`);
+  censusService.getPopulation(location)
+    .then( (response) => {
+      console.log(`\n>~${numeral(response.population).format('0,0')} people live in ${response.location}`,
+        `\n  Population density: ${numeral(response.density).format('0,0')} p/mi²`);
+      if (response.location !== 'USA') {
+        // save new location in wit.ai context
+        context.location = response.location;
+      }
+    });
+  //logBotInfo(context, entities, text);
+  //return Promise.resolve(context);      
+}
+
+function thanks({sessionId, context, text, entities}) {
+  console.log(`\n> bot.thanks("${text}"):`);
+  //logBotInfo(context, entities, text);
+  //return Promise.resolve(context);      
+}
+
 
 /**
  * ------------------------ DialoFlow Bot AI CLI Setup ---------------------------
