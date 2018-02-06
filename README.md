@@ -7,6 +7,7 @@ Think 'Quick Facts' census data bot you can ping for some USA pop data info:
 
 https://www.census.gov/quickfacts/table/PST045216/00
 
+Americans Bot app concept post: https://www.linkedin.com/pulse/americans-bot-app-taras-novak/
 
 # Project Info
 
