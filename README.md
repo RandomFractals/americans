@@ -9,17 +9,27 @@ https://www.census.gov/quickfacts/table/PST045216/00
 
 # Project Info
 
-Americans bot Facebook page: https://www.facebook.com/Americans-1836666999901817/
+DialogFlow Americans Bot proj. v2.0 beta migration announcement:
 
-Americans bot home page: https://americans.herokuapp.com/
+https://plus.google.com/109626352267904541757/posts/MqaGhe5LXki
 
-Current Wit.AI bot brains: https://wit.ai/RandomFractals/americans/stories
+New Americans Bot DialogFlow agent configuration: https://bot.dialogflow.com/americans
 
-New Google API.AI public bot agent configuration: https://bot.dialogflow.com/americans
-
-More census data stats coming to chat clients near you soon.
+Old Americans bot home page: https://americans.herokuapp.com/
 
 More project info on linkedin: https://www.linkedin.com/pulse/americans-bot-app-taras-novak
+
+See Twitter devlogs for the latest daily on this project:
+
+https://twitter.com/hashtag/AmericansBot?src=hash
+
+---------------------------------------------------------------------------------
+
+Old Americans bot Facebook page: https://www.facebook.com/Americans-1836666999901817/
+
+Retiring Wit.AI bot brains: https://wit.ai/RandomFractals/americans/stories
+
+More census data stats coming to chat clients near you soon.
 
 # Latest FB Messenger interface v.: 
 
