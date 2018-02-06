@@ -114,6 +114,7 @@ function askBot(projectId, sessionId, queries, lang) {
     console.log('bot>');
     console.log(responses);
     logQueryResult(sessionClient, responses[0].queryResult);
+    processActions(responses);
   })
   .catch(err => {
     console.error('ERROR:', err);
@@ -139,6 +140,7 @@ function logQueryResult(sessionClient, result) {
   });
 
   // log query, repsonse, and intent
+  console.log('---')
   console.log(`  Query: ${result.queryText}`);
   console.log(`  Response: ${result.fulfillmentText}`);
   if (result.intent) {
@@ -181,6 +183,15 @@ function logContextParams(result) {
  * ------------- Census Pop Data DialogFlow Bot AI Action Handlers -------------------
  * TODO: move these to bot-ai/dialogflow-ai.js after hotwired tests!!!
  */
+
+
+function processActions(responses) {
+  console.log('---');
+  console.log('bot> processing bot request Actions...');
+  for (const response of responses) {
+    console.log('bot> action:', response.queryResult.action)
+  };
+}
 
 function greeting({sessionId, context, text, entities}) {
   console.log(`\n> bot.greeting("${text}"):`);
