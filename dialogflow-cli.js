@@ -191,7 +191,17 @@ function processActions(responses) {
   console.log('bot> processing bot request Actions...');
   for (const response of responses) {
     console.log('bot> action:', response.queryResult.action)
+    switch (response.queryResult.action) {
+      case 'population':
+
+        break;
+      case 'input.welcome':
+      default:
+        console.log('bot>', response.queryResult.fulfillmentText);
+        break;
+    }
   };
+
 }
 
 function greeting({sessionId, context, text, entities}) {
