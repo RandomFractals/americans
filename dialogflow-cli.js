@@ -78,7 +78,8 @@ function askBot(projectId, sessionId, queries, lang) {
         },
       },
     };
-  
+
+    console.log('---');    
     if (!promise) { // first bot query
       console.log(`query: ${query}`);
       promise = sessionClient.detectIntent(request);
