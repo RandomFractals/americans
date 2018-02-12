@@ -72,9 +72,9 @@ npm test
 node dialogflow-cli --help
 ```
 
-### Console
+### Interactive WitAI CLI (Facebook Bots AI interface API command line test)
 ```bash
-node bot.js
+node witai-cli
 ``` 
 
 ## Run
