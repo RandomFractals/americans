@@ -7,19 +7,31 @@ Think 'Quick Facts' census data bot you can ping for some USA pop data info:
 
 https://www.census.gov/quickfacts/table/PST045216/00
 
+Americans Bot app concept post: https://www.linkedin.com/pulse/americans-bot-app-taras-novak/
+
 # Project Info
 
-Americans bot Facebook page: https://www.facebook.com/Americans-1836666999901817/
+DialogFlow Americans Bot proj. v2.0 beta migration announcement:
 
-Americans bot home page: https://americans.herokuapp.com/
+https://plus.google.com/109626352267904541757/posts/MqaGhe5LXki
 
-Current Wit.AI bot brains: https://wit.ai/RandomFractals/americans/stories
+New Americans Bot DialogFlow agent configuration: https://bot.dialogflow.com/americans
 
-New Google API.AI public bot agent configuration: https://bot.api.ai/americans
-
-More census data stats coming to chat clients near you soon.
+Old Americans bot home page: https://americans.herokuapp.com/
 
 More project info on linkedin: https://www.linkedin.com/pulse/americans-bot-app-taras-novak
+
+See Twitter devlogs for the latest daily on this project:
+
+https://twitter.com/hashtag/AmericansBot?src=hash
+
+---------------------------------------------------------------------------------
+
+Old Americans bot Facebook page: https://www.facebook.com/Americans-1836666999901817/
+
+Retiring Wit.AI bot brains: https://wit.ai/RandomFractals/americans/stories
+
+More census data stats coming to chat clients near you soon.
 
 # Latest FB Messenger interface v.: 
 
@@ -54,6 +66,12 @@ Note: only WIT_AI_TOKEN or API_AI_TOKEN, and CENSUS_DATA_API_KEY .env vars are r
 npm test 
 ```
 
+### DialogFlow CLI
+
+```
+node dialogflow-cli --help
+```
+
 ### Console
 ```bash
 node bot.js
@@ -66,9 +84,32 @@ npm start
 
 ## Dev Guides
 
-DialogFlow Google Assistant App and Alexa Echo Skills Tutorial:
-
 * http://blog.potatobon.com/2018/01/26/google-assistant-vs-amazon-echo/
+
+* https://codelabs.developers.google.com/?cat=Assistant
+
+* https://github.com/dialogflow/dialogflow-fulfillment-nodejs#quick-start
+
+* https://github.com/dialogflow/dialogflow-nodejs-client-v2
+
+* https://cloud.google.com/nodejs/getting-started/hello-world
+
+* https://plus.google.com/communities/103318168784860581977 - DialogFlow dev community
+
+--------------------------------------------------------------------------
+
+## Retring Americans Bot v1.4 alpha dev docs 
+
+*NOTE:* these are most likely out of date since both wit.ai and api.ai finished their betas
+and went in totally different directions focusing on things most important for their target audience
+and platforms.
+
+See FB sunsetting their bot engine stories post here: https://wit.ai/blog/2017/07/27/sunsetting-stories
+
+Google rebranded to DialogFlow and extended their bots reach, 
+which will be the focus of further docs and code updates of this v2.0 feature branch of Americans bot.
+
+----------------------------------------------------------------------------
 
 Google api.ai docs:
 
@@ -96,7 +137,7 @@ Some borrowed and refactored code from:
 
 # License
 
-Copyright © 2017 Random Fractals, Inc.
+Copyright © 2018 Random Fractals, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this software except in compliance with the License.
