@@ -101,13 +101,14 @@ npm start
 ## Retring Americans Bot v1.4 alpha dev docs 
 
 *NOTE:* these are most likely out of date since both wit.ai and api.ai finished their betas
-and went in totally different directions focusing on things most important for their target audience
-and platforms.
+and went in totally different directions focusing on things most important for their target dev and user audience and platforms.
 
 See FB sunsetting their bot engine stories post here: https://wit.ai/blog/2017/07/27/sunsetting-stories
+stories migration tutorial: https://github.com/wit-ai/wit-stories-migration-tutorial
+and updated wit.ai API docs: https://wit.ai/docs/http/20170307#post--apps-link
 
 Google rebranded to DialogFlow and extended their bots reach, 
-which will be the focus of further docs and code updates of this v2.0 feature branch of Americans bot.
+which will be the focus of further docs and code updates of this v2.0 repo of Americans bot.
 
 ----------------------------------------------------------------------------
 
